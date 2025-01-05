@@ -1,6 +1,4 @@
-<div class="text-sm font-bold underline">
-  <h1>{{ message }}</h1>
-</div>
+
 <body class="w-screen h-screen overflow-y-auto bg-[#ccf0ec] flex flex-col">
   <!--nav bar-->
   <!-- version pc-->
@@ -41,7 +39,7 @@
         <ul class="flex gap-2 text-xs font-semibold">
           <li class=" ">
             <a
-              href="signin.html"
+            routerLink="/login"
               class="text-[#00927C] hover:scale-125 py-2 px-4"
             >
               Log in
@@ -50,7 +48,7 @@
 
           <li class=" ">
             <a
-              href="signup.html"
+            routerLink="/signup" 
               class="border-1 border-white shadow-xl bg-[#003059] text-white py-2 px-4 rounded-md hover:text-[#003059] hover:bg-white hover:border-[#003059]"
             >
               Sign up
@@ -96,14 +94,14 @@
         <div class="rounded-full w-[12px] h-[12px] bg-figma-light-green lg:bg-[#A4C9E4]"></div>
       </div>
       <div class="flex flex-col lg:flex-row lg:justify-around lg:w-full lg:mt-2">
-        <a href="signin.html">
+        <a routeLi="signin.html">
           <button
             class="text-white w-[200px] lg:w-[250px] py-[12px] my-[1rem] lg:my-0 rounded-[16px] bg-[linear-gradient(87deg,#003059_0%,#0067BF_100%)]"
           >
             Sign in
           </button>
         </a>
-        <a href="signup.html">
+        <a            >
           <button
             class="text-white w-[200px] lg:w-[250px] py-[12px] rounded-[16px] bg-[linear-gradient(87deg,#00927C_45%,#A2E8D8_100%)]"
           >
@@ -114,12 +112,14 @@
     </div>
     <img
       class="absolute left-1/2 -translate-x-1/2 bottom-[47%]   w-[50vw] h-[50vh] max-[1024px]:max-w-[225px] max-[1023px]:max-h-[337px] z-10 lg:static lg:translate-x-0 lg:translate-y-0 lg:h-[80vh] lg:w-[25vw] self-end"
-      src="assets/images/sadnesshome.png"
+      src="/assets/images/sadnesshome.png"
       alt=""
     />
     <div class="fixed bottom-0 w-full h-[55%] lg:h-[10vh] z-100">
       <div class="bg-white h-[30%] rounded-t-[50%] lg:h-full"></div>
       <div class="bg-white h-[70%] lg:hidden"></div>
     </div>
+    
   </main>
 </body>
+
