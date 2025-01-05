@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router'; // Importer Router et N
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-root',
   imports: [HttpClientModule, RouterModule, RouterOutlet,CommonModule], // Ajouter RouterModule pour le routage
@@ -42,8 +43,23 @@ export class AppComponent implements OnInit {
   isQstonePage(): boolean {
     return this.currentRoute === '/qst1';
   }
+  isQsttowPage(): boolean {
+    return this.currentRoute === '/qst2';
+  }
+  isQsttreePage(): boolean {
+    return this.currentRoute === '/qst3';
+  }
   // Méthode pour vérifier si nous sommes sur la page d'inscription
   isSignupPage(): boolean {
     return this.currentRoute === '/signup';
+  }
+  isCommunityPage(): boolean {
+    return this.currentRoute === '/community';
+  }
+  isProgramPage(): boolean {
+    return this.currentRoute === '/programs';
+  }
+  isDashPage(): boolean {
+    return this.currentRoute === '/dashboard';
   }
 }
