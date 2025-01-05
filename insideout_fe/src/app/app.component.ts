@@ -39,7 +39,9 @@ export class AppComponent implements OnInit {
   isLoginPage(): boolean {
     return this.currentRoute === '/login';
   }
-
+  isQstonePage(): boolean {
+    return this.currentRoute === '/qst1';
+  }
   // Méthode pour vérifier si nous sommes sur la page d'inscription
   isSignupPage(): boolean {
     return this.currentRoute === '/signup';
