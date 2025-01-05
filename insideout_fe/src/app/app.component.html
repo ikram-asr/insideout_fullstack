@@ -1,4 +1,6 @@
-
+<!-- Afficher les liens de navigation seulement si on n'est pas sur la page de login ou signup -->
+<div *ngIf="!isLoginPage() && !isSignupPage()">
+  
 <body class="w-screen h-screen overflow-y-auto bg-[#ccf0ec] flex flex-col">
   <!--nav bar-->
   <!-- version pc-->
@@ -94,14 +96,14 @@
         <div class="rounded-full w-[12px] h-[12px] bg-figma-light-green lg:bg-[#A4C9E4]"></div>
       </div>
       <div class="flex flex-col lg:flex-row lg:justify-around lg:w-full lg:mt-2">
-        <a routeLi="signin.html">
+        <a routerLink="/login">
           <button
             class="text-white w-[200px] lg:w-[250px] py-[12px] my-[1rem] lg:my-0 rounded-[16px] bg-[linear-gradient(87deg,#003059_0%,#0067BF_100%)]"
           >
             Sign in
           </button>
         </a>
-        <a            >
+        <a    routerLink="/signup"        >
           <button
             class="text-white w-[200px] lg:w-[250px] py-[12px] rounded-[16px] bg-[linear-gradient(87deg,#00927C_45%,#A2E8D8_100%)]"
           >
@@ -123,3 +125,7 @@
   </main>
 </body>
 
+</div>
+
+<!-- Afficher le contenu de la route active -->
+<router-outlet></router-outlet>
