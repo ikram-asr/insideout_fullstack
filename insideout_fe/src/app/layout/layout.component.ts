@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Router,RouterOutlet,RouterModule } from '@angular/router';
+
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-layout',
+  imports: [ RouterModule, RouterOutlet,FormsModule,CommonModule], // Ajouter RouterModule pour le routage
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })

@@ -15,10 +15,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  {
-    path: '',
-    component: LayoutComponent,
-    children: [
+  
       { path: 'dashboard', component: DashboardComponent },
       { path: 'programs', component: ProgramsComponent },
       { path: 'settings', component: SettingsComponent },
@@ -26,6 +23,6 @@ export const routes: Routes = [
       { path: 'qst2', component: Qst2Component },
       { path: 'qst3', component: Qst3Component },
       { path: 'community', component: CommunityComponent },
-    ],
-  },
+    
+  
 ];

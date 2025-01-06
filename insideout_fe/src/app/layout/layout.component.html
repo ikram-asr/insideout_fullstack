@@ -1,5 +1,4 @@
-<!-- Sidebar component -->
-<app-sidebar></app-sidebar>
+
 
 <!-- Contenu conditionnel en fonction de la page active -->
 <div *ngIf="!isLoginPage() && !isSignupPage() && !isQstonePage() && !isDashPage() && !isProgramPage() && !isCommunityPage() && !isQsttreePage() && !isQsttowPage()">
@@ -7,5 +6,3 @@
   <p>Contenu à afficher lorsque l'utilisateur n'est pas sur une page spécifique.</p>
 </div>
 
-<!-- Outlet pour les routes enfants -->
-<router-outlet></router-outlet>

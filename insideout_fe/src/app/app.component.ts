@@ -62,4 +62,7 @@ export class AppComponent implements OnInit {
   isDashPage(): boolean {
     return this.currentRoute === '/dashboard';
   }
+  isSettingPage(): boolean {
+    return this.currentRoute === '/settings';
+  }
 }
