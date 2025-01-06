@@ -1,0 +1,319 @@
+
+  <body class="w-screen bg-gray-300">
+    <div class="w-full h-full flex">
+      <!-- mobile-nav -->
+      <nav
+        class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
+      >
+        <div class="absolute mobile-nav-4">
+          <a routerLink="/dashboard"
+            ><img class="absolute-center" src="/assets/icons/icons/home.svg" alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-1">
+          <a href="#"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/articles.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-2">
+          <a routerLink="/programs"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/programs.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-active">
+          <a routerLink="/community"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/community-mobile-active.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-3">
+          <a routerLink="/settings"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/settings.svg"
+              alt=""
+          /></a>
+        </div>
+      </nav>
+      <!-- tablet-nav -->
+      <nav
+        class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
+      >
+        <a class="tablet-nav-item" routerLink="/dashboard"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/dashboard.svg"
+            alt=""
+          /><span class="text-xs"
+            >Dashboard</span
+          ></a
+        >
+        <a class="tablet-nav-item" href="#"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/articles.svg"
+            alt=""
+          /><span class="text-xs">Articles</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/programs"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/programs.svg"
+            alt=""
+          /><span class="text-xs">Programs</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/community"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/community-active.svg"
+            alt=""
+          /><span class="text-xs text-figma-nav-green">Community</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/settings"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/settings.svg"
+            alt=""
+          /><span class="text-xs">Settings</span></a
+        >
+      </nav>
+      <!-- desktop-nav -->
+      <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
+        <img src="/assets/images/text-logo.png" alt="" />
+        <div
+          class="flex items-center gap-3 justify-center  mt-3"
+        >
+          <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
+          <div>
+            <p class="text-lg font-medium">Elizabeth</p>
+            <p class="text-md font-medium text-[#61646B]">
+              Elizabeth&#64;example.com
+            </p>
+          </div>
+        </div>
+        <ul class="w-fit flex flex-col mx-auto mt-8">
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/dashboard.svg"
+              alt="Dashboard Icon"
+              class="icon"
+            />
+            <a routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/articles.svg"
+              alt="Articles Icon"
+              class="icon"
+            />
+            <a href="#">Articles</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/programs.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a routerLink="/programs">My Programs</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/community-active.svg"
+              alt="Community Icon"
+              class="icon"
+            />
+            <a routerLink="/community" class="text-figma-nav-green underline-custom"
+              >Community</a
+            >
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/settings.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a routerLink="/settings">Settings</a>
+          </li>
+          <li class="nav-li mt-3">
+            <img
+              src="/assets/icons/icons/logout.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a href="home.html">Logout</a>
+          </li>
+        </ul>
+      </nav>
+
+
+      <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+        <div class="z-30 flex place-items-end justify-end">
+          <div class=" flex justify-center p-[6px] text-white "> 
+            <div class="fixed w-60 z-0 top-0 right-0"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 
+            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt=""></a> 
+          </div>
+          </div>
+          <h1 class="mt-12 mb-4 mx-auto text-figma-blue text-xl lg:text-2xl font-semibold">Share your thoughts</h1>
+          <div class="flex justify-center">
+            <img src="/assets/images/joy.png" alt="" 
+            class="w-[50%] max-[600px]:w-[65%] max-[1000px]:ml-[-60px]  -mr-[300px] z-10 -mt-36 -mb-20 min-[1000px]:-ml-[50px] min-[1000px]:-mr-[300px] min-[1015px]:-mr-[240px] max-[1020px]:-mr-[300px]
+            max-[930px]:-mr-[290px] min-[1200px]:-mr-[300px] min-[1400px]:-mr-[320px]    max-[850px]:-mr-[260px]  max-[760px]:-mr-[240px]
+            max-[690px]:-mr-[210px]  max-[630px]:-mr-[220px]
+            max-[530px]:-mr-[190px] max-[410px]:-mr-[150px]
+            max-[350px]:-mr-[130px]">
+          <div class="w-[100%]">
+        
+        <div class="flex flex-col gap-[12px] p-4 w-[80%] mx-auto bg-white rounded-[16px] shadow
+        max-[930px]:pl-12 pl-8">
+          
+          
+        <img class="w-[40px] h-[40px] xl:w-10 xl:h-10  rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
+          <!-- <img class="w-[32px] h-[32px] " src="./assets/avatar.png" alt=""> -->
+          <textarea class="text-figma-blue" rows="3" name="" id="" >I finally finished a project I've been working on for weeks! Feeling accomplished.</textarea>
+        
+          <button class="w-fit ml-auto px-3 py-1 text-white rounded-[16px] bg-[linear-gradient(87deg,#003059_0%,#0067BF_100%)]">Publish</button>
+        </div>
+      </div>
+    </div>
+        <div class="main-div lg:grid lg:grid-cols-2 flex-1">
+          <div class="friends flex flex-col items-center order-2">
+            <h1 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Today, your friend is feeling:</h1>
+            <div class="flex mb-4 gap-4 mx-auto">
+              <div class="friend-container bg-[#6590ff]">
+                <span class="absolute top-[2px] text-xs">Walid</span>
+                <img src="/assets/images/sad.png" alt="">
+              </div>
+              <div class="friend-container bg-[#ff8981]">
+                <span class="absolute top-[2px] text-xs">Oumaima</span>
+                <img src="/assets/images/angry.png" alt="">
+              </div>
+              <div class="friend-container bg-[#ffc37a]">
+                <span class="absolute top-[2px] text-xs">Ikram</span>
+                <img src="/assets/images/anxious.png" alt="">
+              </div>
+            </div>
+            <div class="flex mb-4 gap-4 mx-auto">
+              <div class="friend-container bg-[#F2E9EC]">
+                <span class="absolute top-[2px] text-xs">Souad</span>
+                <img src="/assets/images/shy.png" alt="">
+              </div>
+              <div class="friend-container bg-[#08095999]">
+                <span class="absolute top-[2px] text-xs">Ritaj</span>
+                <img src="/assets/images/ennui-removebg-preview.png" alt="">
+              </div>
+              <div class="friend-container bg-[#F4F3AC]">
+                <span class="absolute top-[2px] text-xs">Rim</span>
+                <img src="/assets/images/happy.png" alt="">
+              </div>
+            </div>
+            <div class="flex mb-4 gap-4 mx-auto">
+              <div class="friend-container bg-[#9F86BAA3]">
+                <span class="absolute top-[2px] text-xs">Chaymae</span>
+                <img src="/assets/images/stress-removebg-preview.png" alt="">
+              </div>
+              <div class="friend-container bg-[#F4F3AC]">
+                <span class="absolute top-[2px] text-xs">Ahmed</span>
+                <img src="/assets/images/happy.png" alt="">
+              </div>
+              <div class="friend-container bg-[#F2E9EC]">
+                <span class="absolute top-[2px] text-xs">Hamza</span>
+                <img src="/assets/images/shy.png" alt="">
+              </div>
+            </div>
+            <div class="flex gap-[8px] mx-auto">
+              <div class="rounded-full w-[12px] h-[12px] bg-figma-blue"></div>
+              <div class="rounded-full w-[12px] h-[12px] bg-white"></div>
+              <div class="rounded-full w-[12px] h-[12px] bg-white"></div>
+            </div>
+          </div>
+          <div class="messages">
+            <h1 class="mt-8 mb-4 text-center text-figma-blue text-xl font-semibold">Messages/Comments</h1>
+            <div class="mx-4">
+              <div class="mb-4">
+                <div class="post relative">
+                  <div class="avatar"></div>
+                  <div>
+                    <h3>Oumaima</h3>
+                    <p>Today was really frustrating! Some things just didn't go as planned.</p>
+                  </div>
+                </div>
+                <div class="flex gap-2 mt-3">
+                  <div class="reaction bg-[#F4F3AC]">
+                    <img src="/assets/images/happy.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#ff8981]">
+                    <img src="/assets/images/angry.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#6590ff]">
+                    <img src="/assets/images/sad.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#F2E9EC]">
+                    <img src="/assets/images/shy.png" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                
+               
+              </div>
+              <div class="mb-4">
+                <div class="post relative">
+                  <div class="avatar"></div>
+                  <div>
+                    <h3>Ikram</h3>
+                    <p>Feeling a bit stressed, but I’m doing my best to stay calm.</p>
+                  </div>
+                </div>
+                <div class="flex gap-2 mt-3">
+                  <div class="reaction bg-[#F4F3AC]">
+                    <img src="/assets/images/happy.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#ff8981]">
+                    <img src="/assets/images/angry.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#6590ff]">
+                    <img src="/assets/images/sad.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#F2E9EC]">
+                    <img src="/assets/images/shy.png" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="post relative">
+                  <div class="avatar"></div>
+                  <div>
+                    <h3>Walid</h3>
+                    <p>Today has been a tough day. Trying to focus on the small positives.</p>
+                  </div>
+                </div>
+                <div class="flex gap-2 mt-3">
+                  <div class="reaction bg-[#F4F3AC]">
+                    <img src="/assets/images/happy.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#ff8981]">
+                    <img src="/assets/images/angry.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#6590ff]">
+                    <img src="/assets/images/sad.png" alt="">
+                  </div>
+                  <div class="reaction bg-[#F2E9EC]">
+                    <img src="/assets/images/shy.png" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+

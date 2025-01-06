@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+
+    <!-- les graphes -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+   
+
+
+  </head>
+  <body class="w-screen h-screen bg-gray-300 ">
+    <div class="w-full h-full flex">
+      <!-- mobile-nav -->
+      <nav
+        class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
+      >
+        <div class="absolute mobile-nav-active">
+          <a routerLink="/dashboard"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/home-mobile-active.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-1">
+          <a href="#"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/articles.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-2">
+          <a routerLink="/programs"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/programs.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-3">
+          <a routerLink="/community"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/community.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-4">
+          <a routerLink="/settings"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/settings.svg"
+              alt=""
+          /></a>
+        </div>
+      </nav>
+      <!-- tablet-nav -->
+      <nav
+        class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
+      >
+        <a class="tablet-nav-item" routerLink="/dashboard"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/dashboard-active.svg"
+            alt=""
+          /><span class="text-xs text-figma-nav-green"
+            >Dashboard</span
+          ></a
+        >
+        <a class="tablet-nav-item" href="#"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/articles.svg"
+            alt=""
+          /><span class="text-xs">Articles</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/programs"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/programs.svg"
+            alt=""
+          /><span class="text-xs">Programs</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/community"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/community.svg"
+            alt=""
+          /><span class="text-xs">Community</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/settings"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/settings.svg"
+            alt=""
+          /><span class="text-xs">Settings</span></a
+        >
+      </nav>
+      <!-- desktop-nav -->
+      <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
+        <img src="assets/images/text-logo.png" alt="" />
+        <div
+        class="flex items-center gap-3 justify-center  mt-3"
+      >
+        <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
+        <div>
+          <p class="text-lg font-medium">Elizabeth</p>
+          <p class="text-md font-medium text-[#61646B]">
+            Elizabeth&#64;example.com
+          </p>
+        </div>
+      </div>
+        <ul class="w-fit flex flex-col mx-auto mt-8">
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/dashboard-active.svg"
+              alt="Dashboard Icon"
+              class="icon"
+              
+            />
+            <a class="text-figma-nav-green underline-custom" routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/articles.svg"
+              alt="Articles Icon"
+              class="icon"
+            />
+            <a href="#">Articles</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/programs.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a routerLink="/programs">My Programs</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/community.svg"
+              alt="Community Icon"
+              class="icon"
+            />
+            <a routerLink="/community"
+              >Community</a
+            >
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/settings.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a routerLink="/settings">Settings</a>
+          </li>
+          <li class="nav-li mt-3">
+            <img
+              src="/assets/icons/icons/logout.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a href="#">Logout</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- HERO desktop-->
+      <main class="bg-[#FFE4BC] flex-1 flex flex-col items-center overflow-y-auto pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-2">
+
+        <div class="w-full pl-4 pr-4 max-[500px]:pb-4">
+         <div class="flex place-items-end justify-end">
+          <div class=" flex justify-center p-[6px] text-white "> 
+            <div class="fixed w-60 z-0 top-0 right-0"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 
+            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt=""></a> 
+          </div>
+          </div> 
+          <div class="flex justify-between max-[430px]:mb-4">
+          <div class="font-bold  pt-4 text-xl max-[430px]:text-lg text-figma-blue  ">
+          <h1 class=" max-[430px]:whitespace-pre" >Feeling anxious ? </h1>
+          <p>Try <span class="text-[#BE1C0A]">this</span> out!</p>
+         </div>
+         <div class="flex justify-center items-center font-semibold max-[430px]:items-end min-[1440px]:-mb-[5%] ">
+          
+          <a class="text-white rounded-lg px-3 py-1 bg-[rgb(239,113,63)] shadow-xl  z-10  mt-[15%]  min-[471px]:-ml-[20%] 
+          max-[430px]:text-xs  max-[430px]:whitespace-pre  max-[430px]:-ml-10" routerLink="/qst1"> Take today's assessment</a>
+        
+          <div class="w-[70px] max-[470px]:hidden z-10
+            min-[471px]:-ml-[5%]  min-[1440px]:w-[100px] min-[2000px]:w-[200px]">
+            <img src="/assets/images/anxiety-removebg-preview.png"  alt="">
+          </div>
+         </div> 
+
+        </div>
+        <div class="flex-col items-center justify-center m-auto min-[1440px]:mt-[5%]"> 
+       
+         <div class=" bg-white rounded-md shadow-md px-10 py-2   max-[430px]:px-2 ">
+          
+          <p class="text-[#BE1C0A] font-bold ">Mood History</p>
+          <div class=" mt-2 flex justify-between">
+            <div class="text-center font-semibold text-xs text-[#61646B]  ">
+              <div class="character-container-full bg-[#3971FF7D] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
+                <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/sad.png" alt="">
+              </div>
+              <p class="pt-2">Mon</p>
+              </div>
+
+          <div class="text-center font-semibold text-xs text-[#61646B]  ">
+          <div class="character-container-full bg-[#FF46397D] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
+            <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/angry.png" alt="">
+          </div>
+          <p class="pt-2">Tue</p>
+          </div>
+
+          <div class="text-center font-semibold text-xs text-[#61646B] ">
+          <div class="character-container-full bg-[rgba(57,113,255,0.49)] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
+            <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/sad.png" alt="">
+          </div>
+          <p class="pt-2">Wed</p>
+          </div>
+
+          <div class="text-center font-semibold text-xs text-[#61646B]  ">
+            <div class="character-container-full bg-[#F4A84CA1] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
+              <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/anxious.png" alt="">
+            </div>
+            <p class="pt-2">Sat</p>
+          </div>
+
+
+          <div class="text-center font-semibold text-xs text-[#61646B]  ">
+          <div class="character-container-full bg-[#F4F3AC] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
+            <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/happy.png" alt="">
+          </div>
+          <p class="pt-2">Fri</p>
+        </div>
+
+          <div class="text-center font-semibold text-xs text-[#61646B]  ">
+            <div class="character-container-full bg-[#F4A84CA1] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
+              <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/anxious.png" alt="">
+            </div>
+            <p class="pt-2">Sat</p>
+          </div>
+
+          <div class="text-center font-semibold text-xs text-[#61646B]  ">
+            <div class="character-container-full bg-[#F4A84CA1] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
+              <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/anxious.png" alt="">
+            </div>
+            <p class="pt-2">Sat</p>
+          </div>
+
+        </div>
+        
+        </div>
+        <!-- les graphes -->
+        
+
+        <div class=" flex max-[430px]:flex-col justify-between mt-4 max-[430px]:gap-4 h-[50%] items-center ">
+
+          <div class="w-[49%] h-[100%]  max-[430px]:w-[100%] bg-white rounded-md shadow-md px-4 py-[3%]  max-[430px]:order-1">
+            <p class="text-[#BE1C0A] font-bold mb-6 max-[430px]:text-lg">How you slept this week</p>
+            <canvas id="sleep" class="    " ></canvas>
+          </div>
+          <div class="w-[49%] h-[100%]  bg-white max-[430px]:w-[100%] rounded-md shadow-md px-4 py-[3%] max-[430px]:order-1">
+            <p class="text-[#BE1C0A] font-bold mb-6 max-[430px]:text-lg">Hours studied this week</p>
+            <canvas id="study"  class="  "></canvas>
+          </div>
+        </div>
+      </div>
+
+
+         </div>
+        
+      </main>
+    </div>
+    <script>
+      //graphe sleep
+      // Créer un contexte pour le graphique
+const ctx = document.getElementById('sleep').getContext('2d');
+
+// Dégradé de couleur pour le fond
+const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, 'rgba(239,113,63, 0.4)');   // Couleur orange clair
+gradient.addColorStop(1, 'rgba(239,113,63, 0)');     // Couleur transparente
+
+// Configuration du graphique
+const config = {
+    type: 'line',
+    data: {
+        labels: ['M','T', 'W', 'T', 'F', 'S', 'S'],  // Labels des jours
+        datasets: [{
+            label: 'Hours',
+            data: [8, 7, 9, 5, 6, 8, 4,9],  // Données pour chaque jour
+            fill: true,
+            backgroundColor: gradient,
+            borderColor: 'rgba(255, 99, 71, 0.8)',
+            borderWidth: 2,
+            tension: 0.4,  // Pour les courbes lissées
+            pointBackgroundColor: 'rgba(255, 99, 71, 0.8)',  
+            pointBorderColor: 'rgba(255, 99, 71, 0.8)',
+            pointHoverRadius: 8,
+            pointRadius: function(context) {
+                // Mettre en évidence un point particulier (par exemple, le jour "S")
+                return context.dataIndex === 4 ? 6 : 0;
+            },
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false,  // Cacher la légende
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: false,  // Cacher les lignes de la grille
+                },
+                ticks: {
+                    color: '#888',  // Couleur des labels en bas
+                }
+            },
+            y: {
+                display: false,  // Cacher l'axe y
+            }
+        },
+        elements: {
+            line: {
+                borderCapStyle: 'round'  // Coins arrondis
+            }
+        }
+    }
+};
+
+// Créer le graphique
+const myChart = new Chart(ctx, config);
+
+// Graphe study
+// Graphe study
+// Graphe study
+const ctx1 = document.getElementById('study').getContext('2d');
+
+const study = new Chart(ctx1, {
+    type: 'bar',  
+    data: {
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'], 
+        datasets: [{
+            label: 'Hours',
+            data: [12, 19, 3, 5, 2, 3, 8],  
+            backgroundColor: '#003059',
+            borderColor: '#003059',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false  // Cacher la légende
+            },
+            tooltip: {
+                enabled: false  // Désactiver les info-bulles
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: '#888',  
+                }
+            },
+            y: {
+                beginAtZero: true,
+                display: false  // Masquer l'axe Y
+            }
+        },
+        elements: {
+            bar: {
+                borderRadius: 10, 
+            }
+        },
+       
+    }
+});
+
+
+
+     </script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+
+  <body class="w-screen bg-gray-300">
+    <div class="w-full h-full flex">
+      <nav
+        class="min-[501px]:hidden w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
+      >
+        <div class="absolute mobile-nav-4">
+          <a href="index.html"
+            ><img class="absolute-center" src="/assets/icons/icons/home.svg" alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-1">
+          <a href="#"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/articles.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-2">
+          <a routerLink="/programs"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/programs.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-3">
+          <a routerLink="/community"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/community.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-active">
+          <a routerLink="/settings"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/settings-mobile-active.svg"
+              alt=""
+          /></a>
+        </div>
+      </nav>
+      <!-- tablet-nav -->
+      <nav
+        class="max-[501px]:hidden min-[1024px]:hidden bg-white fixed bottom-0 w-full flex justify-evenly py-3"
+      >
+        <a class="tablet-nav-item" routerLink="/dashboard"
+          ><img
+            class="h-9 w-9 md:h-11 md:w-11"
+            src="/assets/icons/icons/dashboard.svg"
+            alt=""
+          /><span class="text-sm md:text-base"
+            >Dashboard</span
+          ></a
+        >
+        <a class="tablet-nav-item" routerLink="#"
+          ><img
+            class="h-9 w-9 md:h-11 md:w-11"
+            src="/assets/icons/icons/articles.svg"
+            alt=""
+          /><span class="text-sm md:text-base">Articles</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/programs"
+          ><img
+            class="h-9 w-9 md:h-11 md:w-11"
+            src="/assets/icons/icons/programs.svg"
+            alt=""
+          /><span class="text-sm md:text-base">Programs</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/community"
+          ><img
+            class="h-9 w-9 md:h-11 md:w-11"
+            src="/assets/icons/icons/community.svg"
+            alt=""
+          /><span class="text-sm md:text-base">Community</span></a
+        >
+        <a class="tablet-nav-item" routerLink="/settings"
+          ><img
+            class="h-9 w-9 md:h-11 md:w-11"
+            src="/assets/icons/icons/settings-active.svg"
+            alt=""
+          /><span class="text-sm md:text-base text-figma-nav-green">Settings</span></a
+        >
+      </nav>
+      <!-- desktop-nav -->
+      <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
+        <img src="/assets/images/text-logo.png" alt="" />
+        <div
+        class="flex items-center gap-3 justify-center  mt-3"
+      >
+        <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
+        <div>
+          <p class="text-lg font-medium">Elizabeth</p>
+          <p class="text-md font-medium text-[#61646B]">
+            Elizabeth&#64;example.com
+          </p>
+        </div>
+      </div>
+        <ul class="w-fit flex flex-col mx-auto mt-8">
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/dashboard.svg"
+              alt="Dashboard Icon"
+              class="icon"
+            />
+            <a  routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/articles.svg"
+              alt="Articles Icon"
+              class="icon"
+            />
+            <a href="#">Articles</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/programs.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a routerLink="/programs">My Programs</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/community.svg"
+              alt="Community Icon"
+              class="icon"
+            />
+            <a routerLink="/community"
+              >Community</a
+            >
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/settings-active.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a class="text-figma-nav-green underline-custom" routerLink="/settings">Settings</a>
+          </li>
+          <li class="nav-li mt-3">
+            <img
+              src="/assets/icons/icons/logout.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a href="home.html">Logout</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="flex-1 pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+        HHHHHH
+      </main>
+    </div>
+  </body>
+
