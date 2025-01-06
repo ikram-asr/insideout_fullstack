@@ -73,4 +73,8 @@ export class AppComponent implements OnInit {
   isSettingPage(): boolean {
     return this.currentRoute === '/settings';
   }
+  isMessagesPage(): boolean {
+    return this.currentRoute === '/messages';
+  }
 }
+ 

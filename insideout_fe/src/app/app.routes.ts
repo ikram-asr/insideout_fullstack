@@ -9,6 +9,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ProgramsComponent } from './pages/programs/programs.component';
 import { CommunityComponent } from './pages/community/community.component';
+import { MessagesComponent } from './pages/messages/messages.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ export const routes: Routes = [
       { path: 'qst2', component: Qst2Component },
       { path: 'qst3', component: Qst3Component },
       { path: 'community', component: CommunityComponent },
+      { path: 'messages', component: MessagesComponent },
     
   
 ];

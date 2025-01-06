@@ -1,7 +1,8 @@
 <body class="w-screen h-screen bg-gray-300">
-    <div *ngIf="prenom">
-      <p>Bienvenue, {{ prenom }} !</p>
-    </div>
+  <div>
+    <h1>Bienvenue, {{ user?.nom }}</h1>
+    <!-- Autres contenus de la page qst1 -->
+  </div>
   
 
   <div class="relative w-full h-full flex">
@@ -18,10 +19,10 @@
         /></a>
       </div>
       <div class="absolute mobile-nav-1">
-        <a href="#"
+        <a routerLink="/messages"
           ><img
             class="absolute-center"
-            src="/assets/icons/icons/articles.svg"
+            src="/assets/icons/icons/msg.png"
             alt=""
         /></a>
       </div>
@@ -63,13 +64,7 @@
           >Dashboard</span
         ></a
       >
-      <a class="tablet-nav-item" href="#"
-        ><img
-          class="w-7"
-          src="/assets/icons/icons/articles.svg"
-          alt=""
-        /><span class="text-xs">Articles</span></a
-      >
+      
       <a class="tablet-nav-item" routerLink="/programs"
         ><img
           class="w-7"
@@ -83,6 +78,13 @@
           src="/assets/icons/icons/community.svg"
           alt=""
         /><span class="text-xs">Community</span></a
+      >
+      <a class="tablet-nav-item" routerLink="/messages"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/msg.png"
+          alt=""
+        /><span class="text-xs">Messages</span></a
       >
       <a class="tablet-nav-item" routerLink="/settings"
         ><img
@@ -116,14 +118,7 @@
           />
           <a class="text-figma-nav-green underline-custom" routerLink="/dashboard">Dashboard</a>
         </li>
-        <li class="nav-li">
-          <img
-            src="/assets/icons/icons/articles.svg"
-            alt="Articles Icon"
-            class="icon"
-          />
-          <a href="#">Articles</a>
-        </li>
+        
         <li class="nav-li">
           <img
             src="/assets/icons/icons/programs.svg"
@@ -141,6 +136,14 @@
           <a routerLink="/community"
             >Community</a
           >
+        </li>
+        <li class="nav-li">
+          <img
+          src="/assets/icons/icons/msg.png"
+            alt="Articles Icon"
+            class="icon"
+          />
+          <a routerLink="/messages">Messages</a>
         </li>
         <li class="nav-li">
           <img

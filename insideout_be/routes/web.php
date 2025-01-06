@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthentificationController;
-
+use App\Http\Controllers\CommunityController;
 Route::get('/hello', function () {
     return response()->json(['message' => 'Hello, world!']);
 });
@@ -12,6 +12,7 @@ Route::get('/hello', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware('auth:sanctum')->get('friends/details', [CommunityController::class, 'getFriendsDetails']);
 
 /*Route::prefix('api')->group(function () {
     Route::post('signup', [AuthentificationController::class, 'signup']);
@@ -29,7 +30,7 @@ Route::prefix('api')->group(function () {
 // Inscription
 
 Route::prefix('api')->group(function () {
-    Route::get('/users', [UserController::class, 'getAllUsers']);
+    Route::get('users', [UserController::class, 'getAllUsers']);
     Route::post('signup', [AuthController::class, 'signup']);
     Route::post('login', [AuthController::class, 'login']);
     Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);

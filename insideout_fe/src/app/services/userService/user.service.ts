@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-
-  private apiUrl = 'http://localhost/api/users';  // L'URL de l'API Laravel
+  private apiUrl = 'http://127.0.0.1:8000/api/users'; // Vérifiez cette URL
 
   constructor(private http: HttpClient) {}
 
-  // Méthode pour récupérer tous les utilisateurs
   getUsers(): Observable<any[]> {
+    console.log('Calling API:', this.apiUrl);
     return this.http.get<any[]>(this.apiUrl);
   }
+  
 }

@@ -13,56 +13,43 @@ import { FormsModule, ReactiveFormsModule,FormGroup, FormBuilder, Validators } f
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginForm!: FormGroup;
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
-    currentRoute: string = ''; // Variable pour suivre la route actuelle
-    prenom: string = '';  // Stocker le prénom de l'utilisateur
+  loginForm: FormGroup;
+  errorMessage: string = ''; 
 
-  
-    constructor(private fb: FormBuilder,private authService:AuthService, private router: Router) {}
-  
-    onSubmit() {
-      console.log('Email:', this.email);
-      console.log('Password:', this.password);
-    
-      this.authService.login(this.email, this.password).subscribe({
-        next: (response) => {
-          console.log(this.loginForm.value);  // Vérifiez ce qui est envoyé
-          localStorage.setItem('auth_token', response.token);
-          localStorage.setItem('prenom', response.user.prenom);
-          this.router.navigate(['/qst1']);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message || 'Erreur de connexion. Veuillez réessayer.';
-        }
-      });
-    }
-    
-    ngOnInit(): void {
-      // Initialisation du FormGroup avec les contrôles
-      this.loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],  // Contrôle email avec validation
-        password: ['', Validators.required]  // Contrôle password avec validation
-      });
-    
-      // Suivre les événements de navigation
-      this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          this.currentRoute = event.url; // Mettre à jour la route active
-        }
-      });
-    }
-    
-  // Méthode pour vérifier si nous sommes sur la page d'inscription
-  isSignupPage(): boolean {
-    return this.currentRoute === '/signup';
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
   }
-  isQstonePage(): boolean {
-    return this.currentRoute === '/qst1';
+
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    const { email, password } = this.loginForm.value;
+
+    this.authService.login(email, password).subscribe(
+      (response) => {
+        // Handle successful login (e.g., redirect to dashboard)
+        this.router.navigate(['/dashboard']);
+      },
+      (error) => {
+        this.errorMessage = 'Invalid credentials. Please try again.';
+      }
+    );
   }
-  isHomePage(): boolean {
-    return this.currentRoute === '/';
+
+  isSignupPage() {
+    return this.router.url.includes('/signup');
+  }
+
+  isQstonePage() {
+    return this.router.url.includes('/qstone');
+  }
+
+  isHomePage() {
+    return this.router.url === '/';
   }
 }

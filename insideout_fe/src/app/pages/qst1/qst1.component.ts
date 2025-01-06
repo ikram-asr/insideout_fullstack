@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
 import { AuthService } from '../../services/authService/auth.service';
-import { Router } from '@angular/router';  // Importation du Router
 
+import { Router } from '@angular/router';  // Importation du Router
 
 @Component({
   selector: 'app-qst1',
@@ -40,6 +40,17 @@ export class Qst1Component implements AfterViewInit {
   ngOnInit() {
     this.prenom = localStorage.getItem('prenom');
   }*/
+
+  user: any;
+
+
+ 
+
+  ngOnInit(): void {
+    this.user = this.authService.getUser();
+  }
+
+  
 
   ngAfterViewInit(): void {
     const slidingParts = Array.from(
