@@ -15,21 +15,23 @@ import { CommunityService } from '../../services/community.service';
 })
 export class CommunityComponent implements OnInit {
   friends: any[] = [];
+  errorMessage: string = '';
 
   constructor(private communityService: CommunityService) {}
 
   ngOnInit(): void {
-    this.loadFriendsDetails();
+    this.loadFriends();
   }
 
-  loadFriendsDetails(): void {
-    this.communityService.getFriendsDetails().subscribe({
-      next: (data) => {
-        // Convertir les données de type objet en tableau pour l'affichage
-        this.friends = Object.entries(data).map(([key, value]) => value);
-        console.log(this.friends);
+  loadFriends(): void {
+    this.communityService.getFriends().subscribe(
+      (data) => {
+        this.friends = data; // On suppose que `data` contient la liste des amis et posts
       },
-      error: (err) => console.error('Failed to load friends details', err)
-    });
+      (error) => {
+        this.errorMessage = 'Erreur lors du chargement des amis';
+        console.error('Erreur:', error);
+      }
+    );
   }
 }

@@ -1,3 +1,4 @@
+// community.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,11 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommunityService {
-  private apiUrl = 'http://127.0.0.1:8000/api/friends/details';
+  private apiUrl = 'http://127.0.0.1:8000/api'; // L'URL de votre backend
 
   constructor(private http: HttpClient) {}
 
-  getFriendsDetails(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  // Récupérer les amis et leurs posts
+  getFriends(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/community/friends`);
   }
 }

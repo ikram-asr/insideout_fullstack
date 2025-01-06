@@ -165,7 +165,7 @@
               <p>Status: {{ friend.status }}</p>
               <p>Mood: {{ friend.mood }}</p>
           
-              <div *ngIf="friend.posts.length > 0">
+              <div *ngIf="friend.posts && friend.posts.length > 0">
                 <h4>Posts:</h4>
                 <div *ngFor="let post of friend.posts">
                   <p>{{ post.content }}</p>
@@ -179,6 +179,7 @@
           <div *ngIf="friends.length === 0">
             <p>You have no friends or no posts to display.</p>
           </div>
+          
           
           
 
