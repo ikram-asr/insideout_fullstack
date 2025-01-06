@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/userService/user.service';
 import { CommonModule } from '@angular/common'; // Assurez-vous que c'est importé
+import { RouterModule } from '@angular/router';
+
+import { FormsModule } from '@angular/forms';
+
+import { Router } from '@angular/router';  
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule],
+    imports: [RouterModule, FormsModule, CommonModule],
   
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
