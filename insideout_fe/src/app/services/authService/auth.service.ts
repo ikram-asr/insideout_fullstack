@@ -34,6 +34,7 @@ export class AuthService {
       email: email,
       password: password,
     };
+    localStorage.setItem('prenom', prenom); 
 
     return this.http.post(`${this.apiUrl}/signup`, body, { headers });
   }

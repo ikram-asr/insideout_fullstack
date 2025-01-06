@@ -1,5 +1,9 @@
 <body class="w-screen h-screen bg-gray-300">
-    
+    <div *ngIf="prenom">
+      <p>Bienvenue, {{ prenom }} !</p>
+    </div>
+  
+
   <div class="relative w-full h-full flex">
     <!-- mobile-nav -->
     <nav

@@ -20,11 +20,11 @@ class AuthController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6',
             ]);
-    
+        
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()], 422);
             }
-    
+        
             // Création de l'utilisateur
             $user = User::create([
                 'nom' => $request->nom,
@@ -32,22 +32,41 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-    
-            // Retourner la réponse
-            return response()->json(['message' => 'Utilisateur créé avec succès!', 'user' => $user], 201);
+        
+            // Connexion de l'utilisateur après sa création
+            Auth::login($user);
+        
+            // Retourner la réponse avec un message de succès
+            return response()->json(['message' => 'Utilisateur créé et connecté avec succès!', 'user' => $user], 201);
         }
-    
+        
         // Connexion de l'utilisateur
         public function login(Request $request)
-        {
-            // Validation de la requête de connexion
-            $credentials = $request->only('email', 'password');
-            if (Auth::attempt($credentials)) {
-                $user = Auth::user();
-                return response()->json(['message' => 'Connexion réussie', 'user' => $user], 200);
-            }
-    
-            return response()->json(['message' => 'Identifiants incorrects'], 401);
+    {
+        // Validation des entrées
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        // Vérifier si l'utilisateur existe
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'Les informations d\'identification sont incorrectes.'], 401);
         }
+
+        // Si tout va bien, générer un token et retourner les informations de l'utilisateur
+        $token = $user->createToken('YourAppName')->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => [
+                'prenom' => $user->prenom,
+                'nom' => $user->nom
+            ]
+        ]);
+    }
+
     }
     

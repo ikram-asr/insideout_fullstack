@@ -29,6 +29,11 @@ export class Qst1Component implements AfterViewInit {
   activeOption: HTMLElement | null = null;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
+  prenom: string | null = '';
+
+  ngOnInit() {
+    this.prenom = localStorage.getItem('prenom');
+  }
 
   ngAfterViewInit(): void {
     const slidingParts = Array.from(
