@@ -1,3 +1,4 @@
+<div  *ngIf="!isSignupPage() && !isQstonePage() && !isHomePage() && !isSidebarPage()"></div>
 <body class="w-screen h-screen bg-gray-300">
     <div class="relative w-full h-full flex">
       <!-- mobile-nav -->
@@ -227,9 +228,10 @@
           </div>
         </div>
         <div class="bottom-[4.5rem] min-[500px]:bottom-[80px] min-[1024px]:bottom-[16px] w-full flex px-4 justify-between items-center ">
-          <button class="bg-[#00927C] rounded-full text-white font-medium text-sm py-1 px-6"><a href="index.html">Skip</a></button>
+          <button class="bg-[#00927C] rounded-full text-white font-medium text-sm py-1 px-6"><a routerLink="/sidebar">Skip</a></button>
           <button class="bg-[#00927C] rounded-full text-white font-medium text-sm py-1 px-6"><a href="question-2.html">Next</a></button>
         </div>
       </main>
     </div>
   </body>
+  <router-outlet></router-outlet>

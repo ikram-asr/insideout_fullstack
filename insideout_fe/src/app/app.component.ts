@@ -4,9 +4,11 @@ import { Router, NavigationEnd } from '@angular/router'; // Importer Router et N
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+
 @Component({
   selector: 'app-root',
-  imports: [HttpClientModule, RouterModule, RouterOutlet,CommonModule], // Ajouter RouterModule pour le routage
+  imports: [HttpClientModule, RouterModule, RouterOutlet,FormsModule,CommonModule,ReactiveFormsModule], // Ajouter RouterModule pour le routage
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
@@ -45,5 +47,11 @@ export class AppComponent implements OnInit {
   // Méthode pour vérifier si nous sommes sur la page d'inscription
   isSignupPage(): boolean {
     return this.currentRoute === '/signup';
+  }
+  isSidebarPage(): boolean {
+    return this.currentRoute === '/sidebar';
+  }
+  isDashPage(): boolean {
+    return this.currentRoute === '/dashboard';
   }
 }
