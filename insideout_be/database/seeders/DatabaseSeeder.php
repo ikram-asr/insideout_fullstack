@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UsersTableSeeder::class,
+            PostSeeder::class,
+            MessageSeeder::class,
+            EtatSeeder::class,
+            ReactionSeeder::class,
+            FriendshipSeeder::class,
         ]);
         // User::factory(10)->create();
 

@@ -2,6 +2,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
+import { AuthService } from '../../services/authService/auth.service';
 
 @Component({
   selector: 'app-qst1',
@@ -28,12 +29,18 @@ export class Qst1Component implements AfterViewInit {
 
   activeOption: HTMLElement | null = null;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private el: ElementRef, private renderer: Renderer2 ,private authService: AuthService) {}
   prenom: string | null = '';
+  user: any;
 
-  ngOnInit() {
-    this.prenom = localStorage.getItem('prenom');
+
+ 
+
+  ngOnInit(): void {
+    this.user = this.authService.getUser();
   }
+
+  
 
   ngAfterViewInit(): void {
     const slidingParts = Array.from(

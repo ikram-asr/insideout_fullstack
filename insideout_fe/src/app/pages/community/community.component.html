@@ -157,6 +157,34 @@
 
 
       <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+
+
+        <div *ngIf="friends.length > 0">
+            <div *ngFor="let friend of friends">
+              <h3>{{ friend.nom }} {{ friend.prenom }}</h3>
+              <p>Status: {{ friend.status }}</p>
+              <p>Mood: {{ friend.mood }}</p>
+          
+              <div *ngIf="friend.posts.length > 0">
+                <h4>Posts:</h4>
+                <div *ngFor="let post of friend.posts">
+                  <p>{{ post.content }}</p>
+                  <small>Posted on: {{ post.created_at }}</small>
+                </div>
+              </div>
+              <hr />
+            </div>
+          </div>
+          
+          <div *ngIf="friends.length === 0">
+            <p>You have no friends or no posts to display.</p>
+          </div>
+          
+          
+
+
+
+
         <div class="z-30 flex place-items-end justify-end">
           <div class=" flex justify-center p-[6px] text-white "> 
             <div class="fixed w-60 z-0 top-0 right-0"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 

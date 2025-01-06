@@ -12,6 +12,7 @@ Route::get('/hello', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware('auth:sanctum')->get('friends/details', [CommunityController::class, 'getFriendsDetails']);
 
 /*Route::prefix('api')->group(function () {
     Route::post('signup', [AuthentificationController::class, 'signup']);
