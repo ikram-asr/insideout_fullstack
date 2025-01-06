@@ -21,11 +21,11 @@ return [
     'allowed_origins' => ['http://localhost:4200'],  // Frontend URL (Angular app URL)
 
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*',],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*', 'X-CSRF-TOKEN'],
+    'allowed_headers' => ['*'],
 
     'exposed_headers' => [],
 

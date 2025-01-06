@@ -7,15 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8000/api'; // L'URL de ton backend Laravel
+  private apiUrl = 'http://127.0.0.1:8000/api'; // L'URL de ton backend Laravel
 
   constructor(private http: HttpClient) {}
 
   // Récupérer le token CSRF depuis la page HTML (meta tag)
-  private getCSRFToken(): string {
+ private getCSRFToken(): string {
     return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
   }
+  /* getCrsfToken(){
+    return this.http.get<any>('${apiUl}sanctum/csrf-cookie',{withCredentials:true, observe: 'reponse'})
 
+  }*/
   // Inscription
   signup(nom: string, prenom: string, email: string, password: string): Observable<any> {
     const token = this.getCSRFToken();  // Récupère le token CSRF
