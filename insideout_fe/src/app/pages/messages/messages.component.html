@@ -1,22 +1,23 @@
 
-  <body class="w-screen bg-gray-300">
+<body class="w-screen bg-gray-300">
     <div class="w-full h-full flex">
+      <!-- mobile-nav -->
       <nav
-        class="min-[501px]:hidden w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
+        class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
       >
         <div class="absolute mobile-nav-4">
-          <a href="index.html"
+          <a routerLink="/dashboard"
             ><img class="absolute-center" src="/assets/icons/icons/home.svg" alt=""
           /></a>
         </div>
-        <div class="absolute mobile-nav-1">
-          <a href="#"
-            ><img
-              class="absolute-center"
-              src="/assets/icons/icons/articles.svg"
-              alt=""
-          /></a>
-        </div>
+        <div class="absolute mobile-nav-active">
+            <a routerLink="/messages"
+              ><img
+                class="absolute-center"
+                src="/assets/icons/icons/msg-mobile-active.svg"
+                alt=""
+            /></a>
+          </div>
         <div class="absolute mobile-nav-2">
           <a routerLink="/programs"
             ><img
@@ -25,7 +26,7 @@
               alt=""
           /></a>
         </div>
-        <div class="absolute mobile-nav-3">
+        <div class="absolute mobile-nav-1">
           <a routerLink="/community"
             ><img
               class="absolute-center"
@@ -33,72 +34,72 @@
               alt=""
           /></a>
         </div>
-        <div class="absolute mobile-nav-active">
+        <div class="absolute mobile-nav-3">
           <a routerLink="/settings"
             ><img
               class="absolute-center"
-              src="/assets/icons/icons/settings-mobile-active.svg"
+              src="/assets/icons/icons/settings.svg"
               alt=""
           /></a>
         </div>
       </nav>
       <!-- tablet-nav -->
       <nav
-        class="max-[501px]:hidden min-[1024px]:hidden bg-white fixed bottom-0 w-full flex justify-evenly py-3"
+        class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
       >
         <a class="tablet-nav-item" routerLink="/dashboard"
           ><img
-            class="h-9 w-9 md:h-11 md:w-11"
+            class="w-7"
             src="/assets/icons/icons/dashboard.svg"
             alt=""
-          /><span class="text-sm md:text-base"
+          /><span class="text-xs"
             >Dashboard</span
           ></a
         >
-       
+        
         <a class="tablet-nav-item" routerLink="/programs"
           ><img
-            class="h-9 w-9 md:h-11 md:w-11"
+            class="w-7"
             src="/assets/icons/icons/programs.svg"
             alt=""
-          /><span class="text-sm md:text-base">Programs</span></a
+          /><span class="text-xs">Programs</span></a
         >
         <a class="tablet-nav-item" routerLink="/community"
           ><img
-            class="h-9 w-9 md:h-11 md:w-11"
+            class="w-7"
             src="/assets/icons/icons/community.svg"
             alt=""
-          /><span class="text-sm md:text-base">Community</span></a
+          /><span class="text-xs ">Community</span></a
         >
         <a class="tablet-nav-item" routerLink="/messages"
         ><img
           class="w-7"
-          src="/assets/icons/icons/msg.png"
+          src="/assets/icons/icons/msg-active.png"
           alt=""
-        /><span class="text-xs">Messages</span></a
+        /><span class="text-xs text-figma-nav-green">Messages</span></a
       >
         <a class="tablet-nav-item" routerLink="/settings"
           ><img
-            class="h-9 w-9 md:h-11 md:w-11"
-            src="/assets/icons/icons/settings-active.svg"
+            class="w-7"
+            src="/assets/icons/icons/settings.svg"
             alt=""
-          /><span class="text-sm md:text-base text-figma-nav-green">Settings</span></a
+          /><span class="text-xs">Settings</span></a
         >
       </nav>
       <!-- desktop-nav -->
       <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
         <img src="/assets/images/text-logo.png" alt="" />
         <div
-        class="flex items-center gap-3 justify-center  mt-3"
-      >
-        <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
-        <div>
-          <p class="text-lg font-medium">Elizabeth</p>
-          <p class="text-md font-medium text-[#61646B]">
-            Elizabeth&#64;example.com
-          </p>
+          class="flex items-center gap-3 justify-center  mt-3"
+        >
+          <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
+          <div>
+            <p class="text-lg font-medium">Elizabeth</p>
+            <p class="text-md font-medium text-[#61646B]">
+              Elizabeth&#64;example.com
+            </p>
+          </div>
         </div>
-      </div>
         <ul class="w-fit flex flex-col mx-auto mt-8">
           <li class="nav-li">
             <img
@@ -106,7 +107,7 @@
               alt="Dashboard Icon"
               class="icon"
             />
-            <a  routerLink="/dashboard">Dashboard</a>
+            <a routerLink="/dashboard">Dashboard</a>
           </li>
          
           <li class="nav-li">
@@ -123,25 +124,25 @@
               alt="Community Icon"
               class="icon"
             />
-            <a routerLink="/community"
+            <a routerLink="/community" 
               >Community</a
             >
           </li>
           <li class="nav-li">
             <img
-            src="/assets/icons/icons/msg.png"
+            src="/assets/icons/icons/msg-active.png"
               alt="Articles Icon"
               class="icon"
             />
-            <a routerLink="/messages">Messages</a>
+            <a routerLink="/messages" class="text-figma-nav-green underline-custom">Messages</a>
           </li>
           <li class="nav-li">
             <img
-              src="/assets/icons/icons/settings-active.svg"
+              src="/assets/icons/icons/settings.svg"
               alt="Settings Icon"
               class="icon"
             />
-            <a class="text-figma-nav-green underline-custom" routerLink="/settings">Settings</a>
+            <a routerLink="/settings">Settings</a>
           </li>
           <li class="nav-li mt-3">
             <img
@@ -154,8 +155,9 @@
         </ul>
       </nav>
 
-      <main class="flex-1 pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
-        HHHHHH
+
+      <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+       
       </main>
     </div>
   </body>
