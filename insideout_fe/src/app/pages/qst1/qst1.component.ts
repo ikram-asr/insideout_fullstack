@@ -2,6 +2,9 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
+import { AuthService } from '../../services/authService/auth.service';
+import { Router } from '@angular/router';  // Importation du Router
+
 
 @Component({
   selector: 'app-qst1',
@@ -28,12 +31,15 @@ export class Qst1Component implements AfterViewInit {
 
   activeOption: HTMLElement | null = null;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private el: ElementRef, private renderer: Renderer2,private router: Router, private authService: AuthService) {}
   prenom: string | null = '';
-
+  /*logout() {
+    this.authService.logout(); // This is where the actual logout logic happens
+    this.router.navigate(['/login']); // Redirect to login page after logout
+  }
   ngOnInit() {
     this.prenom = localStorage.getItem('prenom');
-  }
+  }*/
 
   ngAfterViewInit(): void {
     const slidingParts = Array.from(
@@ -106,4 +112,5 @@ export class Qst1Component implements AfterViewInit {
 
     this.renderer.setStyle(main, 'background', mainColor);
   }
+
 }

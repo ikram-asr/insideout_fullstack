@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthentificationController;
 
 Route::get('/hello', function () {
@@ -29,6 +29,7 @@ Route::prefix('api')->group(function () {
 // Inscription
 
 Route::prefix('api')->group(function () {
+    Route::get('/users', [UserController::class, 'getAllUsers']);
     Route::post('signup', [AuthController::class, 'signup']);
     Route::post('login', [AuthController::class, 'login']);
     Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);

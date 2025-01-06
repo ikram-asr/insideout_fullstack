@@ -23,26 +23,23 @@ export class LoginComponent {
   
     constructor(private fb: FormBuilder,private authService:AuthService, private router: Router) {}
   
-
     onSubmit() {
+      console.log('Email:', this.email);
+      console.log('Password:', this.password);
+    
       this.authService.login(this.email, this.password).subscribe({
         next: (response) => {
           console.log(this.loginForm.value);  // Vérifiez ce qui est envoyé
-
-          // Enregistrer le token et le prénom de l'utilisateur dans le localStorage
           localStorage.setItem('auth_token', response.token);
           localStorage.setItem('prenom', response.user.prenom);
-  
-          // Rediriger vers la page /qst1
           this.router.navigate(['/qst1']);
         },
         error: (err) => {
-          // Gérer l'erreur si l'authentification échoue
           this.errorMessage = err.error.message || 'Erreur de connexion. Veuillez réessayer.';
         }
       });
     }
-
+    
     ngOnInit(): void {
       // Initialisation du FormGroup avec les contrôles
       this.loginForm = this.fb.group({
