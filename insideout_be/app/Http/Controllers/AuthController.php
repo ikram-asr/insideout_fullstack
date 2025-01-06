@@ -42,30 +42,35 @@ class AuthController extends Controller
         
         // Connexion de l'utilisateur
         public function login(Request $request)
-    {
-        // Validation des entrées
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ]);
-
-        // Vérifier si l'utilisateur existe
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'Les informations d\'identification sont incorrectes.'], 401);
+        {
+            // Validation des entrées
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+            ]);
+        
+            // Vérifier si l'utilisateur existe
+            $user = User::where('email', $request->email)->first();
+        
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return response()->json(['success' => false, 'message' => 'Les informations d\'identification sont incorrectes.'], 401);
+            }
+        
+            // Si tout va bien, générer un token et retourner les informations de l'utilisateur
+            $token = $user->createToken('YourAppName')->plainTextToken;
+        
+            return response()->json([
+                'success' => true,
+                'message' => 'Connexion réussie.',
+                'token' => $token,
+                'user' => [
+                    'id' => $user->id,
+                    'prenom' => $user->prenom,
+                    'nom' => $user->nom,
+                    'email' => $user->email,
+                ],
+                'redirect_url' => 'http://localhost:4200/#/dashboard/' . $user->id // L'URL avec l'ID de l'utilisateur
+            ]);
         }
-
-        // Si tout va bien, générer un token et retourner les informations de l'utilisateur
-        $token = $user->createToken('YourAppName')->plainTextToken;
-
-        return response()->json([
-            'token' => $token,
-            'user' => [
-                'prenom' => $user->prenom,
-                'nom' => $user->nom
-            ]
-        ]);
-    }
-
+        
     }

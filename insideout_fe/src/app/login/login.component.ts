@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule,FormGroup, FormBuilder, Validators } f
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = ''; 
+  credentials = { email: '', password: '' };
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
@@ -24,22 +25,29 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    const { email, password } = this.loginForm.value;
-
-    this.authService.login(email, password).subscribe(
-      (response) => {
-        // Handle successful login (e.g., redirect to dashboard)
-        this.router.navigate(['/dashboard']);
+    const loginData = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
+  
+    this.authService.login(loginData).subscribe(
+      response => {
+        console.log('Login success:', response);
+        // Sauvegarder le token dans localStorage ou dans un service si nécessaire
+        localStorage.setItem('token', response.token);  // Exemple
+  
+        // Redirection vers la page de dashboard avec l'ID de l'utilisateur
+        const redirectUrl = response.redirect_url;  // URL de redirection fournie par Laravel
+        window.location.href = redirectUrl;  // Redirige l'utilisateur vers la page de son dashboard
       },
-      (error) => {
-        this.errorMessage = 'Invalid credentials. Please try again.';
+      error => {
+        console.error('Login error:', error);
+        // Afficher un message d'erreur si nécessaire
       }
     );
   }
+  
+  
 
   isSignupPage() {
     return this.router.url.includes('/signup');

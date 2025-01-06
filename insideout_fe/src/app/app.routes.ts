@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard/:id', component: DashboardComponent },
       { path: 'programs', component: ProgramsComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'qst1', component: Qst1Component },

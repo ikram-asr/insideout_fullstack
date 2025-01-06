@@ -1,36 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/userService/user.service';
-import { CommonModule } from '@angular/common'; // Assurez-vous que c'est importé
+import { ActivatedRoute } from '@angular/router';  // Importation pour récupérer l'ID de l'URL
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
 import { FormsModule } from '@angular/forms';
-
-import { Router } from '@angular/router';  
 
 @Component({
   selector: 'app-dashboard',
-    imports: [RouterModule, FormsModule, CommonModule],
-  
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  users: any[] = [];
+  user: any = {};  // Utilisateur individuel
   errorMessage: string = '';
-
-  constructor(private userService: UserService) {}
+  userId: string = '';  // ID de l'utilisateur récupéré depuis l'URL
+  users: any[] = [];
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute  // Service pour récupérer les paramètres d'URL
+  ) {}
 
   ngOnInit(): void {
-    console.log('DashboardComponent initialized.');
+    // Récupérer l'ID de l'utilisateur depuis l'URL
+    this.userId = this.route.snapshot.paramMap.get('id')!;
+    console.log('ID utilisateur récupéré :', this.userId);
 
-    this.userService.getUsers().subscribe({
+    // Vérifier que l'ID est valide avant de récupérer les données
+    if (this.userId) {
+      this.getUserData(this.userId); // Appeler la fonction pour récupérer les données utilisateur
+    } else {
+      this.errorMessage = 'ID utilisateur non valide';
+    }
+  }
+
+  getUserData(userId: string): void {
+    this.userService.getUserById(userId).subscribe({
       next: (response) => {
-        console.log('Users fetched successfully:', response); // Debug log
-        this.users = response; // Affecter les données récupérées
+        console.log('Données utilisateur récupérées :', response);
+        this.user = response;  // Affecter les données de l'utilisateur récupéré
       },
       error: (error) => {
-        console.error('Error fetching users:', error); // Debug log
-        this.errorMessage = 'Erreur lors du chargement des utilisateurs.';
+        console.error('Erreur lors de la récupération des données utilisateur', error);
+        this.errorMessage = 'Erreur lors de la récupération des données utilisateur.';
       }
     });
   }
