@@ -5,12 +5,12 @@
         class="min-[501px]:hidden w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
       >
         <div class="absolute mobile-nav-4">
-          <a href="index.html"
+          <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
             ><img class="absolute-center" src="/assets/icons/icons/home.svg" alt=""
           /></a>
         </div>
         <div class="absolute mobile-nav-1">
-          <a href="#"
+          <a *ngIf="user.id" [routerLink]="['/messages/', user.id]"
             ><img
               class="absolute-center"
               src="/assets/icons/icons/articles.svg"
@@ -18,7 +18,7 @@
           /></a>
         </div>
         <div class="absolute mobile-nav-2">
-          <a routerLink="/programs"
+          <a *ngIf="user.id" [routerLink]="['/programs/', user.id]"
             ><img
               class="absolute-center"
               src="/assets/icons/icons/programs.svg"
@@ -26,7 +26,7 @@
           /></a>
         </div>
         <div class="absolute mobile-nav-3">
-          <a routerLink="/community"
+          <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
             ><img
               class="absolute-center"
               src="/assets/icons/icons/community.svg"
@@ -34,7 +34,7 @@
           /></a>
         </div>
         <div class="absolute mobile-nav-active">
-          <a routerLink="/settings"
+          <a *ngIf="user.id" [routerLink]="['/settings/', user.id]"
             ><img
               class="absolute-center"
               src="/assets/icons/icons/settings-mobile-active.svg"
@@ -46,7 +46,7 @@
       <nav
         class="max-[501px]:hidden min-[1024px]:hidden bg-white fixed bottom-0 w-full flex justify-evenly py-3"
       >
-        <a class="tablet-nav-item" routerLink="/dashboard"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
           ><img
             class="h-9 w-9 md:h-11 md:w-11"
             src="/assets/icons/icons/dashboard.svg"
@@ -56,28 +56,28 @@
           ></a
         >
        
-        <a class="tablet-nav-item" routerLink="/programs"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
           ><img
             class="h-9 w-9 md:h-11 md:w-11"
             src="/assets/icons/icons/programs.svg"
             alt=""
           /><span class="text-sm md:text-base">Programs</span></a
         >
-        <a class="tablet-nav-item" routerLink="/community"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
           ><img
             class="h-9 w-9 md:h-11 md:w-11"
             src="/assets/icons/icons/community.svg"
             alt=""
           /><span class="text-sm md:text-base">Community</span></a
         >
-        <a class="tablet-nav-item" routerLink="/messages"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
         ><img
           class="w-7"
           src="/assets/icons/icons/msg.png"
           alt=""
         /><span class="text-xs">Messages</span></a
       >
-        <a class="tablet-nav-item" routerLink="/settings"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
           ><img
             class="h-9 w-9 md:h-11 md:w-11"
             src="/assets/icons/icons/settings-active.svg"
@@ -88,17 +88,17 @@
       <!-- desktop-nav -->
       <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
         <img src="/assets/images/text-logo.png" alt="" />
-        <div
-        class="flex items-center gap-3 justify-center  mt-3"
-      >
-        <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
-        <div>
-          <p class="text-lg font-medium">Elizabeth</p>
-          <p class="text-md font-medium text-[#61646B]">
-            Elizabeth&#64;example.com
-          </p>
+        <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
+            <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
+            <div>
+            <h1 class="text-lg font-medium"> {{ user.prenom }} {{ user.nom }}</h1>
+            <p class="text-md font-medium text-[#61646B]"> {{ user.email }}</p>
+           
         </div>
-      </div>
+          </div>
+          <div *ngIf="errorMessage">
+            <p class="error">{{ errorMessage }}</p>
+          </div>
         <ul class="w-fit flex flex-col mx-auto mt-8">
           <li class="nav-li">
             <img
@@ -106,7 +106,7 @@
               alt="Dashboard Icon"
               class="icon"
             />
-            <a  routerLink="/dashboard">Dashboard</a>
+            <a  *ngIf="user.id" [routerLink]="['/dashboard/', user.id]">Dashboard</a>
           </li>
          
           <li class="nav-li">
@@ -115,7 +115,7 @@
               alt="Programs Icon"
               class="icon"
             />
-            <a routerLink="/programs">My Programs</a>
+            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">My Programs</a>
           </li>
           <li class="nav-li">
             <img
@@ -123,7 +123,7 @@
               alt="Community Icon"
               class="icon"
             />
-            <a routerLink="/community"
+            <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
               >Community</a
             >
           </li>
@@ -133,7 +133,7 @@
               alt="Articles Icon"
               class="icon"
             />
-            <a routerLink="/messages">Messages</a>
+            <a *ngIf="user.id" [routerLink]="['/messages/', user.id]">Messages</a>
           </li>
           <li class="nav-li">
             <img
@@ -141,7 +141,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a class="text-figma-nav-green underline-custom" routerLink="/settings">Settings</a>
+            <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
           </li>
           <li class="nav-li mt-3">
             <img

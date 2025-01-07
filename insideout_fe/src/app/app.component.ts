@@ -61,20 +61,20 @@ export class AppComponent implements OnInit {
     return this.currentRoute === '/sidebar';}
 
   isCommunityPage(): boolean {
-    return this.currentRoute === '/community/:userId';
+    return this.currentRoute === '/community/:id';
   }
   isProgramPage(): boolean {
-    return this.currentRoute === '/programs';
+    return this.currentRoute === '/programs/:id';
 
   }
   isDashPage(): boolean {
-    return this.currentRoute === '/dashboard/:userId';
+    return this.currentRoute === 'dashboard/:id';
   }
   isSettingPage(): boolean {
-    return this.currentRoute === '/settings';
+    return this.currentRoute === '/settings/:id';
   }
   isMessagesPage(): boolean {
-    return this.currentRoute === '/messages';
+    return this.currentRoute === '/messages/:id';
   }
 }
  

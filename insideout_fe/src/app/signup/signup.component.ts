@@ -102,6 +102,6 @@ export class SignupComponent {
       return this.currentRoute === '/login';
     }
     isQstonePage(): boolean {
-      return this.currentRoute === '/qst1';
+      return this.currentRoute === '/qst1/:id';
     }
 }

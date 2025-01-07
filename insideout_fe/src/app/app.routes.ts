@@ -16,14 +16,14 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   
-      { path: 'dashboard/:userId', component: DashboardComponent },
-      { path: 'programs', component: ProgramsComponent },
-      { path: 'settings', component: SettingsComponent },
-      { path: 'qst1', component: Qst1Component },
-      { path: 'qst2', component: Qst2Component },
-      { path: 'qst3', component: Qst3Component },
-      { path: 'community/:userId', component: CommunityComponent },
-      { path: 'messages', component: MessagesComponent },
+      { path: 'dashboard/:id', component: DashboardComponent },
+      { path: 'programs/:id', component: ProgramsComponent },
+      { path: 'settings/:id', component: SettingsComponent },
+      { path: 'qst1/:id', component: Qst1Component },
+      { path: 'qst2/:id', component: Qst2Component },
+      { path: 'qst3/:id', component: Qst3Component },
+      { path: 'community/:id', component: CommunityComponent },
+      { path: 'messages/:id', component: MessagesComponent },
     
   
 ];

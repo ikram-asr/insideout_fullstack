@@ -30,14 +30,14 @@ Route::prefix('api')->group(function () {
 // Inscription
 
 Route::prefix('api')->group(function () {
-    Route::get('users', [UserController::class, 'getAllUsers']);
+    Route::get('listusers', [UserController::class, 'getAllUsers']);
     Route::post('signup', [AuthController::class, 'signup']);
     Route::post('login', [AuthController::class, 'login']);
+    Route::get('users/user/{id}', [UserController::class, 'getUser']);
+
+    //Route::middleware('auth:sanctum')->get('users/user/{id}', [UserController::class, 'getUser']);
     Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
     Route::middleware('auth:sanctum')->get('user', [AuthController::class, 'getUser']);
-    Route::get('/friends/{userId}', [CommunityController::class, 'getFriendsDetails']);
-
-
 })->middleware('auth:sanctum');
 /*Route::post('register', [AuthController::class, 'register']);
 

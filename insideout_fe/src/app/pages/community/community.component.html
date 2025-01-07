@@ -6,7 +6,7 @@
         class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
       >
         <div class="absolute mobile-nav-4">
-          <a routerLink="/dashboard"
+          <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
             ><img class="absolute-center" src="/assets/icons/icons/home.svg" alt=""
           /></a>
         </div>
@@ -19,7 +19,7 @@
           /></a>
         </div>
         <div class="absolute mobile-nav-2">
-          <a routerLink="/programs"
+          <a *ngIf="user.id" [routerLink]="['/programs/', user.id]"
             ><img
               class="absolute-center"
               src="/assets/icons/icons/programs.svg"
@@ -27,7 +27,7 @@
           /></a>
         </div>
         <div class="absolute mobile-nav-active">
-          <a routerLink="/community"
+          <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
             ><img
               class="absolute-center"
               src="/assets/icons/icons/community-mobile-active.svg"
@@ -35,7 +35,7 @@
           /></a>
         </div>
         <div class="absolute mobile-nav-3">
-          <a routerLink="/settings"
+          <a *ngIf="user.id" [routerLink]="['/settings/', user.id]"
             ><img
               class="absolute-center"
               src="/assets/icons/icons/settings.svg"
@@ -47,7 +47,7 @@
       <nav
         class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
       >
-        <a class="tablet-nav-item" routerLink="/dashboard"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
           ><img
             class="w-7"
             src="/assets/icons/icons/dashboard.svg"
@@ -57,28 +57,28 @@
           ></a
         >
         
-        <a class="tablet-nav-item" routerLink="/programs"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
           ><img
             class="w-7"
             src="/assets/icons/icons/programs.svg"
             alt=""
           /><span class="text-xs">Programs</span></a
         >
-        <a class="tablet-nav-item" routerLink="/community"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
           ><img
             class="w-7"
             src="/assets/icons/icons/community-active.svg"
             alt=""
           /><span class="text-xs text-figma-nav-green">Community</span></a
         >
-        <a class="tablet-nav-item" routerLink="/messages"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
         ><img
           class="w-7"
           src="/assets/icons/icons/msg.png"
           alt=""
         /><span class="text-xs">Messages</span></a
       >
-        <a class="tablet-nav-item" routerLink="/settings"
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
           ><img
             class="w-7"
             src="/assets/icons/icons/settings.svg"
@@ -107,7 +107,7 @@
               alt="Dashboard Icon"
               class="icon"
             />
-            <a routerLink="/dashboard">Dashboard</a>
+            <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]">Dashboard</a>
           </li>
          
           <li class="nav-li">
@@ -116,7 +116,7 @@
               alt="Programs Icon"
               class="icon"
             />
-            <a routerLink="/programs">My Programs</a>
+            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">My Programs</a>
           </li>
           <li class="nav-li">
             <img
@@ -124,7 +124,7 @@
               alt="Community Icon"
               class="icon"
             />
-            <a routerLink="/community" class="text-figma-nav-green underline-custom"
+            <a *ngIf="user.id" [routerLink]="['/community/', user.id]" class="text-figma-nav-green underline-custom"
               >Community</a
             >
           </li>
@@ -134,7 +134,7 @@
               alt="Articles Icon"
               class="icon"
             />
-            <a routerLink="/messages">Messages</a>
+            <a *ngIf="user.id" [routerLink]="['/messages/', user.id]">Messages</a>
           </li>
           <li class="nav-li">
             <img
@@ -142,7 +142,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a routerLink="/settings">Settings</a>
+            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
           </li>
           <li class="nav-li mt-3">
             <img
@@ -157,35 +157,6 @@
 
 
       <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
-
-
-        <div *ngIf="friends.length > 0">
-            <div *ngFor="let friend of friends">
-              <h3>{{ friend.nom }} {{ friend.prenom }}</h3>
-              <!-- Vérifiez que ces propriétés existent dans la réponse API -->
-              <!-- Par défaut, si 'status' et 'mood' n'existent pas, il peut être utile de ne pas les afficher -->
-              <p>Status: {{ friend.status || 'N/A' }}</p>
-              <p>Mood: {{ friend.mood || 'N/A' }}</p>
-          
-              <div *ngIf="friend.posts && friend.posts.length > 0">
-                <h4>Posts:</h4>
-                <div *ngFor="let post of friend.posts">
-                  <p>{{ post.content }}</p>
-                  <small>Posted on: {{ post.created_at }}</small>
-                </div>
-              </div>
-              <hr />
-            </div>
-          </div>
-          
-          <div *ngIf="friends.length === 0">
-            <p>You have no friends or no posts to display.</p>
-          </div>
-          
-          
-          
-
-
 
 
         <div class="z-30 flex place-items-end justify-end">

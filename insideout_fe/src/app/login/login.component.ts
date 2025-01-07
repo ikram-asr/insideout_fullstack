@@ -14,55 +14,53 @@ import { FormsModule, ReactiveFormsModule,FormGroup, FormBuilder, Validators } f
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string = '';
-  isLoading: boolean = false; // Ajout d'une indication de chargement
+  errorMessage: string = ''; 
+  credentials = { email: '', password: '' };
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', Validators.required],
     });
   }
 
-  onSubmit(): void {
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    const { email, password } = this.loginForm.value;
-    this.isLoading = true;
-
-    this.authService.login(email, password).subscribe(
-      (response) => {
-        this.isLoading = false;
-
-        // Récupération de l'ID de l'utilisateur depuis la réponse
-        const userId = response?.user?.id;
-        if (userId) {
-          // Navigation vers la route contenant l'ID utilisateur
-          this.router.navigate([`/dashboard/${userId}`]);
-        } else {
-          this.errorMessage = 'User ID not found in response.';
-        }
+  onSubmit() {
+    const loginData = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
+  
+    this.authService.login(loginData).subscribe(
+      response => {
+        console.log('Login success:', response);
+        // Sauvegarder le token dans localStorage ou dans un service si nécessaire
+        localStorage.setItem('token', response.token);  // Exemple
+  
+        // Redirection vers la page de dashboard avec l'ID de l'utilisateur
+        const redirectUrl = response.redirect_url;  // URL de redirection fournie par Laravel
+        window.location.href = redirectUrl;  // Redirige l'utilisateur vers la page de son dashboard
       },
-      (error) => {
-        this.isLoading = false;
-        this.errorMessage = error?.error?.message || 'Invalid credentials. Please try again.';
+      error => {
+        console.error('Login error:', error);
+        // Afficher un message d'erreur si nécessaire
       }
     );
   }
-  // Vérifie si la page actuelle est une page de type Signup
-  isSignupPage(): boolean {
+  
+  
+
+  isSignupPage() {
     return this.router.url.includes('/signup');
   }
 
-  // Vérifie si la page actuelle est la page Qstone
-  isQstonePage(): boolean {
+  isQstonePage() {
     return this.router.url.includes('/qstone');
   }
 
-  // Vérifie si la page actuelle est la page d'accueil
-  isHomePage(): boolean {
+  isHomePage() {
     return this.router.url === '/';
+  }
+  isDashPage(): boolean {
+    return this.router.url === 'dashboard/:id';
   }
 }
