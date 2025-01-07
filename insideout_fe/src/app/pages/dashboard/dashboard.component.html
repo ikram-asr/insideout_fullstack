@@ -19,6 +19,65 @@
 
   </head>
 
+  <h1>Détails de l'utilisateur</h1>
+
+  <div *ngIf="user">
+    <h2>Bienvenue, {{ user.prenom }} {{ user.nom }}!</h2>
+    <p>Email : {{ user.email }}</p>
+    <p>Date de création : {{ user.created_at }}</p>
+    <p>Profil : <img [src]="user.profile_image" alt="Profile Image" /></p>
+  
+    <h3>Posts :</h3>
+    <ul>
+      <li *ngFor="let post of user.posts">
+        {{ post.content }} (Créé le : {{ post.created_at }})
+      </li>
+    </ul>
+  
+    <h3>Messages envoyés :</h3>
+    <ul>
+      <li *ngFor="let message of user.sent_messages">
+        À {{ message.receiver_id }} : {{ message.content }}
+      </li>
+    </ul>
+  
+    <h3>Messages reçus :</h3>
+    <ul>
+      <li *ngFor="let message of user.received_messages">
+        De {{ message.sender_id }} : {{ message.content }}
+      </li>
+    </ul>
+  
+    <h3>Amis :</h3>
+    <ul>
+      <li *ngFor="let friend of user.friends">
+        {{ friend.prenom }} {{ friend.nom }} (Email : {{ friend.email }})
+      </li>
+    </ul>
+  
+    <h3>États :</h3>
+    <ul>
+      <li *ngFor="let etat of user.etats">
+        Qualité de sommeil : {{ etat.sleep_quality }},
+        Heures de sommeil : {{ etat.sleep_hours }},
+        Humeur : {{ etat.mood }},
+        Date : {{ etat.date }}
+      </li>
+    </ul>
+  
+    <h3>Réactions :</h3>
+    <ul>
+      <li *ngFor="let reaction of user.reactions">
+        Type : {{ reaction.type }}, Post ID : {{ reaction.post_id }}
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="errorMessage">
+    <p class="error">{{ errorMessage }}</p>
+  </div>
+  
+
 
   
 
