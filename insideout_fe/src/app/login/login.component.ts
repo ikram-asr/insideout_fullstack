@@ -14,42 +14,55 @@ import { FormsModule, ReactiveFormsModule,FormGroup, FormBuilder, Validators } f
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string = ''; 
+  errorMessage: string = '';
+  isLoading: boolean = false; // Ajout d'une indication de chargement
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.invalid) {
       return;
     }
 
     const { email, password } = this.loginForm.value;
+    this.isLoading = true;
 
     this.authService.login(email, password).subscribe(
       (response) => {
-        // Handle successful login (e.g., redirect to dashboard)
-        this.router.navigate(['/dashboard']);
+        this.isLoading = false;
+
+        // Récupération de l'ID de l'utilisateur depuis la réponse
+        const userId = response?.user?.id;
+        if (userId) {
+          // Navigation vers la route contenant l'ID utilisateur
+          this.router.navigate([`/dashboard/${userId}`]);
+        } else {
+          this.errorMessage = 'User ID not found in response.';
+        }
       },
       (error) => {
-        this.errorMessage = 'Invalid credentials. Please try again.';
+        this.isLoading = false;
+        this.errorMessage = error?.error?.message || 'Invalid credentials. Please try again.';
       }
     );
   }
-
-  isSignupPage() {
+  // Vérifie si la page actuelle est une page de type Signup
+  isSignupPage(): boolean {
     return this.router.url.includes('/signup');
   }
 
-  isQstonePage() {
+  // Vérifie si la page actuelle est la page Qstone
+  isQstonePage(): boolean {
     return this.router.url.includes('/qstone');
   }
 
-  isHomePage() {
+  // Vérifie si la page actuelle est la page d'accueil
+  isHomePage(): boolean {
     return this.router.url === '/';
   }
 }

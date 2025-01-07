@@ -162,8 +162,10 @@
         <div *ngIf="friends.length > 0">
             <div *ngFor="let friend of friends">
               <h3>{{ friend.nom }} {{ friend.prenom }}</h3>
-              <p>Status: {{ friend.status }}</p>
-              <p>Mood: {{ friend.mood }}</p>
+              <!-- Vérifiez que ces propriétés existent dans la réponse API -->
+              <!-- Par défaut, si 'status' et 'mood' n'existent pas, il peut être utile de ne pas les afficher -->
+              <p>Status: {{ friend.status || 'N/A' }}</p>
+              <p>Mood: {{ friend.mood || 'N/A' }}</p>
           
               <div *ngIf="friend.posts && friend.posts.length > 0">
                 <h4>Posts:</h4>

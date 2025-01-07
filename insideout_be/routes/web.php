@@ -35,6 +35,9 @@ Route::prefix('api')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
     Route::middleware('auth:sanctum')->get('user', [AuthController::class, 'getUser']);
+    Route::get('/friends/{userId}', [CommunityController::class, 'getFriendsDetails']);
+
+
 })->middleware('auth:sanctum');
 /*Route::post('register', [AuthController::class, 'register']);
 

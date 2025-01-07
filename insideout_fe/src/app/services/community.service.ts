@@ -12,7 +12,8 @@ export class CommunityService {
   constructor(private http: HttpClient) {}
 
   // Récupérer les amis et leurs posts
-  getFriends(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/community/friends`);
+  getFriends(userId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/friends/${userId}`);
   }
+  
 }

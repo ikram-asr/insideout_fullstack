@@ -3,65 +3,30 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  private apiUrl = 'http://127.0.0.1:8000/api'; // L'URL de ton backend Laravel
+  private apiUrl = 'http://127.0.0.1:8000/api'; // URL de l'API Laravel
   private user: any;
 
   constructor(private http: HttpClient) {
-    // Récupère les informations de l'utilisateur dans sessionStorage au démarrage
-    this.user = JSON.parse(sessionStorage.getItem('user') || 'null');
-  }
-
-  // Récupérer le token CSRF depuis la page HTML (meta tag)
-  private getCSRFToken(): string {
-    return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    this.user = JSON.parse(sessionStorage.getItem('user') || 'null'); // Chargement de l'utilisateur au démarrage
   }
 
   // Inscription
   signup(nom: string, prenom: string, email: string, password: string): Observable<any> {
-    const token = this.getCSRFToken();  // Récupère le token CSRF
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': token  // Ajouter le token CSRF aux en-têtes
-    });
-
-    const body = {
-      nom: nom,
-      prenom: prenom,
-      email: email,
-      password: password,
-    };
-
-    return this.http.post(`${this.apiUrl}/signup`, body, { headers });
+    const body = { nom, prenom, email, password };
+    return this.http.post(`${this.apiUrl}/signup`, body, this.getHttpOptions());
   }
 
   // Connexion
   login(email: string, password: string): Observable<any> {
-    const token = this.getCSRFToken();  // Récupère le token CSRF
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': token  // Ajouter le token CSRF aux en-têtes
-    });
-
-    const body = {
-      email: email,
-      password: password
-    };
-
-    // Effectuer la requête de connexion et sauvegarder l'utilisateur en session
-    return this.http.post(`${this.apiUrl}/login`, body, { headers }).pipe(
+    const body = { email, password };
+    return this.http.post(`${this.apiUrl}/login`, body, this.getHttpOptions()).pipe(
       tap((response: any) => {
-        // Enregistrer les informations de l'utilisateur dans sessionStorage
-        if (response && response.user) {
-          sessionStorage.setItem('user', JSON.stringify(response.user));
-          this.user = response.user; // Mettre à jour l'utilisateur en cours
+        if (response?.user) {
+          this.saveUser(response.user);
         }
       })
     );
@@ -69,17 +34,52 @@ export class AuthService {
 
   // Déconnexion
   logout(): void {
+    this.http.post(`${this.apiUrl}/logout`, {}, this.getHttpOptions()).subscribe(() => {
+      this.clearSession();
+    });
+  }
+
+  // Vérifie si l'utilisateur est connecté
+  isLoggedIn(): boolean {
+    return !!this.user;
+  }
+
+  // Récupère l'utilisateur actuel
+  getUser(): any {
+    return this.user;
+  }
+
+  // Nouvelle méthode pour obtenir l'ID de l'utilisateur
+  getUserId(): string {
+    return this.user?.id || ''; // Retourne l'ID de l'utilisateur ou une chaîne vide
+  }
+
+  // Enregistre l'utilisateur dans sessionStorage
+  private saveUser(user: any): void {
+    sessionStorage.setItem('user', JSON.stringify(user));
+    this.user = user;
+  }
+
+  // Supprime les données utilisateur de la session
+  private clearSession(): void {
     sessionStorage.removeItem('user');
     this.user = null;
   }
 
-  // Vérifier si l'utilisateur est connecté
-  isLoggedIn(): boolean {
-    return this.user !== null;
+  // Options HTTP standard
+  private getHttpOptions(): { headers: HttpHeaders } {
+    const csrfToken = this.getCSRFToken();
+
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {})
+      })
+    };
   }
 
-  // Récupérer les informations de l'utilisateur connecté
-  getUser(): any {
-    return this.user;
+  // Récupère le token CSRF depuis le meta tag
+  private getCSRFToken(): string | null {
+    return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || null;
   }
 }

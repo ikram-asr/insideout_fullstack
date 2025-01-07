@@ -16,13 +16,13 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard/:userId', component: DashboardComponent },
       { path: 'programs', component: ProgramsComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'qst1', component: Qst1Component },
       { path: 'qst2', component: Qst2Component },
       { path: 'qst3', component: Qst3Component },
-      { path: 'community', component: CommunityComponent },
+      { path: 'community/:userId', component: CommunityComponent },
       { path: 'messages', component: MessagesComponent },
     
   
