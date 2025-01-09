@@ -59,7 +59,7 @@ export class SignupComponent {
         if (response && response.user) {
           this.router.navigate(['/dashboard', response.user.id]);
         } else {
-          this.router.navigate(['/qst1']);
+          this.router.navigate(['/dashboard']);
         }
   
         // Cacher le message de succès après 5 secondes

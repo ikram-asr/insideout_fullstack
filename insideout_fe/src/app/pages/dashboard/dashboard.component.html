@@ -272,11 +272,11 @@
             'bg-[#F4A84CA1]': user.etats[user.etats.length - 1]?.mood === 'anxious',
             'bg-[#FAFCD7]': user.etats[user.etats.length - 1]?.mood === 'happy',
             'bg-[#d0d1f199]': user.etats[user.etats.length - 1]?.mood === 'bored',
-            'bg-[#F2E9EC]': user.etats[user.etats.length - 1]?.mood === 'shy'
+            'bg-[#ED2469]': user.etats[user.etats.length - 1]?.mood === 'shy'
           }">
           <span
           [ngStyle]="{
-            color: getMoodColor(user.etats[user.etats.length - 1]?.mood || '') 
+            color: getMoodButtonTextColor(user.etats[user.etats.length - 1]?.mood || '') 
           }"
           class="font-bold"
         >
@@ -342,18 +342,18 @@
 
           <div class="w-[49%] h-[100%]  max-[430px]:w-[100%] bg-white rounded-md shadow-md px-4 py-[3%]  max-[430px]:order-1">
             <p
-            class="font-bold mb-6 max-[430px]:text-lg"
+            class="font-bold mb-4 max-[430px]:text-lg"
             [ngStyle]="{
               color: getMoodColor(user.etats[user.etats.length - 1]?.mood || '') 
             }"
           >
           How you slept this week          </p>   
            
-          <canvas id="sleep" class=""></canvas>
+          <canvas  id="sleep" class=""></canvas>
         </div>
           <div class="w-[49%] h-[100%]  bg-white max-[430px]:w-[100%] rounded-md shadow-md px-4 py-[3%] max-[430px]:order-1">
             <p
-            class="font-bold mb-6 max-[430px]:text-lg"
+            class="font-bold mb-4 max-[430px]:text-lg"
             [ngStyle]="{
               color: getMoodColor(user.etats[user.etats.length - 1]?.mood || '') 
             }"
