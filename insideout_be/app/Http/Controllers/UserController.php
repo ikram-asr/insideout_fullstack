@@ -34,7 +34,11 @@ class UserController extends Controller
         'friendships',
         'friends',
         'etats',
-        'reactions'
+        'reactions',
+        'friends.posts',       // Posts des amis
+        'friends.etats',       // États des amis
+        'friends.comments',
+        'friends.reactions',
     ])->find($id);
 
     // Vérifier si l'utilisateur existe
