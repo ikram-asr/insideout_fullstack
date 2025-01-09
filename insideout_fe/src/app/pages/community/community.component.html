@@ -89,17 +89,14 @@
       <!-- desktop-nav -->
       <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
         <img src="/assets/images/text-logo.png" alt="" />
-        <div
-          class="flex items-center gap-3 justify-center  mt-3"
-        >
-          <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
-          <div>
-            <p class="text-lg font-medium">Elizabeth</p>
-            <p class="text-md font-medium text-[#61646B]">
-              Elizabeth&#64;example.com
-            </p>
-          </div>
+        <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
+            <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
+            <div>
+            <h1 class="text-lg font-medium"> {{ user.prenom }} {{ user.nom }}</h1>
+            <p class="text-md font-medium text-[#61646B]"> {{ user.email }}</p>
+           
         </div>
+          </div>
         <ul class="w-fit flex flex-col mx-auto mt-8">
           <li class="nav-li">
             <img
@@ -158,6 +155,25 @@
 
       <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
 
+        <h1 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Today, your friend is feeling:</h1>
+
+        <div class="flex justify-center items-center px-16 py-6 overflow-x-auto scrollbar-hide space-x-8 w-11/12 mx-auto">
+            <div *ngFor="let friend of users" 
+                 [ngClass]="moodStyles[friend.etats[0]?.mood]?.background || moodStyles['default'].background" 
+                 class="friend-container py-4 rounded-lg shadow-md flex-shrink-0  ">
+             
+              <img [src]="moodStyles[friend.etats[0]?.mood]?.image || moodStyles['default'].image" 
+                   alt="{{ friend.etats[0]?.mood || 'default' }}" 
+                   class="-mb-4" />
+                   <p class="text-center absolute -bottom-4 text-xs whitespace-pre font-semibold text-figma-blue">{{ friend.nom }} {{ friend.prenom }}</p>
+            </div>
+          </div>
+          
+          
+          
+   
+
+
 
         <div class="z-30 flex place-items-end justify-end">
           <div class=" flex justify-center p-[6px] text-white "> 
@@ -181,141 +197,150 @@
           
         <img class="w-[40px] h-[40px] xl:w-10 xl:h-10  rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
           <!-- <img class="w-[32px] h-[32px] " src="./assets/avatar.png" alt=""> -->
-          <textarea class="text-figma-blue" rows="3" name="" id="" >I finally finished a project I've been working on for weeks! Feeling accomplished.</textarea>
+
+          
+            <textarea
+                [(ngModel)]="newPostContent"
+                placeholder="What’s on your mind?"
+                class="text-figma-blue"
+                rows="3">
+            </textarea>
         
-          <button class="w-fit ml-auto px-3 py-1 text-white rounded-[16px] bg-[linear-gradient(87deg,#003059_0%,#0067BF_100%)]">Publish</button>
+            <!-- <input type="file" (change)="onFileSelected($event)" /> -->
+        
+            <button
+                (click)="addPost()"
+                class="w-fit ml-auto px-3 py-1 text-white rounded-[16px] bg-[linear-gradient(87deg,#003059_0%,#0067BF_100%)]">
+                Publish
+            </button>
+        
+        
         </div>
       </div>
     </div>
-        <div class="main-div lg:grid lg:grid-cols-2 flex-1">
-          <div class="friends flex flex-col items-center order-2">
-            <h1 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Today, your friend is feeling:</h1>
-            <div class="flex mb-4 gap-4 mx-auto">
-              <div class="friend-container bg-[#6590ff]">
-                <span class="absolute top-[2px] text-xs">Walid</span>
-                <img src="/assets/images/sad.png" alt="">
-              </div>
-              <div class="friend-container bg-[#ff8981]">
-                <span class="absolute top-[2px] text-xs">Oumaima</span>
-                <img src="/assets/images/angry.png" alt="">
-              </div>
-              <div class="friend-container bg-[#ffc37a]">
-                <span class="absolute top-[2px] text-xs">Ikram</span>
-                <img src="/assets/images/anxious.png" alt="">
-              </div>
-            </div>
-            <div class="flex mb-4 gap-4 mx-auto">
-              <div class="friend-container bg-[#F2E9EC]">
-                <span class="absolute top-[2px] text-xs">Souad</span>
-                <img src="/assets/images/shy.png" alt="">
-              </div>
-              <div class="friend-container bg-[#08095999]">
-                <span class="absolute top-[2px] text-xs">Ritaj</span>
-                <img src="/assets/images/ennui-removebg-preview.png" alt="">
-              </div>
-              <div class="friend-container bg-[#F4F3AC]">
-                <span class="absolute top-[2px] text-xs">Rim</span>
-                <img src="/assets/images/happy.png" alt="">
+        <div class="main-div px-10 lg:grid flex-1">
+
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+            <!-- Section des posts des amis -->
+<div *ngIf="users.length > 0">
+    <h2>Posts des amis</h2>
+    <div *ngFor="let friend of users">
+        <div class="friend">
+          <div class="friend-info">
+            <img [src]="friend.profile_image" alt="Profile Image" class="profile-image">
+            <p>{{ friend.prenom }} {{ friend.nom }}</p>
+          </div>
+      
+          <div *ngFor="let post of friend.posts" class="post">
+            <div class="post-content">
+              <p>{{ post.content }}</p>
+              <div *ngIf="post.image" class="post-image">
+                <img [src]="post.image" alt="Post Image">
               </div>
             </div>
-            <div class="flex mb-4 gap-4 mx-auto">
-              <div class="friend-container bg-[#9F86BAA3]">
-                <span class="absolute top-[2px] text-xs">Chaymae</span>
-                <img src="/assets/images/stress-removebg-preview.png" alt="">
-              </div>
-              <div class="friend-container bg-[#F4F3AC]">
-                <span class="absolute top-[2px] text-xs">Ahmed</span>
-                <img src="/assets/images/happy.png" alt="">
-              </div>
-              <div class="friend-container bg-[#F2E9EC]">
-                <span class="absolute top-[2px] text-xs">Hamza</span>
-                <img src="/assets/images/shy.png" alt="">
-              </div>
+      
+            <div class="post-actions space-x-2">
+              <button (click)="addReaction(post.id, 'happy')"> 
+                  <div class="reaction bg-[#F4F3AC]">
+                  <img src="/assets/images/happy.png" alt="">
+                </div> </button>
+              <button (click)="addReaction(post.id, 'sad')">
+                  <div class="reaction bg-[#6590ff]">
+                      <img src="/assets/images/sad.png" alt="">
+                    </div>
+              </button>
+              <button (click)="addReaction(post.id, 'angry')">
+                  <div class="reaction bg-[#ff8981]">
+                      <img src="/assets/images/angry.png" alt="">
+                    </div>
+              </button>
+              <button (click)="addReaction(post.id, 'shy')">
+                  <div class="reaction bg-[#F2E9EC]">
+                      <img src="/assets/images/shy.png" alt="">
+                    </div>
+              </button>
+      
+              <input type="text" [(ngModel)]="commentContents[post.id]" placeholder="Ajouter un commentaire">
+              <button (click)="addComment(post.id, commentContents[post.id])">Ajouter Commentaire</button>
             </div>
-            <div class="flex gap-[8px] mx-auto">
-              <div class="rounded-full w-[12px] h-[12px] bg-figma-blue"></div>
-              <div class="rounded-full w-[12px] h-[12px] bg-white"></div>
-              <div class="rounded-full w-[12px] h-[12px] bg-white"></div>
+      
+            <div class="reactions">
+              <p>Réactions :</p>
+              <ul>
+                <li *ngFor="let reaction of friend.reactions">{{ reaction.type }}</li>
+              </ul>
+            </div>
+      
+            <div class="comments">
+              <p>Commentaires :</p>
+              <ul>
+                <li *ngFor="let comment of friend.comments">{{ comment.content }}</li>
+              </ul>
             </div>
           </div>
-          <div class="messages">
-            <h1 class="mt-8 mb-4 text-center text-figma-blue text-xl font-semibold">Messages/Comments</h1>
-            <div class="mx-4">
-              <div class="mb-4">
-                <div class="post relative">
-                  <div class="avatar"></div>
-                  <div>
-                    <h3>Oumaima</h3>
-                    <p>Today was really frustrating! Some things just didn't go as planned.</p>
-                  </div>
-                </div>
-                <div class="flex gap-2 mt-3">
-                  <div class="reaction bg-[#F4F3AC]">
-                    <img src="/assets/images/happy.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#ff8981]">
-                    <img src="/assets/images/angry.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#6590ff]">
-                    <img src="/assets/images/sad.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#F2E9EC]">
-                    <img src="/assets/images/shy.png" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="mb-4">
-                
-               
-              </div>
-              <div class="mb-4">
-                <div class="post relative">
-                  <div class="avatar"></div>
-                  <div>
-                    <h3>Ikram</h3>
-                    <p>Feeling a bit stressed, but I’m doing my best to stay calm.</p>
-                  </div>
-                </div>
-                <div class="flex gap-2 mt-3">
-                  <div class="reaction bg-[#F4F3AC]">
-                    <img src="/assets/images/happy.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#ff8981]">
-                    <img src="/assets/images/angry.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#6590ff]">
-                    <img src="/assets/images/sad.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#F2E9EC]">
-                    <img src="/assets/images/shy.png" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="mb-4">
-                <div class="post relative">
-                  <div class="avatar"></div>
-                  <div>
-                    <h3>Walid</h3>
-                    <p>Today has been a tough day. Trying to focus on the small positives.</p>
-                  </div>
-                </div>
-                <div class="flex gap-2 mt-3">
-                  <div class="reaction bg-[#F4F3AC]">
-                    <img src="/assets/images/happy.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#ff8981]">
-                    <img src="/assets/images/angry.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#6590ff]">
-                    <img src="/assets/images/sad.png" alt="">
-                  </div>
-                  <div class="reaction bg-[#F2E9EC]">
-                    <img src="/assets/images/shy.png" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
+        </div>
+      </div>
+
+     
+  </div>
+  
+  <!-- Section des posts du user -->
+  <div *ngIf="user" class="space-y-2">
+    <h2>Vos Posts</h2>
+    <div *ngFor="let post of user.posts" class="post">
+      <div class="post-content">
+        <p>{{ post.content }}</p>
+        <div *ngIf="post.image" class="post-image">
+          <img [src]="post.image" alt="Post Image">
+        </div>
+      </div>
+  
+      <div class="post-actions space-x-2">
+        <button (click)="addReaction(post.id, 'happy')">
+          <div class="reaction" [ngClass]="moodStyles.happy.background">
+            <img [src]="moodStyles.happy.image" alt="Happy Reaction">
           </div>
+        </button>
+        <button (click)="addReaction(post.id, 'sad')">
+          <div class="reaction" [ngClass]="moodStyles.sad.background">
+            <img [src]="moodStyles.sad.image" alt="Sad Reaction">
+          </div>
+        </button>
+        <button (click)="addReaction(post.id, 'angry')">
+          <div class="reaction" [ngClass]="moodStyles.angry.background">
+            <img [src]="moodStyles.angry.image" alt="Angry Reaction">
+          </div>
+        </button>
+        <button (click)="addReaction(post.id, 'shy')">
+          <div class="reaction" [ngClass]="moodStyles.shy.background">
+            <img [src]="moodStyles.shy.image" alt="Shy Reaction">
+          </div>
+        </button>
+  
+        <input type="text" [(ngModel)]="commentContents[post.id]" placeholder="Ajouter un commentaire">
+        <button (click)="addComment(post.id, commentContents[post.id])">Ajouter Commentaire</button>
+      </div>
+  
+      <div class="reactions">
+        <p>Réactions :</p>
+        <ul>
+          <li *ngFor="let reaction of post.reactions">{{ reaction.type }}</li>
+        </ul>
+      </div>
+  
+      <div class="comments">
+        <p>Commentaires :</p>
+        <ul>
+          <li *ngFor="let comment of post.comments">{{ comment.content }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  
+              
+         
         </div>
       </main>
     </div>

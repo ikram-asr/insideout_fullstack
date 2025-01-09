@@ -1,1 +1,236 @@
-<p>programs works!</p>
+<body class="w-screen bg-gray-300">
+    <div class="w-full h-full flex">
+      <nav
+        class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
+      > 
+        <div class="absolute mobile-nav-4">
+          <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
+            ><img class="absolute-center" src="/assets/icons/icons/home.svg" alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-1">
+          <a *ngIf="user.id" [routerLink]="['/messages/', user.id]"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/msg.png"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-active">
+          <a *ngIf="user.id" [routerLink]="['/programs/', user.id]"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/programs-mobile-active.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-3">
+          <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/community.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-2">
+          <a *ngIf="user.id" [routerLink]="['/settings/', user.id]"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/settings.svg"
+              alt=""
+          /></a>
+        </div>
+      </nav>
+      <!-- tablet-nav -->
+      <nav
+        class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
+      >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/dashboard.svg"
+            alt=""
+          /><span class="text-xs"
+            >Dashboard</span
+          ></a
+        >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/msg.png"
+            alt=""
+          /><span class="text-xs">Messages</span></a
+        >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/programs-active.svg"
+            alt=""
+          /><span class="text-xs text-figma-nav-green">Programs</span></a
+        >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/community.svg"
+            alt=""
+          /><span class="text-xs">Community</span></a
+        >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/settings.svg"
+            alt=""
+          /><span class="text-xs">Settings</span></a
+        >
+      </nav>
+      <!-- desktop-nav -->
+      <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
+        <img src="assets/images/text-logo.png" alt="" />
+        <div
+          class="flex items-center gap-3 justify-center  mt-3"
+        >
+        <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
+            <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
+            <div>
+            <h1 class="text-lg font-medium"> {{ user.prenom }} {{ user.nom }}</h1>
+            <p class="text-md font-medium text-[#61646B]"> {{ user.email }}</p>
+           
+        </div>
+          </div>
+        </div>
+        <ul class="w-fit flex flex-col mx-auto mt-8">
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/dashboard.svg"
+              alt="Dashboard Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]">Dashboard</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/msg.png"
+              alt="Articles Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/messages/', user.id]">Messages</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/programs-active.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/programs/', user.id]">My Programs</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/community.svg"
+              alt="Community Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
+              >Community</a
+            >
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/settings.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
+          </li>
+          <li class="nav-li mt-3">
+            <img
+              src="/assets/icons/icons/logout.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a href="home.html">Logout</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="bg-[#F2E9EC] flex-1 flex flex-col items-center overflow-y-auto pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+        <div class="flex place-items-end justify-end">
+          <div class=" flex justify-center p-[6px] text-white "> 
+            <div class="fixed w-60 z-0 top-0 right-0"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 
+            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="./assets/icons/logout-mobile.svg" alt=""></a> 
+          </div>
+          </div> 
+        <div class="grid grid-cols-3 content-center items-center justify-center bg-[#EED7DF] w-[calc(100%-60px)] max-w-[500px] min-h-[180px] mx-[30px] mt-7 rounded-[30px] shadow">
+          
+          <p class="col-span-2 place-self-center pl-4 w-full min-[450px]:w-2/3 text-lg min-[450px]:text-xl text-figma-blue font-semibold">Are you looking for friends?<br> search for more</p>
+          <img class="w-36 h-36 min-[380px]:w-40 min-[380px]:h-40 relative self-end ml-auto top-4 left-4" src="./assets/images/shy.png" alt="">
+        </div>
+
+       <div class="mt-12 bg-white border-[1px] border-[#ED2469] relative pl-14 py-2 rounded-3xl max-w-[800px] w-[calc(100%-40px)] mx-[20px]">
+  <img class="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6" src="/assets/icons/icons/search.svg" alt="search">
+  <input
+    class="w-[95%] focus:outline-none"
+    type="text"
+    placeholder="Search all..."
+    name="search"
+    id="search"
+    [(ngModel)]="searchQuery"
+    (input)="onSearch()"
+  />
+</div>
+
+<div class="w-full p-8 grid gap-4 justify-center grid-cols-[repeat(auto-fit,_minmax(270px,_1fr))]">
+    <div *ngIf="filteredUsers.length === 0 && searchQuery" class="text-center text-gray-500">
+      Aucun utilisateur trouvé.
+    </div>
+  
+    <div *ngFor="let user of filteredUsers" class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
+      <img
+        class="w-20 h-20 rounded-full object-cover"
+        [src]="user.profile_image || '/assets/images/placeholder.png'"
+        alt="User Image"
+      />
+      <div>
+        <h3 class="text-[#DA6E93] text-base font-medium">{{ user.nom }} {{ user.prenom }}</h3>
+        
+        <!-- Display friendship status or Follow button -->
+        <p *ngIf="getFriendshipStatus(user.id)" class="text-gray-500">
+          Status: {{ getFriendshipStatus(user.id) }}
+        </p>
+        
+        <!-- Button to Follow -->
+       <!-- Button to Follow -->
+<button
+*ngIf="!getFriendshipStatus(user.id) && !isFollowing(user.id)"
+class="px-4 py-2 bg-blue-500 text-white rounded"
+(click)="followUser(user.id)"
+>
+Follow
+</button>
+
+<!-- Button text change after following -->
+<button
+*ngIf="isFollowing(user.id)"
+class="px-4 py-2 bg-gray-500 text-white rounded"
+disabled
+>
+{{ followStatus[user.id] || 'Following...' }}
+</button>
+
+<p *ngIf="followStatus[user.id]" class="text-gray-500">
+{{ followStatus[user.id] }}
+</p>
+
+      </div>
+    </div>
+  </div>
+  
+  
+
+          
+          
+          
+        
+       
+      </main>
+    </div>
+  </body>

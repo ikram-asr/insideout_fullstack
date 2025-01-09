@@ -47,6 +47,10 @@ export class AuthService {
 
     return this.http.post(`${this.apiUrl}/login`, credentials, { headers })
       .pipe(
+        tap((response: any) => {
+          sessionStorage.setItem('user', JSON.stringify(response.user));
+          this.user = response.user;
+        }),
         // Vous pouvez ajouter un traitement d'erreurs ici si nécessaire
         catchError(error => {
           console.error('Error during login:', error);
@@ -69,4 +73,8 @@ export class AuthService {
   getUser(): any {
     return this.user;
   }
+  getToken(): string | null {
+    return this.user ? this.user.token : null;
+}
+
 }

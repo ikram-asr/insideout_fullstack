@@ -20,4 +20,22 @@ export class UserService {
       const headers = { Authorization: `Bearer ${token}` };
       return this.http.get(`${this.apiUrl}/user/${userId}`, { headers });
     }
+
+    getConversation(userId: string, friendId: string): Observable<any> {
+      return this.http.get(`${this.apiUrl}/conversations/${userId}/${friendId}`);
+    }
+
+
+      // Fonction pour envoyer un message
+ // Fonction pour envoyer un message
+ sendMessage(messageData: any): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/send-message`, messageData);
+}
+   
+addFriend(friendshipData: any): Observable<any> {
+  console.log('Sending friendship data:', friendshipData); // Add this log
+  return this.http.post<any>(`${this.apiUrl}/friendships`, friendshipData);
+}
+
+
 }
