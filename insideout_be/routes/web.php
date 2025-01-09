@@ -50,6 +50,10 @@ Route::prefix('api')->group(function () {
     Route::post('/posts/{post}/users/{user}/comments', [PostController::class, 'addComment']);
     Route::post('/posts/{post}/users/{user}/reactions', [PostController::class, 'addReaction']);
     Route::post('/users/{user}/posts', [PostController::class, 'createPost']);
+    Route::put('/users/user/{id}', [UserController::class, 'updateUser']);   // Mettre à jour un utilisateur
+    Route::delete('/users/user/{userId}/friend/{friendId}', [UserController::class, 'removeFriend']); // Supprimer un ami
+
+
 });
 
 

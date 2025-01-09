@@ -37,5 +37,17 @@ addFriend(friendshipData: any): Observable<any> {
   return this.http.post<any>(`${this.apiUrl}/friendships`, friendshipData);
 }
 
+  // Mettre à jour les informations utilisateur
+  updateUser(userId: string, userData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/user/${userId}`, userData);
+  }
+  
+  
+
+  // Supprimer un ami
+  removeFriend(userId: string, friendId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/user/${userId}/friend/${friendId}`);
+  }
+
 
 }

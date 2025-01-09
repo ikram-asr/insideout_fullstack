@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie','uploads/*'],
 
     'allowed_methods' => ['*'],
     'allowed_origins' => ['http://localhost:4200'],  // Frontend URL (Angular app URL)
