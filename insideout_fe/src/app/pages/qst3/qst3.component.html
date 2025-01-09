@@ -178,74 +178,77 @@
         </div>
         <!-- big taille -->
         <div class="flex flex-col flex-1 items-center justify-center gap-4 max-[600px]:hidden max-[770px]:gap-2">
-            <div class="flex justify-between w-full max-[600px]:w-10/12 ">
-
-              <div class="flex justify-center items-center mt-10 w-[100%] ">
-                <div class="w-[40%]  max-[770px]:w-[35%]   -mt-16 ">
-                  <img src="/assets/images/joy-books.png" alt="" class="w-[100%] h-full"> 
-                </div> 
-                  <div class=" w-[50%] flex flex-col   items-center max-[770px]:gap-2">           
-                    <div class="text-center text-[#003059] font-sans">
-                      <h1 class="text-figma-blue text-2xl text-center
-                       font-semibold px-4 mb-4 mt-2 max-[770px]:text-xl">How many hours did you study today?</h1> 
-                    </div>                 
-                  
-                    <div class="text-center text-[#003059] font-sans justify-center">
-                      <div class="h-24 w-20 max-[600px]:w-16 max-[600px]:h-16">
-                        <div class="flex flex-col items-center">
-                          <!-- Time Input -->
-                          <div class="relative inline-flex items-center justify-center bg-white border border-gray-300 
-                          max-[770px]:w-36 max-[770px]:h-20 
-                          rounded-lg p-4 text-2xl font-semibold text-gray-800 w-40 h-24  ">
-                            <div class="flex flex-row items-center ">
-                              <div class="flex flex-col items-center mx-2  ">
-                                <button onclick="increaseHours()" class="text-figma-blue text-sm ">
-                                  <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.0833 22.1667L19 14.25L26.9166 22.1667H11.0833Z" fill="#003059"/>
-                                    </svg></button>
-                                <span id="hours-display" class="text-figma-blue max-[770px]:text-sm">06</span>
-                                <button onclick="decreaseHours()" class="text-gray-600 text-sm"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19 23.75L11.0833 15.8334H26.9166L19 23.75Z" fill="#003059"/>
-                                  </svg>
-                                  </button>
-                              </div>
-                              <div class="flex flex-col items-center mx-2">
-                                <button onclick="increaseMinutes()" class="text-figma-blue text-sm"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M11.0833 22.1667L19 14.25L26.9166 22.1667H11.0833Z" fill="#003059"/>
-                                  </svg></button>
-                                <span id="minutes-display" class="text-figma-blue max-[770px]:text-sm">00</span>
-                                <button onclick="decreaseMinutes()" class="text-gray-600 text-sm"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M19 23.75L11.0833 15.8334H26.9166L19 23.75Z" fill="#003059"/>
-                                  </svg>
-                                  
-                                  </button>
-                              </div>
-                            </div>
+          <div class="flex justify-between w-full max-[600px]:w-10/12">
+            <div class="flex justify-center items-center mt-10 w-[100%]">
+              <div class="w-[40%] max-[770px]:w-[35%] -mt-16">
+                <img src="/assets/images/joy-books.png" alt="" class="w-[100%] h-full">
+              </div>
+              <div class="w-[50%] flex flex-col items-center max-[770px]:gap-2">
+                <div class="text-center text-[#003059] font-sans">
+                  <h1 class="text-figma-blue text-2xl text-center font-semibold px-4 mb-4 mt-2 max-[770px]:text-xl">
+                    How many hours did you study today?
+                  </h1>
+                </div>
+        
+                <div class="text-center text-[#003059] font-sans justify-center">
+                  <div class="h-24 w-20 max-[600px]:w-16 max-[600px]:h-16">
+                    <div class="flex flex-col items-center">
+                      <!-- Time Input -->
+                      <div class="relative inline-flex items-center justify-center bg-white border border-gray-300 
+                      max-[770px]:w-36 max-[770px]:h-20 
+                      rounded-lg p-4 text-2xl font-semibold text-gray-800 w-40 h-24">
+                        <div class="flex flex-row items-center">
+                          <!-- Hours -->
+                          <div class="flex flex-col items-center mx-2">
+                            <button (click)="increaseHours()" class="text-figma-blue text-sm">
+                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.0833 22.1667L19 14.25L26.9166 22.1667H11.0833Z" fill="#003059" />
+                              </svg>
+                            </button>
+                            <span id="hours-display" class="text-figma-blue max-[770px]:text-sm">{{ hours }}</span>
+                            <button (click)="decreaseHours()" class="text-gray-600 text-sm">
+                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 23.75L11.0833 15.8334H26.9166L19 23.75Z" fill="#003059" />
+                              </svg>
+                            </button>
                           </div>
-                          
-                          <span class="text-lg font-medium text-figma-blue mt-2 mb-2 ">Hours</span>
+                          <!-- Minutes -->
+                          <div class="flex flex-col items-center mx-2">
+                            <button (click)="increaseMinutes()" class="text-figma-blue text-sm">
+                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.0833 22.1667L19 14.25L26.9166 22.1667H11.0833Z" fill="#003059" />
+                              </svg>
+                            </button>
+                            <span id="minutes-display" class="text-figma-blue max-[770px]:text-sm">{{ minutes }}</span>
+                            <button (click)="decreaseMinutes()" class="text-gray-600 text-sm">
+                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 23.75L11.0833 15.8334H26.9166L19 23.75Z" fill="#003059" />
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                       </div>
+        
+                      <span class="text-lg font-medium text-figma-blue mt-2 mb-2">Hours</span>
                     </div>
-                    <p class="text-xl text-figma-blue mt-10 text-center font-light max-[770px]:text-lg  max-[770px]:mt-4">
-                      No judgment here, this is  only for personal statistics!
-                    </p>
-                    <div class="bottom-[4.5rem]  w-full flex  justify-between items-center px-14 mt-6  max-[500px]:hidden max-[770px]:mt-2">
-              <button class="bg-[#00927C] rounded-full text-white font-medium text-sm py-1 px-6 ">
-                <a routerLink="/dashboard">Skip</a>
-              </button>
-              <button class="bg-[#003059] rounded-full text-white font-medium text-sm py-1 px-6">
-                <a routerLink="/dashboard">Finish</a>
-              </button>
-            </div>
                   </div>
                 </div>
-                  
-                 
+                <p class="text-xl text-figma-blue mt-10 text-center font-light max-[770px]:text-lg max-[770px]:mt-4">
+                  No judgment here, this is only for personal statistics!
+                </p>
+                <div class="bottom-[4.5rem] w-full flex justify-between items-center px-14 mt-6 max-[500px]:hidden max-[770px]:mt-2">
+                  <button class="bg-[#00927C] rounded-full text-white font-medium text-sm py-1 px-6">
+                    <a [routerLink]="['/dashboard/', user.id]">Skip</a>
+                  </button>
+                  <button class="bg-[#003059] rounded-full text-white font-medium text-sm py-1 px-6" (click)="submit()">
+                    Finish
+                  </button>
+                </div>
+              </div>
             </div>
-            
+          </div>
         </div>
-
+        
         <!-- small taille  -->
         <div class="flex flex-col flex-1 items-center justify-center gap-4 min-[601px]:hidden">
           <div class="flex justify-between w-full max-[600px]:w-10/12 ">
@@ -306,10 +309,10 @@
                 </div>
                   <div class="bottom-[4.5rem]  w-full flex  justify-between items-center px-14 mt-6  max-[600px]:hidden">
             <button class="bg-[#00927C] rounded-full text-white font-medium text-sm py-1 px-6 ">
-              <a routerLink="/dashboard">Skip</a>
+              <a  [routerLink]="['/dashboard/', user.id]">Skip</a>
             </button>
             <button class="bg-[#003059] rounded-full text-white font-medium text-sm py-1 px-6">
-              <a routerLink="/dashboard">Finish</a>
+              <a  [routerLink]="['/dashboard/', user.id]">Finish</a>
             </button>
           </div>
                 </div>
@@ -321,9 +324,9 @@
       </div>
 
         <div class=" bottom-[4.5rem] min-[500px]:bottom-[80px] min-[1024px]:bottom-[16px] w-full flex px-4 justify-between items-center  min-[601px]:hidden">
-          <button class="bg-[#00927C] rounded-full text-white font-medium text-sm py-1 px-6"><a routerLink="/dashboard">Skip</a></button>
+          <button class="bg-[#00927C] rounded-full text-white font-medium text-sm py-1 px-6"><a  [routerLink]="['/dashboard/', user.id]">Skip</a></button>
 
-          <button class="bg-[#003059] rounded-full text-white font-medium text-sm py-1 px-6"><a routerLink="/dashboard">Finish</a></button>
+          <button class="bg-[#003059] rounded-full text-white font-medium text-sm py-1 px-6"><a (click)="submit()" [routerLink]="['/dashboard/', user.id]">Finish</a></button>
         </div>
 
           

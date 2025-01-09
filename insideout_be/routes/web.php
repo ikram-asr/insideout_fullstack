@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthentificationController;
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\EtatController;
+
 Route::get('/hello', function () {
     return response()->json(['message' => 'Hello, world!']);
 });
@@ -30,6 +32,7 @@ Route::prefix('api')->group(function () {
 // Inscription
 
 Route::prefix('api')->group(function () {
+    Route::post('etat', [EtatController::class, 'saveEtat']);
     Route::get('listusers', [UserController::class, 'getAllUsers']);
     Route::post('signup', [AuthController::class, 'signup']);
     Route::post('login', [AuthController::class, 'login']);

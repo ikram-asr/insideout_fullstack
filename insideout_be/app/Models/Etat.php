@@ -17,7 +17,7 @@ class Etat extends Model
         'user_id',
         'sleep_quality',
         'sleep_hours',
-        'study_hours',
+        'sleep_minutes',
         'mood',
         'date',
     ];

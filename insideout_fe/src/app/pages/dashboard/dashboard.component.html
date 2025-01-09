@@ -256,91 +256,110 @@
           </div> 
           <div class="flex justify-between max-[430px]:mb-4">
           <div class="font-bold  pt-4 text-xl max-[430px]:text-lg text-figma-blue  ">
-          <h1 class=" max-[430px]:whitespace-pre" >Feeling anxious ? </h1>
-          <p>Try <span class="text-[#BE1C0A]">this</span> out!</p>
+            <h1 class="max-[430px]:whitespace-pre">
+            Today you are feeling {{ user.etats[user.etats.length - 1]?.mood}}
+            </h1>
          </div>
          <div class="flex justify-center items-center font-semibold max-[430px]:items-end min-[1440px]:-mb-[5%] ">
           
-          <a class="text-white rounded-lg px-3 py-1 bg-[rgb(239,113,63)] shadow-xl  z-10  mt-[15%]  min-[471px]:-ml-[20%] 
-          max-[430px]:text-xs  max-[430px]:whitespace-pre  max-[430px]:-ml-10" routerLink="/qst1"> Take today's assessment</a>
+          <a
+          class="text-white rounded-lg px-3 py-1 shadow-xl z-10 mt-[15%] min-[471px]:-ml-[20%] max-[430px]:text-xs max-[430px]:whitespace-pre max-[430px]:-ml-10"
+          [routerLink]="['/qst1/', user.id]"
+          [ngClass]="{
+            'bg-[#3971FF7D]': user.etats[user.etats.length - 1]?.mood === 'sad',
+            'bg-[#FF46397D]': user.etats[user.etats.length - 1]?.mood === 'angry',
+            'bg-[#9F86BAA3]': user.etats[user.etats.length - 1]?.mood === 'afraid',
+            'bg-[#F4A84CA1]': user.etats[user.etats.length - 1]?.mood === 'anxious',
+            'bg-[#FAFCD7]': user.etats[user.etats.length - 1]?.mood === 'happy',
+            'bg-[#d0d1f199]': user.etats[user.etats.length - 1]?.mood === 'bored',
+            'bg-[#F2E9EC]': user.etats[user.etats.length - 1]?.mood === 'shy'
+          }">
+          <span
+          [ngStyle]="{
+            color: getMoodColor(user.etats[user.etats.length - 1]?.mood || '') 
+          }"
+          class="font-bold"
+        >
+        Take today’s assessment
+        </span>         </a>
         
-          <div class="w-[70px] max-[470px]:hidden z-10
-            min-[471px]:-ml-[5%]  min-[1440px]:w-[100px] min-[2000px]:w-[200px]">
-            <img src="/assets/images/anxiety-removebg-preview.png"  alt="">
-          </div>
+          <div class="w-[70px] max-[470px]:hidden z-10 
+          min-[471px]:-ml-[5%]  min-[1440px]:w-[100px] min-[2000px]:w-[200px]">
+<img
+  [src]="'' + getMoodImagelifjenb(user.etats[user.etats.length - 1]?.mood || '')"
+  [alt]="user.etats[user.etats.length - 1]?.mood"
+/>
+</div>
+
          </div> 
 
         </div>
         <div class="flex-col items-center justify-center m-auto min-[1440px]:mt-[5%]"> 
        
-         <div class=" bg-white rounded-md shadow-md px-10 py-2   max-[430px]:px-2 ">
+          <div class="bg-white rounded-md shadow-md px-10 py-2 max-[430px]:px-2">
+            <p
+            class="font-bold text-lg"
+            [ngStyle]="{
+              color: getMoodColor(user.etats[user.etats.length - 1]?.mood || '') 
+            }"
+          >
+            Mood History
+          </p>            <div class="mt-2 flex justify-between">
+              <!-- Afficher les 7 derniers moods -->
+              <div
+                *ngFor="let etat of user.etats.slice(-7)"
+                class="text-center font-semibold text-xs text-[#61646B]"
+              >
+                <div
+                  class="character-container-full w-14 h-14 max-[430px]:w-8 max-[430px]:h-8"
+                  [ngClass]="{
+                    'bg-[#3971FF7D]': etat.mood === 'sad',
+                    'bg-[#FF46397D]': etat.mood === 'angry',
+                    'bg-[#9F86BAA3]': etat.mood === 'afraid',
+                    'bg-[#F4A84CA1]': etat.mood === 'anxious',
+                    'bg-[#FAFCD7]': etat.mood === 'happy',
+                    'bg-[#080959C9]': etat.mood === 'bored',
+                    'bg-[#EED7DF]': etat.mood === 'shy'
+                  }"
+                >
+                  <!-- L'image correspondant à chaque mood -->
+                  <img
+                    class="w-[40px] max-[430px]:w-[20px]"
+                    [src]="'/assets/images/' + etat.mood + '.png'"
+                    [alt]="etat.mood"
+                  />
+                </div>
+                <!-- Afficher la date du mood -->
+                <p class="pt-2">{{ etat.date | date: 'EEE' }}</p>
+              </div>
+            </div>
+          </div>
           
-          <p class="text-[#BE1C0A] font-bold ">Mood History</p>
-          <div class=" mt-2 flex justify-between">
-            <div class="text-center font-semibold text-xs text-[#61646B]  ">
-              <div class="character-container-full bg-[#3971FF7D] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
-                <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/sad.png" alt="">
-              </div>
-              <p class="pt-2">Mon</p>
-              </div>
-
-          <div class="text-center font-semibold text-xs text-[#61646B]  ">
-          <div class="character-container-full bg-[#FF46397D] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
-            <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/angry.png" alt="">
-          </div>
-          <p class="pt-2">Tue</p>
-          </div>
-
-          <div class="text-center font-semibold text-xs text-[#61646B] ">
-          <div class="character-container-full bg-[rgba(57,113,255,0.49)] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
-            <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/sad.png" alt="">
-          </div>
-          <p class="pt-2">Wed</p>
-          </div>
-
-          <div class="text-center font-semibold text-xs text-[#61646B]  ">
-            <div class="character-container-full bg-[#F4A84CA1] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
-              <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/anxious.png" alt="">
-            </div>
-            <p class="pt-2">Sat</p>
-          </div>
-
-
-          <div class="text-center font-semibold text-xs text-[#61646B]  ">
-          <div class="character-container-full bg-[#F4F3AC] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
-            <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/happy.png" alt="">
-          </div>
-          <p class="pt-2">Fri</p>
-        </div>
-
-          <div class="text-center font-semibold text-xs text-[#61646B]  ">
-            <div class="character-container-full bg-[#F4A84CA1] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
-              <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/anxious.png" alt="">
-            </div>
-            <p class="pt-2">Sat</p>
-          </div>
-
-          <div class="text-center font-semibold text-xs text-[#61646B]  ">
-            <div class="character-container-full bg-[#F4A84CA1] w-10 h-10 max-[430px]:w-8 max-[430px]:h-8">
-              <img class="w-[40px] max-[430px]:w-[20px]" src="/assets/images/anxious.png" alt="">
-            </div>
-            <p class="pt-2">Sat</p>
-          </div>
-
-        </div>
-        
-        </div>
         <!-- les graphes -->
         
 
         <div class=" flex max-[430px]:flex-col justify-between mt-4 max-[430px]:gap-4 h-[50%] items-center ">
 
           <div class="w-[49%] h-[100%]  max-[430px]:w-[100%] bg-white rounded-md shadow-md px-4 py-[3%]  max-[430px]:order-1">
-            <p class="text-[#BE1C0A] font-bold mb-6 max-[430px]:text-lg">How you slept this week</p>
-            <canvas id="sleep" class="    " ></canvas>
-          </div>
+            <p
+            class="font-bold mb-6 max-[430px]:text-lg"
+            [ngStyle]="{
+              color: getMoodColor(user.etats[user.etats.length - 1]?.mood || '') 
+            }"
+          >
+          How you slept this week          </p>   
+           
+          <canvas id="sleep" class=""></canvas>
+        </div>
           <div class="w-[49%] h-[100%]  bg-white max-[430px]:w-[100%] rounded-md shadow-md px-4 py-[3%] max-[430px]:order-1">
-            <p class="text-[#BE1C0A] font-bold mb-6 max-[430px]:text-lg">Hours studied this week</p>
+            <p
+            class="font-bold mb-6 max-[430px]:text-lg"
+            [ngStyle]="{
+              color: getMoodColor(user.etats[user.etats.length - 1]?.mood || '') 
+            }"
+          >
+          Hours studied this week          </p>   
+
             <canvas id="study"  class="  "></canvas>
           </div>
         </div>

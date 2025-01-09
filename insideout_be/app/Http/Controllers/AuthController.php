@@ -46,7 +46,7 @@ class AuthController extends Controller
             // Validation des entrées
             $request->validate([
                 'email' => 'required|email',
-                'password' => 'required|min:6',
+                'password' => 'required',
             ]);
         
             // Vérifier si l'utilisateur existe

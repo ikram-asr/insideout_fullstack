@@ -23,6 +23,7 @@ export class SignupComponent {
   errorMessage: string = '';
   currentRoute: string = ''; // Variable pour suivre la route actuelle
   signupForm!: FormGroup;
+  successMessage: string = '';
   constructor(private http: HttpClient, private authService:AuthService, private router: Router,private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -38,9 +39,43 @@ export class SignupComponent {
       }
     });
   }
+  onSubmit(): void {
+    if (this.signupForm.invalid) {
+      this.errorMessage = 'Please fill in all fields correctly.';
+      return;
+    }
+  
+    const { nom, prenom, email, password } = this.signupForm.value;
+  
+    // Envoi des données à l'API via le service AuthService
+    this.authService.signup(nom, prenom, email, password).subscribe({
+      next: (response) => {
+        console.log('User signed up successfully', response);
+  
+        // Définir le message de succès
+        this.successMessage = 'User created successfully!';
+  
+        // Rediriger après une inscription réussie
+        if (response && response.user) {
+          this.router.navigate(['/dashboard', response.user.id]);
+        } else {
+          this.router.navigate(['/qst1']);
+        }
+  
+        // Cacher le message de succès après 5 secondes
+        setTimeout(() => {
+          this.successMessage = '';
+        }, 5000);
+      },
+      error: (error) => {
+        console.error('Error during signup', error);
+        this.errorMessage = 'Failed to sign up. Please try again.';
+      },
+    });
+  }
   
 
-  onSubmit(): void {
+ /* onSubmit(): void {
     // Vérifier si le formulaire est valide
     if (this.signupForm.invalid) {
       this.errorMessage = 'Please fill in all fields correctly.';
@@ -53,7 +88,8 @@ export class SignupComponent {
     this.authService.signup(nom, prenom, email, password).subscribe({
       next: (response) => {
         console.log('User signed up successfully', response);
-        this.router.navigate(['/qst1']); // Redirection après inscription réussie
+        this.router.navigate(['/qst1']);
+        // Redirection après inscription réussie
       },
       error: (error) => {
         console.error('Error during signup', error);
@@ -61,7 +97,7 @@ export class SignupComponent {
       },
     });
   }
-/*onSubmit() {
+onSubmit() {
   // Appelez votre service pour envoyer les données à l'API
   this.authService.signup(this.nom, this.prenom, this.email, this.password).subscribe({
     next: (response) => {
