@@ -1,89 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-
-    <!-- les graphes -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-   
 
 
-  </head>
-
-  <h1>Détails de l'utilisateur</h1>
-
-  <div *ngIf="user">
-    <h2>Bienvenue, {{ user.prenom }} {{ user.nom }}!</h2>
-    <p>Email : {{ user.email }}</p>
-    <p>Date de création : {{ user.created_at }}</p>
-    <p>Profil : <img [src]="user.profile_image" alt="Profile Image" /></p>
-  
-    <h3>Posts :</h3>
-    <ul>
-      <li *ngFor="let post of user.posts">
-        {{ post.content }} (Créé le : {{ post.created_at }})
-      </li>
-    </ul>
-  
-    <h3>Messages envoyés :</h3>
-    <ul>
-      <li *ngFor="let message of user.sent_messages">
-        À {{ message.receiver_id }} : {{ message.content }}
-      </li>
-    </ul>
-  
-    <h3>Messages reçus :</h3>
-    <ul>
-      <li *ngFor="let message of user.received_messages">
-        De {{ message.sender_id }} : {{ message.content }}
-      </li>
-    </ul>
-  
-    <h3>Amis :</h3>
-    <ul>
-      <li *ngFor="let friend of user.friends">
-        {{ friend.prenom }} {{ friend.nom }} (Email : {{ friend.email }})
-      </li>
-    </ul>
-  
-    <h3>États :</h3>
-    <ul>
-      <li *ngFor="let etat of user.etats">
-        Qualité de sommeil : {{ etat.sleep_quality }},
-        Heures de sommeil : {{ etat.sleep_hours }},
-        Humeur : {{ etat.mood }},
-        Date : {{ etat.date }}
-      </li>
-    </ul>
-  
-    <h3>Réactions :</h3>
-    <ul>
-      <li *ngFor="let reaction of user.reactions">
-        Type : {{ reaction.type }}, Post ID : {{ reaction.post_id }}
-      </li>
-    </ul>
-  </div>
-  
-  <div *ngIf="errorMessage">
-    <p class="error">{{ errorMessage }}</p>
-  </div>
-  
-
-
-  
-
- 
-  
-  
   <body class="w-screen h-screen bg-gray-300 ">
     <div class="w-full h-full flex">
       <!-- mobile-nav -->
@@ -245,7 +161,16 @@
       </ul>
     </nav>
       <!-- HERO desktop-->
-      <main class="bg-[#FFE4BC] flex-1 flex flex-col items-center overflow-y-auto pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-2">
+      <main class=" flex-1 flex flex-col items-center overflow-y-auto pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-2" 
+      [ngClass]="{
+        'bg-[#3971FF7D]': user.etats[user.etats.length - 1]?.mood === 'sad',
+           'bg-[#FF46397D]': user.etats[user.etats.length - 1]?.mood === 'angry',
+        'bg-[#DBD5FD]': user.etats[user.etats.length - 1]?.mood === 'afraid',
+        'bg-[#F4A84CA1]': user.etats[user.etats.length - 1]?.mood === 'anxious',
+        'bg-[#FAFCD7]': user.etats[user.etats.length - 1]?.mood === 'happy',
+        'bg-[#d0d1f199]': user.etats[user.etats.length - 1]?.mood === 'bored',
+        'bg-[#EED7DF]': user.etats[user.etats.length - 1]?.mood === 'shy'
+      }">
 
         <div class="w-full pl-4 pr-4 max-[500px]:pb-4">
          <div class="flex place-items-end justify-end">
@@ -263,15 +188,15 @@
          <div class="flex justify-center items-center font-semibold max-[430px]:items-end min-[1440px]:-mb-[5%] ">
           
           <a
-          class="text-white rounded-lg px-3 py-1 shadow-xl z-10 mt-[15%] min-[471px]:-ml-[20%] max-[430px]:text-xs max-[430px]:whitespace-pre max-[430px]:-ml-10"
+          class="text-white rounded-lg px-3 py-1 shadow-xl z-10 mt-[15%] min-[471px]:-ml-[20%] mb-10  max-[430px]:text-xs max-[430px]:whitespace-pre max-[430px]:-ml-10"
           [routerLink]="['/qst1/', user.id]"
           [ngClass]="{
             'bg-[#3971FF7D]': user.etats[user.etats.length - 1]?.mood === 'sad',
-            'bg-[#FF46397D]': user.etats[user.etats.length - 1]?.mood === 'angry',
+            'bg-[#FF4639]': user.etats[user.etats.length - 1]?.mood === 'angry',
             'bg-[#9F86BAA3]': user.etats[user.etats.length - 1]?.mood === 'afraid',
             'bg-[#F4A84CA1]': user.etats[user.etats.length - 1]?.mood === 'anxious',
-            'bg-[#FAFCD7]': user.etats[user.etats.length - 1]?.mood === 'happy',
-            'bg-[#d0d1f199]': user.etats[user.etats.length - 1]?.mood === 'bored',
+            'bg-[#BAC018]': user.etats[user.etats.length - 1]?.mood === 'happy',
+            'bg-[#080959C9]': user.etats[user.etats.length - 1]?.mood === 'bored',
             'bg-[#ED2469]': user.etats[user.etats.length - 1]?.mood === 'shy'
           }">
           <span
@@ -360,7 +285,7 @@
           >
           Hours studied this week          </p>   
 
-            <canvas id="study"  class="  "></canvas>
+            <canvas id="study"  class=""></canvas>
           </div>
         </div>
       </div>
@@ -482,4 +407,4 @@ const study = new Chart(ctx1, {
 
      </script>
   </body>
-</html>
+

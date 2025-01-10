@@ -1,8 +1,7 @@
 <!-- Afficher les liens de navigation seulement si on n'est pas sur la page de login ou signup -->
 
-<div *ngIf="!isLoginPage() && !isSignupPage() && !isQstonePage() && !isDashPage() && !isProgramPage() && !isCommunityPage() && !isQsttreePage() && !isQsttowPage() && !isSettingPage() && !isMessagesPage()">
+<div *ngIf="isLoginPage() && isSignupPage() && !isQstonePage() && !isDashPage() && !isProgramPage() && !isCommunityPage() && !isQsttreePage() && !isQsttowPage() && !isSettingPage() && !isMessagesPage()">
 
-  
 <body class="w-screen h-screen overflow-y-auto bg-[#ccf0ec] flex flex-col">
   <!--nav bar-->
   <!-- version pc-->
@@ -129,5 +128,4 @@
 
 </div>
 
-<!-- Afficher le contenu de la route active -->
 <router-outlet></router-outlet>

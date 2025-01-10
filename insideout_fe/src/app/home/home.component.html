@@ -1,0 +1,132 @@
+<!-- Afficher les liens de navigation seulement si on n'est pas sur la page de login ou signup -->
+
+<div >
+
+    <body class="w-screen h-screen overflow-y-auto bg-[#ccf0ec] flex flex-col">
+      <!--nav bar-->
+      <!-- version pc-->
+      <nav
+        class="max-[1023px]:hidden bg-transparent w-screen h-[10vh]"
+      >
+        <div class="container flex min-w-full">
+          <!--logo section-->
+          <div>
+            <a target="_blank" href="#"
+              ><img class="hover:scale-105" src="/assets/images/text-logo.png" alt=""
+            /></a>
+          </div>
+          <!--link section-->
+          <div
+            class="container flex justify-end gap-6 px-20 items-center"
+          >
+            <ul class="flex gap-2 text-xs font-semibold">
+              <li class=" ">
+                <button class="text-[#003059] hover:scale-105 py-2 px-4">
+                  Features
+                </button>
+              </li>
+    
+              <li class=" ">
+                <button class="text-[#003059] hover:scale-105 py-2 px-4">
+                  About
+                </button>
+              </li>
+    
+              <li class=" ">
+                <button class="text-[#003059] hover:scale-105 py-2 px-4">
+                  Support
+                </button>
+              </li>
+            </ul>
+    
+            <ul class="flex gap-2 text-xs font-semibold">
+              <li class=" ">
+                <a
+                routerLink="/login"
+                  class="text-[#00927C] hover:scale-125 py-2 px-4"
+                >
+                  Log in
+                </a>
+              </li>
+    
+              <li class=" ">
+                <a
+                routerLink="/signup" 
+                  class="border-1 border-white shadow-xl bg-[#003059] text-white py-2 px-4 rounded-md hover:text-[#003059] hover:bg-white hover:border-[#003059]"
+                >
+                  Sign up
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+      <!-- version tablette-->
+      <nav class="max-[501px]:hidden min-[1024px]:hidden bg-transparent max-h-9">
+            <img
+                class="mx-auto w-60 hover:scale-105"
+                src="/assets/images/text-logo.png"
+                alt=""
+            />
+      </nav>
+    
+      <!-- version mobile-->
+      <nav class="min-[501px]:hidden bg-transparent max-h-9"></nav>
+    
+      <!-- HERO SECTION -->
+    
+      <main class="grid grid-cols-[1fr_auto] relative flex-1 h-[90vh]">
+        <!-- foot desktp-->
+        <div
+          class="flex flex-col items-center w-full absolute top-[52.5%] left-1/2 -translate-x-1/2 z-10 lg:static lg:translate-x-0 lg:justify-center lg:gap-[2vh] lg:[@media(max-height:550px)]:gap-[0.5vh]"
+        >
+          <h1
+            class="text-figma-blue text-[1.375rem] text-center font-semibold w-2/3 lg:text-figma-nav-green lg:text-3xl lg:font-[Montserrat,sans-serif] lg:mb-[4vh] lg:[@media(max-height:550px)]:text-2xl"
+          >
+            Take care of your <br> mental health!
+          </h1>
+          <p class="hidden lg:block text-xl w-3/4 text-figma-blue lg:[@media(max-height:550px)]:text-lg">
+            Empowering students to achieve academic excellence while nurturing
+            mental well-being, fostering a balanced and thriving journey toward
+            personal and professional success.
+          </p>
+          <div class="flex gap-[16px] mt-[12px] lg:mt-[4vh]">
+            <div class="rounded-full w-[12px] h-[12px] bg-figma-nav-green lg:bg-figma-blue"></div>
+            <div class="rounded-full w-[12px] h-[12px] bg-figma-light-green lg:bg-[#60829F]"></div>
+            <div class="rounded-full w-[12px] h-[12px] bg-figma-light-green lg:bg-[#A4C9E4]"></div>
+          </div>
+          <div class="flex flex-col lg:flex-row lg:justify-around lg:w-full lg:mt-2">
+            <a routerLink="/login">
+              <button
+                class="text-white w-[200px] lg:w-[250px] py-[12px] my-[1rem] lg:my-0 rounded-[16px] bg-[linear-gradient(87deg,#003059_0%,#0067BF_100%)]"
+              >
+                Sign in
+              </button>
+            </a>
+            <a    routerLink="/signup"        >
+              <button
+                class="text-white w-[200px] lg:w-[250px] py-[12px] rounded-[16px] bg-[linear-gradient(87deg,#00927C_45%,#A2E8D8_100%)]"
+              >
+                Sign up
+              </button>
+            </a>
+          </div>
+        </div>
+        <img
+          class="absolute left-1/2 -translate-x-1/2 bottom-[47%]   w-[50vw] h-[50vh] max-[1024px]:max-w-[225px] max-[1023px]:max-h-[337px] z-10 lg:static lg:translate-x-0 lg:translate-y-0 lg:h-[80vh] lg:w-[25vw] self-end"
+          src="/assets/images/sadnesshome.png"
+          alt=""
+        />
+        <div class="fixed bottom-0 w-full h-[55%] lg:h-[10vh] z-100">
+          <div class="bg-white h-[30%] rounded-t-[50%] lg:h-full"></div>
+          <div class="bg-white h-[70%] lg:hidden"></div>
+        </div>
+        
+      </main>
+    </body>
+    
+    </div>
+    
+ 
+    

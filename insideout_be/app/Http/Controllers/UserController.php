@@ -60,7 +60,7 @@ class UserController extends Controller
           return response()->json(['success' => false, 'message' => 'Utilisateur non trouvé.'], 404);
       }
   
-      \Log::info('Données reçues : ', $request->all());
+      //Log::info('Données reçues : ', $request->all());
   
       // Validation des données
       $validatedData = $request->validate([
@@ -87,7 +87,7 @@ class UserController extends Controller
           $frontendPath = public_path('../../insideout_fe/public/uploads/' . $imageName);
           
           if (!copy($imagePath, $frontendPath)) {
-              \Log::error('Échec de la copie de l\'image vers le frontend.');
+              //Log::error('Échec de la copie de l\'image vers le frontend.');
           }
       }
   

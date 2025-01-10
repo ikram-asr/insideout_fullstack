@@ -32,198 +32,13 @@ export class DashboardComponent implements OnInit {
     
   ) {Chart.register(...registerables);
   }
-
- /* createChart(): void {
-    const ctx = document.getElementById('sleep') as HTMLCanvasElement;
-    new Chart(ctx, {
-      type: 'bar', // Type de graphique (bar, line, pie, etc.)
-      data: {
-        labels: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'], // Étiquettes de l'axe X
-        datasets: [
-          {
-            label: 'Qualité du sommeil',
-            data: [8, 7, 6, 9, 8], // Données de l'axe Y
-            backgroundColor: [
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-              'rgba(75, 192, 192, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  }*/
- /*chart(){
-  
-  new Chart("sleep", {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
- }
-  createSleepChart(data: any): void {
-    // Étape 1 : Extraire les dates et les qualités de sommeil
-    const dates = data.etats.map((etat: { date: string }) => etat.date);
-    const qualities = data.etats.map((etat: { sleep_quality: string }) => etat.sleep_quality);
-  
-    // Étape 2 : Mapper les qualités de sommeil sur des valeurs numériques
-    const qualityMap: { [key: string]: number } = {
-      "terrible": 1,
-      "poor": 2,
-      "fair": 3,
-      "good": 4,
-      "excellent": 5
-    };
-  
-    const qualityValues = qualities.map((quality: string) => qualityMap[quality.toLowerCase()]);
-  
-    // Étape 3 : Créer le graphique
-    new Chart("sleep", {
-      type: 'bar',
-      data: {
-        labels: dates, // Abscisses (dates)
-        datasets: [{
-          label: 'Sleep Quality',
-          data: qualityValues, // Valeurs des barres
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 1,
-              callback: function(tickValue: string | number) {
-                // Remap des valeurs pour afficher les labels textuels
-                if (typeof tickValue === 'number') {
-                  return Object.keys(qualityMap).find(key => qualityMap[key] === tickValue);
-                }
-                return tickValue;  // En cas de string, retourne directement le tick
-              }
-            }
-          },
-          x: {
-            ticks: {
-              autoSkip: false, // Afficher toutes les dates
-            }
-          }
-        }
-      }
-    });
-  }
-  createChart(userData: any[]): void {
-    // Vérifie si les données sont correctement récupérées
-    console.log('Données utilisées pour le graphique :', userData);
-  
-    if (!userData || userData.length === 0) {
-      console.error('Aucune donnée à afficher pour le graphique.');
-      return;
-    }
-  
-    // Labels pour l'axe X (dates ou autre identification)
-    const labels = userData.map((etat) => etat.date);
-  
-    // Données pour la qualité du sommeil
-    const data = userData.map((etat) => etat.sleep_hours);
-  
-    // Récupération de l'élément canvas
-    const canvas = document.getElementById('sleep') as HTMLCanvasElement;
-  
-    if (!canvas) {
-      console.error('Canvas avec l\'ID "sleep" introuvable.');
-      return;
-    }
-  
-    // Création du graphique (ligne au lieu de bar)
-    new Chart(canvas, {
-      type: 'line', // Changer ici de 'bar' à 'line' pour un graphique en ligne
-      data: {
-        labels, // Étiquettes de l'axe X
-        datasets: [
-          {
-            label: 'Qualité du sommeil',
-            data, // Données de l'axe Y
-            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur de fond sous la ligne
-            borderColor: 'rgba(75, 192, 192, 1)', // Couleur de la ligne
-            borderWidth: 2, // Épaisseur de la ligne
-            fill: true, // Remplir sous la ligne
-            tension: 0.4, // Courbure de la ligne
-            pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Couleur des points sur la ligne
-            pointBorderColor: 'rgba(75, 192, 192, 1)', // Bord des points
-            pointRadius: 5, // Taille des points
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: (value: any) => {
-                // Remplacer les valeurs numériques par des étiquettes personnalisées
-                switch (value) {
-                  case 'Excellent':
-                    return 'Excellent';
-                  case 'Good':
-                    return 'Good';
-                  case 'Fair':
-                    return 'Fair';
-                  case 'Poor':
-                    return 'Poor';
-                  case 'Terrible':
-                    return 'Terrible';
-                  default:
-                    return value; // Retourne la valeur par défaut si aucune correspondance
-                }
-              }
-            }
-          }
-        }
-      }
-    });
-  
-    console.log('Graphique en ligne créé avec succès.');
-  }*/
     ngOnInit(): void {
+
+    
       // Récupérer l'ID de l'utilisateur depuis l'URL
       this.userId = this.route.snapshot.paramMap.get('id')!;
       console.log('ID utilisateur récupéré :', this.userId);
-  
+
       // Vérifier que l'ID est valide avant de récupérer les données
       if (this.userId) {
         this.getUserData(this.userId); // Appeler la fonction pour récupérer les données utilisateur
@@ -231,34 +46,142 @@ export class DashboardComponent implements OnInit {
         this.errorMessage = 'ID utilisateur non valide';
       }
     }
-  
-  
+    createGraphBar(): void {
+      if (this.user && this.user.etats) {
+        let etats = this.user.etats.slice(-7); // Prendre les 7 derniers états
+    
+        // Préparer les données pour le graphique
+        const data = {
+          etats: etats.map((etat: { date: string; sleep_hours: number; mood: string }) => ({
+            date: etat.date,
+            sleep_hours: etat.sleep_hours,
+            mood: etat.mood
+          }))
+        };
+    
+        // Appeler la fonction pour créer le graphique
+        this.createStudyChart(data);
+      }
+    }
+    
+    createStudyChart(data: any): void {
+      // Étape 1 : Extraire les dates et les heures de sommeil
+      const dates = data.etats.map((etat: { date: string }) => {
+        const date = new Date(etat.date); // Convertir en objet Date
+        return date.toLocaleDateString('en-US', { weekday: 'short' }); // Récupérer le nom abrégé du jour
+      });
+    
+      const sleepHours = data.etats.map((etat: { sleep_hours: number }) => etat.sleep_hours); // Heures de sommeil
+    
+      // Étape 2 : Couleur pour les barres (selon le dernier mood)
+      const lastMood = data.etats[data.etats.length - 1]?.mood.toLowerCase();
+      const moodColorMap: { [key: string]: string } = {
+        happy: '#BAC018', // Vert
+        sad: '#003059',      // Jaune
+        anxious: '#9D2008' ,
+        afraid:'#936ABA',
+        bored :    '#080959C9', 
+        angry :    '#FF4639',
+        shy :    '#ED2469'// Rouge
+      };
+      const moodbackroundmap: { [key: string]: string } = {
+        happy: '#FAFCD7', // Vert
+        sad: '#3971FF7D',      // Jaune
+        anxious: '#F4A84CA1' ,
+        afraid:'#DBD5FD',
+        bored :    '#d0d1f199', 
+        angry :    '#FF46397D',
+        shy :    '#EED7DF'// Rouge
+      };
+      const barColor = moodColorMap[lastMood] || 'rgba(75, 192, 192, 1)'; // Couleur par défaut
+      const bgolor = moodbackroundmap[lastMood] || 'rgba(75, 192, 192, 1)';
+      // Étape 3 : Créer le graphique
+      new Chart("study", {
+        type: 'bar',
+        data: {
+          labels: dates, // Abscisses (jours)
+          datasets: [{
+            label: 'Sleep Hours',
+            data: sleepHours, // Valeurs des heures de sommeil
+            backgroundColor: bgolor,
+            borderColor: barColor,
+            borderWidth: 2
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              grid: {
+                display: false // Désactiver les lignes de grille de l'axe Y
+              },
+              beginAtZero: true,
+              title: {
+                display: false,
+                text: 'Hours of Study'
+              },
+              ticks: {
+                stepSize: 1
+              }
+            },
+            x: {
+              grid: {
+                display: false // Désactiver les lignes de grille de l'axe Y
+              },
+              title: {
+                display: true,
+              }
+            }
+          }
+        }
+      });
+    }
+    
     createGraphWhenDataLoaded(): void {
       if (this.user && this.user.etats) {
         let etats = this.user.etats; // Récupérer les états de sommeil de l'utilisateur
         // Limiter aux 7 derniers jours
 etats = etats.slice(-7); // Prendre les 7 derniers éléments
+const moodColorMap: { [key: string]: string } = {
+  happy: '#BAC018', // Vert
+  sad: '#003059',      // Jaune
+  anxious: '#9D2008' ,
+  afraid:'#936ABA',
+  bored :    '#080959C9', 
+  angry :    '#FF4639',
+  shy :    '#ED2469'// Rouge
+};
+const moodbackroundmap: { [key: string]: string } = {
+  happy: '#FAFCD7', // Vert
+  sad: '#3971FF7D',      // Jaune
+  anxious: '#F4A84CA1' ,
+  afraid:'#DBD5FD',
+  bored :    '#d0d1f199', 
+  angry :    '#FF46397D',
+  shy :    '#EED7DF'// Rouge
+};
+// Dernier mood
+const lastMood = etats[etats.length - 1]?.mood.toLowerCase();
+console.log("Dernier mood :", lastMood);
 
+const lineColor = moodColorMap[lastMood] || 'rgba(75, 192, 192, 1)';
+console.log("Couleur de la ligne :", lineColor);
+const bgolor = moodbackroundmap[lastMood] || 'rgba(75, 192, 192, 1)';
+console.log("Couleur de la ligne :", lineColor);
 // Extraire les dates et les valeurs de qualité de sommeil
 const sleepQualities = etats.map((etat: { sleep_quality: string }) => etat.sleep_quality);
-const dates = etats.map((etat: { date: string }) => etat.date);
-// Dernier mood
-const moodColorMap: { [key: string]: string } = {
-  excellent: 'rgba(75, 192, 192, 1)', // Vert
-  fair: 'rgba(255, 206, 86, 1)',      // Jaune
-  poor: 'rgba(255, 99, 132, 1)'       // Rouge
-};
-const lastMood = etats[etats.length - 1]?.sleep_quality.toLowerCase();
-const lineColor = moodColorMap[lastMood] || 'rgba(75, 192, 192, 1)'; // Couleur par défaut
+const dates = etats.map((etat: { date: string }) => {const date = new Date(etat.date); // Convertir la chaîne en objet Date
+return date.toLocaleDateString('en-US', { weekday: 'short' }); // Récupérer le nom du jour
+});
+// Couleur par défaut
 
 // Mapper la qualité de sommeil à un score numérique pour le graphique
 const qualityValues = sleepQualities.map((quality: string) => this.qualityMap[quality.toLowerCase()]);
 
-this.createSleepChart(dates, qualityValues,lineColor);
+this.createSleepChart(dates, qualityValues,lineColor,bgolor);
       }
     }
   
-    createSleepChart(dates: string[], qualityValues: number[],lineColor: string): void {
+    createSleepChart(dates: string[], qualityValues: number[],lineColor:string,bgolor:string): void {
       new Chart("sleep", {
         type: 'line',  // Changement du type de graphique pour "line"
         data: {
@@ -266,8 +189,8 @@ this.createSleepChart(dates, qualityValues,lineColor);
           datasets: [{
             label: 'Sleep Quality',
             data: qualityValues, // Valeurs des lignes
-            fill: false, 
-            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Couleur de fond sous la ligne
+            fill: true, 
+            backgroundColor: bgolor, // Couleur de fond sous la ligne
             // Ne pas remplir sous la ligne
             borderColor:lineColor,
             borderWidth: 2,
@@ -277,11 +200,32 @@ this.createSleepChart(dates, qualityValues,lineColor);
         options: {
           scales: {
             y: {
-              beginAtZero: true,
-              min: 0,  // Fixer une valeur minimale pour l'axe Y
-              max: 5,  // Fixer une valeur maximale pour l'axe Y
+              grid: {
+                display: false // Désactiver les lignes de grille de l'axe Y
+              },
+              title: {
+                display: false,
+                
+                text: 'Hours of Sleep'
+
+              },
+              ticks: {
+                callback: function(value: string | number) {
+                  const qualityLabels = ['Terrible','Poor', 'Fair', 'Good', 'Excellent'];
+                  // Vérifier si 'value' est un nombre avant d'accéder à 'qualityLabels'
+                  if (typeof value === 'number') {
+                    return qualityLabels[value] || '';
+                  }
+                  return ''; // Retourner une chaîne vide si ce n'est pas un nombre
+                }
+              },              
+              min: 0,  // Correspond à "Poor"
+              max: 4   // Correspond à "Excellent"
             },
             x: {
+              grid: {
+                display: false // Désactiver les lignes de grille de l'axe Y
+              },
               ticks: {
                 autoSkip: false, // Afficher toutes les dates
               }
@@ -296,7 +240,8 @@ this.createSleepChart(dates, qualityValues,lineColor);
       next: (response) => {
         console.log('Données utilisateur récupérées :', response);
         this.user = response;  
-        this.createGraphWhenDataLoaded(); // Créer le graphique une fois les données utilisateur récupérées
+        this.createGraphWhenDataLoaded();
+        this.createGraphBar(); // Créer le graphique une fois les données utilisateur récupérées
         // Affecter les données de l'utilisateur récupéré
       },
       error: (error) => {
@@ -342,7 +287,7 @@ this.createSleepChart(dates, qualityValues,lineColor);
           case 'afraid':
             return '/assets/images/fear.png';
       default:
-        return '/assets/images/default.png'; // Image par défaut
+        return '/assets/images/Nostalgia_Transparent.webp'; // Image par défaut
     }
   }
   
@@ -350,13 +295,13 @@ this.createSleepChart(dates, qualityValues,lineColor);
   getMoodColor(mood: string): string {
     switch (mood) {
       case 'sad':
-        return '#3971FF'; // Couleur pour "sad"
+        return '#003059'; // Couleur pour "sad"
       case 'angry':
         return '#FF4639'; // Couleur pour "angry"
       case 'afraid':
         return '#9F86BA'; // Couleur pour "afraid"
       case 'anxious':
-        return '#F4A84C'; // Couleur pour "anxious"
+        return '#9D2008'; // Couleur pour "anxious"
       case 'happy':
         return '#BAC018'; // Couleur pour "happy"
       case 'bored':
@@ -383,7 +328,7 @@ getMoodButtonColor(mood: string): string {
     case 'bored':
       return '#d0d1f1'; // Couleur pour "bored"
     case 'shy':
-      return '#F2E9EC'; // Couleur pour "shy"
+      return '#EED7DF'; // Couleur pour "shy"
     default:
       return '#BE1C0A'; // Couleur par défaut
   }
@@ -395,13 +340,15 @@ getMoodButtonTextColor(mood: string): string {
     case 'sad':
     case 'angry':
     case 'afraid':
-    case 'anxious':
       return 'text-figma-blue '; // Couleur du texte clair pour certains moods
     case 'happy':
+      return'#FAFCD7';
     case 'bored':
-      return '#080959C9';
+      return '#FFFFF';
       case 'shy':
-        return '#F2E9EC'
+        return '#F2E9EC';
+        case 'anxious':
+      return '#9D2008'; 
         // Couleur du texte sombre pour d'autres moods
     default:
       return '#000000'; // Couleur par défaut

@@ -1,32 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
-import { Router, NavigationEnd } from '@angular/router'; // Importer Router et NavigationEnd
+import { Router, NavigationEnd, NavigationError, NavigationStart, NavigationCancel } from '@angular/router'; // Importer Router et NavigationEnd
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { LoadingService } from './services/loading.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { LoadingComponent } from './loading/loading.component'; // Vérifie le chemin correct
 
 
 @Component({
   selector: 'app-root',
-  imports: [HttpClientModule, RouterModule, RouterOutlet,FormsModule,CommonModule,ReactiveFormsModule], // Ajouter RouterModule pour le routage
+  imports: [HttpClientModule,LoadingComponent  , RouterModule, RouterOutlet,FormsModule,CommonModule,ReactiveFormsModule], // Ajouter RouterModule pour le routage
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   message: string = ''; // Variable pour afficher le message de l'API
   currentRoute: string = ''; // Variable pour suivre la route actuelle
-
-  constructor(private apiService: ApiService, private router: Router) {}
+  //isLoading: boolean ;
+  constructor(private apiService: ApiService, private router: Router, 
+    public loadingService: LoadingService) {
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationStart) {
+          this.loadingService.show();
+        } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+          this.loadingService.hide();
+        }
+      });
+    }
 
   ngOnInit() {
-    // Suivre les événements de navigation
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.currentRoute = event.url; // Mettre à jour la route active
-      }
-    });
+
+   // this.isLoading= true;
 
     // Appel de l'API pour récupérer un message
     this.apiService.getHello().subscribe({
@@ -37,8 +43,12 @@ export class AppComponent implements OnInit {
         console.error('Error during API call:', error);
       },
     });
+  
   }
-
+  
+  isappPage(): boolean {
+    return this.currentRoute === '';
+  }
   // Méthode pour vérifier si nous sommes sur la page de login
   isLoginPage(): boolean {
     return this.currentRoute === '/login';
