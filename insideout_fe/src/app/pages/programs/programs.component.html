@@ -54,19 +54,12 @@
             >Dashboard</span
           ></a
         >
-        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
-          ><img
-            class="w-7"
-            src="/assets/icons/icons/msg.png"
-            alt=""
-          /><span class="text-xs">Messages</span></a
-        >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
           ><img
             class="w-7"
             src="/assets/icons/icons/programs-active.svg"
             alt=""
-          /><span class="text-xs text-figma-nav-green">Programs</span></a
+          /><span class="text-xs text-figma-nav-green">Search</span></a
         >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
           ><img
@@ -75,12 +68,19 @@
             alt=""
           /><span class="text-xs">Community</span></a
         >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/msg.png"
+          alt=""
+        /><span class="text-xs">Messages</span></a
+      >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
           ><img
             class="w-7"
             src="/assets/icons/icons/settings.svg"
             alt=""
-          /><span class="text-xs">Settings</span></a
+          /><span class="text-xs">My Profile</span></a
         >
       </nav>
       <!-- desktop-nav -->
@@ -110,19 +110,11 @@
           </li>
           <li class="nav-li">
             <img
-              src="/assets/icons/icons/msg.png"
-              alt="Articles Icon"
-              class="icon"
-            />
-            <a *ngIf="user.id" [routerLink]="['/messages/', user.id]">Messages</a>
-          </li>
-          <li class="nav-li">
-            <img
               src="/assets/icons/icons/programs-active.svg"
               alt="Programs Icon"
               class="icon"
             />
-            <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/programs/', user.id]">My Programs</a>
+            <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search</a>
           </li>
           <li class="nav-li">
             <img
@@ -136,11 +128,19 @@
           </li>
           <li class="nav-li">
             <img
+              src="/assets/icons/icons/msg.png"
+              alt="Articles Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/messages/', user.id]">Messages</a>
+          </li>
+          <li class="nav-li">
+            <img
               src="/assets/icons/icons/settings.svg"
               alt="Settings Icon"
               class="icon"
             />
-            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
+            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">My Profile</a>
           </li>
           <li class="nav-li mt-3">
             <img
@@ -148,16 +148,18 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a href="home.html">Logout</a>
+            <a (click)="onLogout()" >Logout</a>
           </li>
         </ul>
       </nav>
 
       <main class="bg-[#F2E9EC] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px] lg:ml-[25%] flex-1 flex flex-col overflow-y-auto">
         <div class="flex place-items-end justify-end">
+          <a (click)="onLogout()"  class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
+
           <div class=" flex justify-center p-[6px] text-white "> 
             <div class="fixed w-60 z-0 top-0 right-0"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 
-            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="./assets/icons/logout-mobile.svg" alt=""></a> 
+            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="./assets/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
           </div>
           </div> 
         <div class="grid grid-cols-3 content-center items-center justify-center bg-[#EED7DF] w-[calc(100%-60px)] max-w-[500px] min-h-[180px] mx-[30px] mt-7 rounded-[30px] shadow">

@@ -63,7 +63,7 @@
             class="w-7"
             src="/assets/icons/icons/programs.svg"
             alt=""
-          /><span class="text-xs">Programs</span></a
+          /><span class="text-xs">Search</span></a
         >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
           ><img
@@ -84,7 +84,7 @@
             class="w-7"
             src="/assets/icons/icons/settings.svg"
             alt=""
-          /><span class="text-xs">Settings</span></a
+          /><span class="text-xs">My Profile</span></a
         >
       </nav>
       <!-- desktop-nav -->
@@ -118,7 +118,7 @@
               alt="Programs Icon"
               class="icon"
             />
-            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">My Programs</a>
+            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search</a>
           </li>
           <li class="nav-li">
             <img
@@ -144,7 +144,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
+            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">My Profile</a>
           </li>
           <li class="nav-li mt-3">
             <img
@@ -152,7 +152,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a href="home.html">Logout</a>
+            <a (click)="onLogout()" >Logout</a>
           </li>
         </ul>
       </nav>
@@ -162,78 +162,72 @@
 
         <img src="/assets/images/envi-removebg-preview.png" alt="" class="w-32 absolute right-2 -top-2">
        
-        <div class="flex w-full  h-screen  justify-center items-center">
+
+       
+
+        <a (click)="onLogout()"  class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
+
+        <div class="flex flex-wrap w-full h-screen justify-center items-center gap-4">
 
           <!-- Section for Friends List -->
-          <div class="w-1/3  p-4">
+          <div class="w-full sm:w-1/3 p-4">
             <h2 class="text-lg font-medium px-2 text-figma-blue">Friends</h2>
             <ul class="list-none mt-4 overflow-y-auto max-h-96 scrollbar-thin
-             bg-white p-4 rounded-lg
-             scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
+              bg-white p-4 rounded-lg
+              scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
               <li *ngFor="let friend of friends" 
-              (click)="selectFriend(friend.id)" 
-              [ngClass]="{'bg-[#CCF0EC] ': friend.id === selectedFriendId, 'cursor-pointer p-2 hover:bg-gray-200': true}" 
-              class="p-2">
-              <div class="flex justify-start items-center gap-2 rounded-md">
+                  (click)="selectFriend(friend.id)" 
+                  [ngClass]="{'bg-[#CCF0EC] ': friend.id === selectedFriendId, 'cursor-pointer p-2 hover:bg-gray-200': true}" 
+                  class="p-2">
+                <div class="flex justify-start items-center gap-2 rounded-md">
                   <img [src]="friend.profile_image" class="h-10 w-10 rounded-full" alt="Friend Image" />
                   <span>{{ friend.prenom }} {{ friend.nom }}</span>
-                  <!-- Affichage du nombre de nouveaux messages -->
+                  <!-- Display unread messages count -->
                   <span *ngIf="getUnreadMessagesCount(friend.id) > 0" class="bg-figma-blue text-white rounded-full px-2 py-1 text-xs ml-2">
-                      {{ getUnreadMessagesCount(friend.id) }}
+                    {{ getUnreadMessagesCount(friend.id) }}
                   </span>
-              </div>
-          </li>
-          
+                </div>
+              </li>
             </ul>
           </div>
         
           <!-- Section for Messages -->
-          
-          <div class="flex-1 p-4">
-            
+          <div class="w-full sm:flex-1 p-4">
             <h2 class="text-lg font-medium px-2 text-figma-blue">Conversation</h2>
             <div class="max-h-96 p-4 flex-col justify-between">
+              
+              <!-- Display conversation messages -->
               <div *ngIf="selectedFriendId && conversation.length > 0" class="overflow-y-auto max-h-80 scrollbar-thin bg-white p-4 rounded-lg scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
                 <div *ngFor="let message of conversation" class="flex mb-2">
-                  <!-- Message de l'utilisateur (aligné à droite) -->
-                  <div
-                    *ngIf="message.sender_id === user.id"
-                    class="ml-auto bg-figma-nav-green text-white p-2 rounded-lg max-w-xs"
-                  >
+                  <!-- Message from user (aligned to the right) -->
+                  <div *ngIf="message.sender_id === user.id" class="ml-auto bg-figma-nav-green text-white p-2 rounded-lg max-w-xs">
                     <span class="font-bold">You:</span> {{ message.content }}
                     <span class="text-xs text-gray-400 ml-2">{{ message.updated_at | date: 'short' }}</span>
                   </div>
-          
-                  <!-- Message de l'ami (aligné à gauche) -->
-                  <div
-                    *ngIf="message.sender_id !== user.id"
-                    class="mr-auto bg-gray-300 text-black p-2 rounded-lg max-w-xs"
-                  >
+        
+                  <!-- Message from friend (aligned to the left) -->
+                  <div *ngIf="message.sender_id !== user.id" class="mr-auto bg-gray-300 text-black p-2 rounded-lg max-w-xs">
                     <span class="font-bold">{{ getFriendName(message.sender_id) }}:</span> {{ message.content }}
                     <span class="text-xs text-gray-400 ml-2">{{ message.updated_at | date: 'short' }}</span>
                   </div>
                 </div>
               </div>
-          
-  <div *ngIf="selectedFriendId && conversation.length === 0">
-    <p class="text-gray-500">No messages yet. Start a conversation!</p>
-  </div>
-
-
-  <div *ngIf="selectedFriendId">
-    
-    <div class="mt-4 flex">
-      <input [(ngModel)]="newMessage" type="text" placeholder="Type your message..." class="p-2 border rounded w-full" />
-      <button (click)="sendMessage()" class="ml-2 p-2 bg-figma-blue text-white rounded">Send</button>
-    </div>
-  </div>
-  </div>
-</div>
-
-
-
-
+        
+              <!-- Message if no conversation exists -->
+              <div *ngIf="selectedFriendId && conversation.length === 0">
+                <p class="text-gray-500">No messages yet. Start a conversation!</p>
+              </div>
+        
+              <!-- Input for new message -->
+              <div *ngIf="selectedFriendId" class="mt-4 flex">
+                <input [(ngModel)]="newMessage" type="text" placeholder="Type your message..." class="p-2 border rounded w-full" />
+                <button (click)="sendMessage()" class="ml-2 p-2 bg-figma-blue text-white rounded">Send</button>
+              </div>
+            </div>
+          </div>
+        
         </div>
+        
  
           
       </main>

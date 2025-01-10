@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/userService/user.service';
 import { ActivatedRoute } from '@angular/router';  // Importation pour récupérer l'ID de l'URL
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { EtatService } from '../../services/etat.service';
 import { Chart, ChartConfiguration, ChartOptions, ChartType, registerables } from 'chart.js';
-
+import { AuthService } from '../../services/authService/auth.service';
 @Component({
   selector: 'app-dashboard',
   imports: [RouterModule, FormsModule, CommonModule],
@@ -29,7 +29,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    
+    private authService: AuthService,
+    private router: Router
   ) {Chart.register(...registerables);
   }
     ngOnInit(): void {
@@ -46,6 +47,15 @@ export class DashboardComponent implements OnInit {
         this.errorMessage = 'ID utilisateur non valide';
       }
     }
+    onLogout(): void {
+      this.authService.logout().subscribe(() => {
+        // Redirigez l'utilisateur vers la page de connexion ou une autre page
+        this.router.navigate(['/']);
+      }, error => {
+        console.error('Erreur lors de la déconnexion', error);
+      });
+    }
+
     createGraphBar(): void {
       if (this.user && this.user.etats) {
         let etats = this.user.etats.slice(-7); // Prendre les 7 derniers états
@@ -211,7 +221,7 @@ this.createSleepChart(dates, qualityValues,lineColor,bgolor);
               },
               ticks: {
                 callback: function(value: string | number) {
-                  const qualityLabels = ['Terrible','Poor', 'Fair', 'Good', 'Excellent'];
+                  const qualityLabels = ['0','Terrible','Poor', 'Fair', 'Good', 'Excellent'];
                   // Vérifier si 'value' est un nombre avant d'accéder à 'qualityLabels'
                   if (typeof value === 'number') {
                     return qualityLabels[value] || '';
@@ -220,7 +230,7 @@ this.createSleepChart(dates, qualityValues,lineColor,bgolor);
                 }
               },              
               min: 0,  // Correspond à "Poor"
-              max: 4   // Correspond à "Excellent"
+              max: 5   // Correspond à "Excellent"
             },
             x: {
               grid: {
@@ -267,7 +277,7 @@ this.createSleepChart(dates, qualityValues,lineColor,bgolor);
           case 'afraid':
             return '/assets/images/stress-removebg-preview.png';
       default:
-        return '/assets/images/default.png'; // Image par défaut
+        return '/assets/images/Nostalgia_Transparent.webp'; // Image par défaut
     }
   }
   getMoodImagelifjenb(mood: string): string {
@@ -309,7 +319,7 @@ this.createSleepChart(dates, qualityValues,lineColor,bgolor);
       case 'shy':
         return '#ED2469'; // Couleur pour "shy"
       default:
-        return '#BE1C0A'; // Couleur par défaut
+        return '#4D3435'; // Couleur par défaut
     }
   }
   // Fonction pour obtenir la couleur de fond du bouton
@@ -330,7 +340,7 @@ getMoodButtonColor(mood: string): string {
     case 'shy':
       return '#EED7DF'; // Couleur pour "shy"
     default:
-      return '#BE1C0A'; // Couleur par défaut
+      return '#4D3435'; // Couleur par défaut
   }
 }
 
@@ -351,7 +361,7 @@ getMoodButtonTextColor(mood: string): string {
       return '#9D2008'; 
         // Couleur du texte sombre pour d'autres moods
     default:
-      return '#000000'; // Couleur par défaut
+      return '#B39B99'; // Couleur par défaut
   }
 }
 

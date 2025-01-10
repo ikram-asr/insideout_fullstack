@@ -40,7 +40,10 @@ export class Qst2Component implements OnInit {
       this.errorMessage = 'ID utilisateur non valide';
     }
   }
-
+  changeBackgroundColor(bgColor: string): void {
+    document.body.style.backgroundColor = bgColor;
+  }
+  
   getUserData(userId: string): void {
     this.userService.getUserById(userId).subscribe({
       next: (response) => {

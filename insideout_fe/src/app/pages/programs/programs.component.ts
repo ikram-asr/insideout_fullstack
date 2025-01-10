@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/userService/user.service';
 import { ActivatedRoute } from '@angular/router';  
+import { AuthService } from '../../services/authService/auth.service';
 
 @Component({
   selector: 'app-programs',
@@ -24,13 +25,22 @@ export class ProgramsComponent {
   searchQuery: string = '';  // Texte de recherche
   followStatus: Record<string, string> = {};  // Ensure `friendId` can be a string key
 
- 
-
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute  // Service pour récupérer les paramètres d'URL
+    private route: ActivatedRoute,
+    private authService : AuthService,
+    private router: Router // Service pour récupérer les paramètres d'URL
   ) {}
+
+  onLogout(): void {
+    this.authService.logout().subscribe(() => {
+      // Redirigez l'utilisateur vers la page de connexion ou une autre page
+      this.router.navigate(['/']);
+    }, error => {
+      console.error('Erreur lors de la déconnexion', error);
+    });
+  }
 
   ngOnInit(): void {
     // Récupérer l'ID de l'utilisateur depuis l'URL

@@ -1,6 +1,6 @@
 
 
-  <body class="w-screen h-screen bg-gray-300 ">
+  <body class="w-screen h-screen bg-[#B39B99] ">
     <div class="w-full h-full flex">
       <!-- mobile-nav -->
       <nav
@@ -66,7 +66,7 @@
           class="w-7"
           src="/assets/icons/icons/programs.svg"
           alt=""
-        /><span class="text-xs">Programs</span></a
+        /><span class="text-xs">Search</span></a
       >
       <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
         ><img
@@ -87,7 +87,7 @@
           class="w-7"
           src="/assets/icons/icons/settings.svg"
           alt=""
-        /><span class="text-xs">Settings</span></a
+        /><span class="text-xs">My Profile</span></a
       >
     </nav>
     <!-- desktop-nav -->
@@ -122,7 +122,7 @@
             alt="Programs Icon"
             class="icon"
           />
-          <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Programs</a>
+          <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search</a>
         </li>
         <li class="nav-li">
           <img
@@ -148,7 +148,7 @@
             alt="Settings Icon"
             class="icon"
           />
-          <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
+          <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">My Profile</a>
         </li>
         <li class="nav-li mt-3">
           <img
@@ -156,7 +156,7 @@
             alt="Settings Icon"
             class="icon"
           />
-          <a href="#">Logout</a>
+          <a (click)="onLogout()" href="#">Logout</a>
         </li>
       </ul>
     </nav>
@@ -169,26 +169,27 @@
         'bg-[#F4A84CA1]': user.etats[user.etats.length - 1]?.mood === 'anxious',
         'bg-[#FAFCD7]': user.etats[user.etats.length - 1]?.mood === 'happy',
         'bg-[#d0d1f199]': user.etats[user.etats.length - 1]?.mood === 'bored',
-        'bg-[#EED7DF]': user.etats[user.etats.length - 1]?.mood === 'shy'
+        'bg-[#EED7DF]': user.etats[user.etats.length - 1]?.mood === 'shy',
+
       }">
 
         <div class="w-full pl-4 pr-4 max-[500px]:pb-4">
          <div class="flex place-items-end justify-end">
           <div class=" flex justify-center p-[6px] text-white "> 
             <div class="fixed w-60 z-0 top-0 right-0"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 
-            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt=""></a> 
+            <a (click)="onLogout()"  class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
           </div>
           </div> 
           <div class="flex justify-between max-[430px]:mb-4">
-          <div class="font-bold  pt-4 text-xl max-[430px]:text-lg text-figma-blue  ">
+          <div class="font-bold  pt-10 text-xl max-[430px]:text-lg text-figma-blue  ">
             <h1 class="max-[430px]:whitespace-pre">
-            Today you are feeling {{ user.etats[user.etats.length - 1]?.mood}}
+            Today you are feeling {{ user.etats[user.etats.length - 1]?.mood}} 
             </h1>
          </div>
          <div class="flex justify-center items-center font-semibold max-[430px]:items-end min-[1440px]:-mb-[5%] ">
           
           <a
-          class="text-white rounded-lg px-3 py-1 shadow-xl z-10 mt-[15%] min-[471px]:-ml-[20%] mb-10  max-[430px]:text-xs max-[430px]:whitespace-pre max-[430px]:-ml-10"
+          class="text-white  rounded-lg px-3 py-1 shadow-xl z-10 mt-[15%] min-[471px]:-ml-[20%] mb-10  max-[430px]:text-xs max-[430px]:whitespace-pre max-[430px]:-ml-10"
           [routerLink]="['/qst1/', user.id]"
           [ngClass]="{
             'bg-[#3971FF7D]': user.etats[user.etats.length - 1]?.mood === 'sad',
@@ -244,7 +245,8 @@
                     'bg-[#F4A84CA1]': etat.mood === 'anxious',
                     'bg-[#FAFCD7]': etat.mood === 'happy',
                     'bg-[#080959C9]': etat.mood === 'bored',
-                    'bg-[#EED7DF]': etat.mood === 'shy'
+                    'bg-[#EED7DF]': etat.mood === 'shy',
+                    'bg-[#4D3435]': etat.mood === 'null'
                   }"
                 >
                   <!-- L'image correspondant à chaque mood -->
@@ -296,113 +298,6 @@
       </main>
     </div>
     <script>
-      //graphe sleep
-      // Créer un contexte pour le graphique
-const ctx = document.getElementById('sleep').getContext('2d');
-
-// Dégradé de couleur pour le fond
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, 'rgba(239,113,63, 0.4)');   // Couleur orange clair
-gradient.addColorStop(1, 'rgba(239,113,63, 0)');     // Couleur transparente
-
-// Configuration du graphique
-const config = {
-    type: 'line',
-    data: {
-        labels: ['M','T', 'W', 'T', 'F', 'S', 'S'],  // Labels des jours
-        datasets: [{
-            label: 'Hours',
-            data: [8, 7, 9, 5, 6, 8, 4,9],  // Données pour chaque jour
-            fill: true,
-            backgroundColor: gradient,
-            borderColor: 'rgba(255, 99, 71, 0.8)',
-            borderWidth: 2,
-            tension: 0.4,  // Pour les courbes lissées
-            pointBackgroundColor: 'rgba(255, 99, 71, 0.8)',  
-            pointBorderColor: 'rgba(255, 99, 71, 0.8)',
-            pointHoverRadius: 8,
-            pointRadius: function(context) {
-                // Mettre en évidence un point particulier (par exemple, le jour "S")
-                return context.dataIndex === 4 ? 6 : 0;
-            },
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false,  // Cacher la légende
-            }
-        },
-        scales: {
-            x: {
-                grid: {
-                    display: false,  // Cacher les lignes de la grille
-                },
-                ticks: {
-                    color: '#888',  // Couleur des labels en bas
-                }
-            },
-            y: {
-                display: false,  // Cacher l'axe y
-            }
-        },
-        elements: {
-            line: {
-                borderCapStyle: 'round'  // Coins arrondis
-            }
-        }
-    }
-};
-
-// Créer le graphique
-const myChart = new Chart(ctx, config);
-
-// Graphe study
-// Graphe study
-// Graphe study
-const ctx1 = document.getElementById('study').getContext('2d');
-
-const study = new Chart(ctx1, {
-    type: 'bar',  
-    data: {
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'], 
-        datasets: [{
-            label: 'Hours',
-            data: [12, 19, 3, 5, 2, 3, 8],  
-            backgroundColor: '#003059',
-            borderColor: '#003059',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false  // Cacher la légende
-            },
-            tooltip: {
-                enabled: false  // Désactiver les info-bulles
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#888',  
-                }
-            },
-            y: {
-                beginAtZero: true,
-                display: false  // Masquer l'axe Y
-            }
-        },
-        elements: {
-            bar: {
-                borderRadius: 10, 
-            }
-        },
-       
-    }
-});
-
 
 
      </script>

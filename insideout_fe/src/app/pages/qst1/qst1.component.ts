@@ -76,35 +76,6 @@ export class Qst1Component implements AfterViewInit, OnInit {
     this.router.navigate([`/qst2/${this.user.id}`]);
   }
   
-
-
-/*saveQuality(): void {
-  if (!this.activeOption) {
-    this.errorMessage = 'Aucune option sélectionnée';
-    return;
-  }
-
-  const quality = this.activeOption.dataset['quality'] || '';
-  const userId = this.userId;
-
-  if (!quality) {
-    this.errorMessage = 'Qualité non définie';
-    return;
-  }
-
-  console.log('Envoi de la qualité:', quality, 'ID utilisateur:', userId);  // Log pour vérifier les données
-  this.etatService.saveEtat(Number(userId), quality).subscribe({
-    next: (response) => {
-      console.log('Qualité enregistrée avec succès :', response);
-      // Logique après l'enregistrement réussi
-    },
-    error: (error) => {
-      console.error('Erreur lors de l\'enregistrement de la qualité', error);
-      this.errorMessage = 'Erreur lors de l\'enregistrement de la qualité';
-    }
-  });
-}
-*/
 ngOnInit(): void {
   // Vérifie que l'ID est bien récupéré
   this.userId = this.route.snapshot.paramMap.get('id')!;
@@ -135,37 +106,49 @@ ngOnInit(): void {
   // Méthode de gestion du clic sur les options de qualité
   switchActiveOption(event: Event, slidingParts: HTMLElement[], gaps: HTMLElement[], main: HTMLElement): void {
     const target = event.currentTarget as HTMLElement;
-
+  
+    // Retirer la classe active de l'option précédente
     if (this.activeOption) {
       this.renderer.removeClass(this.activeOption, 'active');
     }
+  
+    // Définir la nouvelle option active
     this.activeOption = target;
     this.renderer.addClass(this.activeOption, 'active');
-
+  
     const quality = this.activeOption.dataset['quality'] || '';
     const barColor = this.barBackgrounds[quality as keyof typeof this.barBackgrounds];
     const mainColor = this.mainBackgrounds[quality as keyof typeof this.mainBackgrounds];
     const activeId = Number(this.activeOption.dataset['id']);
-
+  
+    // Remplir la barre en fonction de la position du cercle (du bas vers le haut)
     slidingParts.forEach((part, index) => {
-      this.renderer.setStyle(part, 'background', index <= activeId ? barColor : 'white');
+      this.renderer.setStyle(part, 'background', index <= activeId ? 'white' : barColor);
     });
-
+  
     gaps.forEach((gap, index) => {
-      this.renderer.setStyle(gap, 'backgroundColor', index < activeId ? barColor : 'white');
+      this.renderer.setStyle(gap, 'backgroundColor', index < activeId ? 'white' : barColor);
     });
-
-    this.renderer.setStyle(this.activeOption, 'background', `linear-gradient(to bottom, white 0%, white 50%, ${barColor} 50%, ${barColor} 100%)`);
-
+  
+    // Calculer la position du cercle en pourcentage (en haut vers le bas)
+    const positionPercentage = (activeId / (slidingParts.length - 1 )) * 100;
+  
+    // Appliquer le gradient inversé à la barre pour que la couleur soit au-dessus du cercle
+    this.renderer.setStyle(this.activeOption, 'background', 
+      `linear-gradient(to bottom, white ${positionPercentage}%, ${barColor} ${positionPercentage}%)`);
+  
+    // Appliquer la couleur au cercle
     const marker = this.activeOption.querySelector('.circle') as HTMLElement;
     if (marker) {
       this.renderer.setStyle(marker, 'background', barColor);
       this.renderer.setStyle(marker, 'filter', `drop-shadow(0px 4px 4px ${barColor})`);
     }
-
+  
+    // Appliquer la couleur principale au fond
     this.renderer.setStyle(main, 'background', mainColor);
   }
-
+  
+  
   ngAfterViewInit(): void {
     const slidingParts = Array.from(this.el.nativeElement.querySelectorAll('.sliding-part')) as HTMLElement[];
     const gaps = Array.from(this.el.nativeElement.querySelectorAll('.faux-gap')) as HTMLElement[];

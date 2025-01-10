@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/userService/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { CommunityService } from '../../services/community.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import moment from 'moment';  // Installer Moment.js : `npm install moment`
+import { AuthService } from '../../services/authService/auth.service';
 
 
 @Component({
@@ -42,7 +43,9 @@ export class CommunityComponent implements OnInit {
     private route: ActivatedRoute,
     private communityService: CommunityService,
     private http: HttpClient,
-    private cdr: ChangeDetectorRef // Injection de ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService,
+    private router: Router // Injection de ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +58,14 @@ export class CommunityComponent implements OnInit {
     } else {
       this.errorMessage = 'Invalid user ID';
     }
+  }
+  onLogout(): void {
+    this.authService.logout().subscribe(() => {
+      // Redirigez l'utilisateur vers la page de connexion ou une autre page
+      this.router.navigate(['/']);
+    }, error => {
+      console.error('Erreur lors de la déconnexion', error);
+    });
   }
 
   getUserData(userId: string): void {

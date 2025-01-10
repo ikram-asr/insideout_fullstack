@@ -1,5 +1,5 @@
 
-  <body class="w-screen h-screen bg-[#FAFCD7]">
+  <body class="w-screen h-screen ">
     <div class="relative w-full h-full flex">
       <!-- mobile-nav -->
       <nav
@@ -160,10 +160,10 @@
       </ul>
     </nav>
 
-      <main class="relative transition-colors flex-1 flex flex-col pt-2 pb-[calc(6rem)] h-full overflow-y-auto min-[500px]:pb-[80px] min-[1024px]:pb-2">
+      <main class=" relative transition-colors flex-1 flex flex-col pt-2 pb-[calc(6rem)] h-full overflow-y-auto min-[500px]:pb-[80px] min-[1024px]:pb-2">
         <div class="flex items-center justify-between px-4 pt-3"> 
           <h2 class=" text-figma-nav-green font-semibold text-base fixed mt-8">
-            <a class="text-[#003059] flex absolute left-0 bottom-full text-sm gap-2  z-10 rounded-full px-2 cursor-pointer hover:bg-slate-500/35" href="question-1.html">
+            <a class="text-[#003059] flex absolute left-0 bottom-full text-sm gap-2  z-10 rounded-full px-2 cursor-pointer hover:bg-slate-500/35" [routerLink]="['/dashboard/', user.id]">
                 <img src="/assets/icons/icons/Back.svg" alt="" class="text-[#003059] w-5 h-5 ">Back
               </a>
             Assessment
@@ -172,14 +172,14 @@
             <span class="border-[1px] border-figma-nav-green  z-10 text-figma-nav-green font-semibold px-[12px] py-[4px] rounded-[30px] bg-[rgba(255,255,255,0.80)]">2 of 3</span>
             <div class=" flex justify-center p-[6px] "> 
               <div class="fixed z-0 w-[96] top-0 right-0 min-[370px]:-top-[40px]"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 
-               <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden "><img  src="/assets/icons/icons/logout-mobile.svg" alt=""></a> 
+               <a [routerLink]="['/']" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden "><img  src="/assets/icons/icons/logout-mobile.svg" alt=""></a> 
             </div>
           </div>
         </div>
         <h1 class="text-figma-blue text-lg text-center font-semibold px-4 mt-2 max-[600px]:mt-16 ">How are you feeling today?</h1>
         <div class="flex flex-col flex-1 items-center justify-center gap-4">
             <!-- affichage d emotion -->
-            <div id="selectedEmotionDisplay" class="text-center mt-2 flex items-center justify-center gap-4 max-[600px]:mt-2  max-[600px]:h-24 ">
+            <div id="selectedEmotionDisplay"  class="text-center  mt-2 flex items-center justify-center gap-4 max-[600px]:mt-2  max-[600px]:h-24 " >
               <div class="flex max-[600px]:items-center justify-center ">
                  <p id="emotionText" class="text-lg font-light min-[1000px]:text-xl text-[#003059] max-[600px]:w-24">I'm feeling Happy today!!</p> </div> 
                <div class="max-[600px]:-mt-14">
@@ -194,7 +194,7 @@
             <div class="flex  justify-between px-4 w-8/12 max-[600px]:w-10/12  ">
 
                 <div class="feeling text-center text-[#003059] font-sans hover:scale-110  scale-selected cursor-pointer"   data-mood="Happy"
-                (click)="selectEmotionAndMood('Happy', '#FAFCD7', '/assets/images/joy-45-removebg-preview.png', 'happy', $event)">
+                (click)="selectEmotionAndMood('Happy', '#FAFCD7', '/assets/images/joy-45-removebg-preview.png', 'happy', $event)" >
                 <div class="character-container bg-[#F4F3AC] h-20 w-16    max-[600px]:w-12 max-[600px]:h-12">
                     <img src="/assets/images/joy-removebg-preview.png" alt="" class="h-24">
                   </div>
@@ -203,7 +203,7 @@
 
                 <div class="feeling text-center text-[#003059] font-sans hover:scale-110 cursor-pointer" data-mood="Anxious"
                 (click)="selectEmotionAndMood('Anxious', '#FFE4BC', '/assets/images/anxiety-q.png', 'anxious', $event)">
-                  <div class="character-container bg-[#F4A84CA1]  h-20 w-16   max-[600px]:w-12 max-[600px]:h-12">
+                  <div class="character-container bg-[#F4A84CA1]   h-20 w-16   max-[600px]:w-12 max-[600px]:h-12">
                     <img src="/assets/images/anxiety-removebg-preview.png" alt="">
                   </div>
                   <p class="shadow-2xl max-[600px]:text-xs ">Anxious</p>

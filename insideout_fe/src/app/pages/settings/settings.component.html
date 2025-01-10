@@ -61,7 +61,7 @@
             class="h-9 w-9 md:h-11 md:w-11"
             src="/assets/icons/icons/programs.svg"
             alt=""
-          /><span class="text-sm md:text-base">Programs</span></a
+          /><span class="text-sm md:text-base">Search</span></a
         >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
           ><img
@@ -82,7 +82,7 @@
             class="h-9 w-9 md:h-11 md:w-11"
             src="/assets/icons/icons/settings-active.svg"
             alt=""
-          /><span class="text-sm md:text-base text-figma-nav-green">Settings</span></a
+          /><span class="text-sm md:text-base text-figma-nav-green">My Profile</span></a
         >
       </nav>
       <!-- desktop-nav -->
@@ -117,7 +117,7 @@
               alt="Programs Icon"
               class="icon"
             />
-            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">My Programs</a>
+            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search</a>
           </li>
           <li class="nav-li">
             <img
@@ -143,7 +143,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
+            <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/settings/', user.id]">My profile</a>
           </li>
           <li class="nav-li mt-3">
             <img
@@ -151,28 +151,33 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a href="home.html">Logout</a>
+            <a (click)="onLogout()" >Logout</a>
           </li>
         </ul>
       </nav>
 
-      <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px] lg:ml-[25%]">
-        <img src="/assets/images/profile_header.png" alt="" class="z-0 -mt-8 ">
 
+      <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px] lg:ml-[25%]">
+
+        <img src="/assets/images/profile_header.png" alt="" class="z-0 -mt-8 w-full">
+      
+        <a (click)="onLogout()" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4">
+          <img src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()">
+        </a>
+      
         <div class="p-8 z-20">
-        
-        
+          
           <!-- Vue des informations utilisateur -->
-          <div *ngIf="!editMode" class="mb-6  flex justify-between items-center -mt-36 ">
+          <div *ngIf="!editMode" class="mb-6 flex justify-between max-[800px]:justify-center  max-[800px]:-mt-24 items-center -mt-36 flex-wrap">
             <div class="flex items-center gap-4">
               <img
                 [src]="user.profile_image || '/assets/images/placeholder.png'"
                 alt="Photo de profil"
                 class="w-14 h-14 rounded-full"
               />
-              <div class=" text-white">
+              <div class="text-white">
                 <strong> {{ user.nom }}  {{ user.prenom }}</strong>
-                <p class="text-white/80"><strong > {{ user.email }}</strong></p>
+                <p class="text-white/80"><strong> {{ user.email }}</strong></p>
               </div>
             </div>
             <button
@@ -182,157 +187,139 @@
               Edit
             </button>
           </div>
-        
+      
           <!-- Formulaire d'édition -->
-          <div *ngIf="editMode"  class="fixed top-0 left-0 w-full h-full  bg-gray-500 bg-opacity-50 flex items-center justify-center">
-           
-            <div class="bg-white rounded-lg p-6 w-1/3">
-            <div class="flex items-center gap-4">
-              <img
-                [src]="user.profile_image || '/assets/images/placeholder.png'"
-                alt="Photo de profil"
-                class="w-20 h-20 rounded-full"
-              />
-              <input
-                type="file"
-                (change)="onFileSelected($event)"
-                class="mt-2 text-sm"
-              />
+          <div *ngIf="editMode" class="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white rounded-lg p-6 w-full sm:w-1/2 lg:w-1/3">
+              <div class="flex items-center gap-4">
+                <img
+                  [src]="user.profile_image || '/assets/images/placeholder.png'"
+                  alt="Photo de profil"
+                  class="w-20 h-20 rounded-full"
+                />
+                <input
+                  type="file"
+                  (change)="onFileSelected($event)"
+                  class="mt-2 text-sm"
+                />
+              </div>
+      
+              <div class="mt-4">
+                <label class="block">Last Name :</label>
+                <input
+                  [(ngModel)]="user.nom"
+                  class="border px-2 py-1 w-full border-figma-blue rounded-lg"
+                />
+      
+                <label class="block mt-2">Name :</label>
+                <input
+                  [(ngModel)]="user.prenom"
+                  class="border px-2 py-1 w-full border-figma-blue rounded-lg"
+                />
+      
+                <label class="block mt-2">Email :</label>
+                <input
+                  [(ngModel)]="user.email"
+                  type="email"
+                  class="border px-2 py-1 w-full border-figma-blue rounded-lg"
+                />
+              </div>
+      
+              <button
+                (click)="updateUser()"
+                class="bg-figma-nav-green text-white px-4 py-2 rounded mt-4"
+              >
+                Save
+              </button>
+              <button
+                (click)="toggleEditMode()"
+                class="bg-figma-blue/70 text-white px-4 py-2 rounded mt-4 ml-2"
+              >
+                Cancel
+              </button>
             </div>
-        
-            <div class="mt-4">
-              <label class="block">Last Name :</label>
-              <input
-                [(ngModel)]="user.nom"
-                class="border px-2 py-1 w-full border-figma-blue rounded-lg "
-              />
-        
-              <label class="block mt-2">Name :</label>
-              <input
-                [(ngModel)]="user.prenom"
-                class="border px-2 py-1 w-full border-figma-blue rounded-lg "
-              />
-        
-              <label class="block mt-2">Email :</label>
-              <input
-                [(ngModel)]="user.email"
-                type="email"
-                class="border px-2 py-1 w-full border-figma-blue rounded-lg "
-              />
-            </div>
-        
-            <button
-              (click)="updateUser()"
-              class="bg-figma-nav-green text-white px-4 py-2 rounded mt-4"
-            >
-              Save
-            </button>
-            <button
-              (click)="toggleEditMode()"
-              class="bg-figma-blue/70 text-white px-4 py-2 rounded mt-4 ml-2"
-            >
-              Cancel
-            </button>
           </div>
-          </div>
-        
+      
           <!-- Statistiques utilisateur -->
-          <div class="flex justify-between mt-12 items-center mb-4">
-            
+          <div class="flex justify-between mt-12 items-center mb-4 flex-wrap">
             <p class="font-bold text-figma-blue px-4">Your posts : {{ postCount }}</p>
             <div class="flex gap-8 items-center">
-            <p class="font-bold text-figma-blue">
-              Your friends : {{ friendCount }}
-              
-            </p>
-            <button  (click)="toggleFriendPopup()" class="py-2 px-4 text-figma-light-green bg-figma-blue
-            rounded-lg font-semibold">
-              Show Friends 
-            </button>
-          </div>
-          </div>
-
-          <!-- Your posts  -->
-           <div class="flex justify-between">
-
-          <div *ngIf="user" class="space-y-2 w-[49%] overflow-y-auto max-h-80 scrollbar-thin
-          px-4 rounded-lg
-          scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
-            
-            <div class="flex justify-start items-center gap-2">
-              <img [src]="user.profile_image" alt="Profile Image" class="profile-image w-8 rounded-full">
-              <p>{{ user.prenom }} {{ user.nom }}</p>
-             
-        
+              <p class="font-bold text-figma-blue">
+                Your friends : {{ friendCount }}
+              </p>
+              <button (click)="toggleFriendPopup()" class="py-2 px-4 text-figma-light-green bg-figma-blue rounded-lg font-semibold">
+                Show Friends 
+              </button>
             </div>
-            
-            <div *ngFor="let post of user.posts" class="">
-              
-              <span  class="text-gray-500 text-xs ">{{ getTimeSince(post.updated_at) }}</span>
-              <div class="post-content" class="p-4 bg-white rounded-lg shadow-lg">
-                <p>{{ post.content }}</p>
-                <div *ngIf="post.image" class="post-image">
-                  <img [src]="post.image" alt="Post Image">
-                </div>
+          </div>
+      
+          <!-- Your posts -->
+          <div class="flex justify-between flex-wrap">
+            <div *ngIf="user" class="space-y-2 w-full sm:w-[49%] lg:w-[49%] overflow-y-auto max-h-80 scrollbar-thin px-4 rounded-lg scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
+              <div class="flex justify-start items-center gap-2">
+                <img [src]="user.profile_image" alt="Profile Image" class="profile-image w-8 rounded-full">
+                <p>{{ user.prenom }} {{ user.nom }}</p>
               </div>
-        
-              <div class="flex justify-between p-2 items-center  ">
-          
-                <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
-                  <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1 "> 
-                    {{ countReactions(post, 'happy') }} 
-                    <div class="reaction bg-[#F4F3AC] hover:scale-150">
-                      <img src="/assets/images/happy.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150 "> 
-                    </div></button>
-                  <button (click)="addReaction(post.id, 'sad')" class="flex justify-center items-center gap-1">
-                    {{ countReactions(post, 'sad') }}
+      
+              <div *ngFor="let post of user.posts">
+                <span class="text-gray-500 text-xs">{{ getTimeSince(post.updated_at) }}</span>
+                <div class="post-content p-4 bg-white rounded-lg shadow-lg">
+                  <p>{{ post.content }}</p>
+                  <div *ngIf="post.image" class="post-image">
+                    <img [src]="post.image" alt="Post Image">
+                  </div>
+                </div>
+      
+                <div class="flex justify-between p-2 items-center">
+                  <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
+                    <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1">
+                      {{ countReactions(post, 'happy') }} 
+                      <div class="reaction bg-[#F4F3AC] hover:scale-150">
+                        <img src="/assets/images/happy.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150"> 
+                      </div>
+                    </button>
+                    <button (click)="addReaction(post.id, 'sad')" class="flex justify-center items-center gap-1">
+                      {{ countReactions(post, 'sad') }}
                       <div class="reaction bg-[#6590ff] hover:scale-150">
-                          <img src="/assets/images/sad.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150">
-                        </div>  
-                  </button>
-                  <button (click)="addReaction(post.id, 'angry')" class="flex justify-center items-center gap-1">
-                    {{ countReactions(post, 'angry') }}
+                        <img src="/assets/images/sad.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150">
+                      </div>
+                    </button>
+                    <button (click)="addReaction(post.id, 'angry')" class="flex justify-center items-center gap-1">
+                      {{ countReactions(post, 'angry') }}
                       <div class="reaction bg-[#ff8981] hover:scale-150">
-                          <img src="/assets/images/angry.png" alt="" class="hover:scale-200">
-                        </div> 
-                  </button>
-                  <button (click)="addReaction(post.id, 'shy')" class="flex justify-center items-center gap-1">
-                    {{ countReactions(post, 'shy') }}
+                        <img src="/assets/images/angry.png" alt="" class="hover:scale-200">
+                      </div> 
+                    </button>
+                    <button (click)="addReaction(post.id, 'shy')" class="flex justify-center items-center gap-1">
+                      {{ countReactions(post, 'shy') }}
                       <div class="reaction bg-[#F2E9EC] hover:scale-150">
-                          <img src="/assets/images/shy.png" alt="" class="hover:scale-150">
-                        </div> 
-                  </button>
-          
-                  
+                        <img src="/assets/images/shy.png" alt="" class="hover:scale-150">
+                      </div> 
+                    </button>
+                  </div>
+      
+                  <div class="comments-count">
+                    <button (click)="openCommentsModal(post)" class="hover:underline">
+                      {{ countComments(post) }} Commentaires
+                    </button>
+                  </div>
                 </div>
-          
-                <div class="comments-count">
-                  <button (click)="openCommentsModal(post)" class="hover:underline">
-                    {{ countComments(post) }} Commentaires
-                  </button>
-                </div>
-          
               </div>
-              
+            </div>
+      
+            <div class="w-full sm:w-[40%] mt-6">
+              <img src="/assets/images/sad_joy.png" alt="">
             </div>
           </div>
-
-          <div class="w-[40%] mt-6">
-            <img src="/assets/images/sad_joy.png" alt="">
-          </div>
-
-
-
-
-</div>
+      
           <!-- Modal pour afficher les commentaires -->
           <div *ngIf="selectedPostId" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div class="modal-content bg-white rounded-lg p-4 w-96 space-y-4 h-96 overflow-hidden">
+            <div class="modal-content bg-white rounded-lg p-4 w-full sm:w-96 space-y-4 h-96 overflow-hidden">
               <div class="flex justify-between items-center">
                 <h3 class="text-lg font-semibold">comments</h3>
                 <button (click)="closeCommentsModal()" class="text-red-700 hover:scale-150 font-bold text-3xl">x</button>
               </div>
-          
+      
               <!-- Liste des commentaires -->
               <div class="comments space-y-2 overflow-y-auto max-h-64 scrollbar-thin scrollbar-thumb-figma-nav-green scrollbar-track-gray-200/0">
                 <div *ngFor="let comment of getCommentsForPost(selectedPostId)" class="p-2">
@@ -342,11 +329,9 @@
                     <span class="text-gray-500 text-xs">{{ getTimeSince(comment.updated_at) }}</span>
                   </div>
                   <p class="ml-8"> {{ comment.content }}</p>
-                    <!-- Ligne horizontale sauf après le dernier commentaire -->
-                  <!-- <hr class="border-gray-300 w-1/2 mx-auto pt-2"> -->
                 </div>
               </div>
-          
+      
               <!-- Formulaire pour ajouter un commentaire -->
               <div class="flex justify-between items-center gap-2">
                 <input
@@ -364,49 +349,41 @@
               </div>
             </div>
           </div>
-        
+      
           <!-- Pop-up des amis -->
-          <div
-            *ngIf="showFriendPopup"
-            class="fixed top-0 left-0 w-full h-full  bg-gray-500 bg-opacity-50 flex items-center justify-center"
-          >
-          <div class="bg-white rounded-lg p-6 w-1/3">
-            <div class=" overflow-y-auto max-h-96 scrollbar-thin
-            
-            scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
-              <h3 class="text-xl font-semibold mb-4">Your friend's list</h3>
-              <ul>
-                <li
-                  *ngFor="let friend of friendList"
-                  class="flex justify-between items-center mb-2"
-                >
-                <div class="flex gap-2">
-                  <img [src]="friend.profile_image" class="w-6 rounded-full" alt="">
-                  <p>{{ friend.nom }} {{ friend.prenom }}</p> </div>
-                  <button
-                    (click)="removeFriend(friend.id)"
-                    class="bg-[#ff8981] text-white px-3 py-1 rounded flex gap-2 items-center"
-                  > <div class=" hover:scale-150">
-                    <img src="/assets/images/angry.png" alt="" class="hover:scale-200 w-8 -mt-2">
-                  </div> 
-                    Unfollow
-                  </button>
-                </li>
-              </ul>
-             
+          <div *ngIf="showFriendPopup" class="fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white rounded-lg p-6 w-full sm:w-1/3">
+              <div class="overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
+                <h3 class="text-xl font-semibold mb-4">Your friend's list</h3>
+                <ul>
+                  <li *ngFor="let friend of friendList" class="flex justify-between items-center mb-2">
+                    <div class="flex gap-2">
+                      <img [src]="friend.profile_image" class="w-6 rounded-full" alt="">
+                      <p>{{ friend.nom }} {{ friend.prenom }}</p> 
+                    </div>
+                    <button
+                      (click)="removeFriend(friend.id)"
+                      class="bg-[#ff8981] text-white px-3 py-1 rounded flex gap-2 items-center"
+                    >
+                      <div class="hover:scale-150">
+                        <img src="/assets/images/angry.png" alt="" class="hover:scale-200 w-8 -mt-2">
+                      </div> 
+                      Unfollow
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              <button
+                (click)="toggleFriendPopup()"
+                class="mt-4 bg-gray-300 px-4 py-2 rounded"
+              >
+                Close
+              </button>
             </div>
-            <button
-            (click)="toggleFriendPopup()"
-            class="mt-4 bg-gray-300 px-4 py-2 rounded"
-          >
-            close
-          </button>
-        </div>
           </div>
         </div>
-        
-        
       </main>
+      
     </div>
   </body>
 
