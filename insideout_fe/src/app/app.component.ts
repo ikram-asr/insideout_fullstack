@@ -17,8 +17,8 @@ import { LoadingComponent } from './loading/loading.component'; // Vérifie le c
 })
 export class AppComponent implements OnInit {
   message: string = ''; // Variable pour afficher le message de l'API
-  currentRoute: string = ''; // Variable pour suivre la route actuelle
-  //isLoading: boolean ;
+  currentRoute: string = ''; 
+  isLoading = false;
   constructor(private apiService: ApiService, private router: Router, 
     public loadingService: LoadingService) {
       this.router.events.subscribe(event => {
@@ -31,7 +31,17 @@ export class AppComponent implements OnInit {
     }
 
   ngOnInit() {
-
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.isLoading = true;
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel
+      ) {
+        this.isLoading = false;
+      }
+    });
+  
    // this.isLoading= true;
 
     // Appel de l'API pour récupérer un message
