@@ -119,11 +119,14 @@ class UserController extends Controller
     }
 
     // Suppression de la relation d'amitié
-    $deleted = Friendship::where('user_id', $userId)
+    $deleted1 = Friendship::where('user_id', $userId)
                          ->where('friend_id', $friendId)
                          ->delete();
+    $deleted2 = Friendship::where('user_id', $friendId)
+        ->where('friend_id',  $userId)
+         ->delete();
 
-    if ($deleted) {
+    if ($deleted1) {
         return response()->json(['message' => 'Ami supprimé avec succès.'], 200);
     } else {
         return response()->json(['message' => 'Erreur lors de la suppression de l’ami.'], 500);

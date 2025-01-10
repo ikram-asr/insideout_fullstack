@@ -11,6 +11,7 @@ use App\Http\Controllers\EtatController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FriendshipController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/hello', function () {
     return response()->json(['message' => 'Hello, world!']);
@@ -54,6 +55,9 @@ Route::prefix('api')->group(function () {
     Route::post('/users/{user}/posts', [PostController::class, 'createPost']);
     Route::put('/users/user/{id}', [UserController::class, 'updateUser']);   // Mettre à jour un utilisateur
     Route::delete('/users/user/{userId}/friend/{friendId}', [UserController::class, 'removeFriend']); // Supprimer un ami
+    Route::post('/notifications', [NotificationController::class, 'sendNotification']);
+    Route::get('/notifications/{userId}', [NotificationController::class, 'getNotifications']);
+    Route::put('/notifications/mark-as-read/{userId}/{friendId}', [NotificationController::class, 'markNotificationsAsRead']);
 
 
 });

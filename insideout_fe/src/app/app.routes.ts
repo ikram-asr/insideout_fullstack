@@ -10,6 +10,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ProgramsComponent } from './pages/programs/programs.component';
 import { CommunityComponent } from './pages/community/community.component';
 import { MessagesComponent } from './pages/messages/messages.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
       { path: 'qst3/:id', component: Qst3Component },
       { path: 'community/:id', component: CommunityComponent },
       { path: 'messages/:id', component: MessagesComponent },
+      { path: 'profile/:id/:idfriend', component: ProfileComponent },
     
   
 ];

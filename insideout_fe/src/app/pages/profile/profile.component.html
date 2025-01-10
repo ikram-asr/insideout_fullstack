@@ -1,0 +1,320 @@
+
+<body class="w-screen bg-gray-300">
+    <div class="w-full h-full flex">
+      <!-- mobile-nav -->
+      <nav
+        class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
+      >
+        <div class="absolute mobile-nav-4">
+          <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
+            ><img class="absolute-center" src="/assets/icons/icons/home.svg" alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-1">
+          <a href="#"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/articles.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-2">
+          <a *ngIf="user.id" [routerLink]="['/programs/', user.id]"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/programs.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-active">
+          <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/community-mobile-active.svg"
+              alt=""
+          /></a>
+        </div>
+        <div class="absolute mobile-nav-3">
+          <a *ngIf="user.id" [routerLink]="['/settings/', user.id]"
+            ><img
+              class="absolute-center"
+              src="/assets/icons/icons/settings.svg"
+              alt=""
+          /></a>
+        </div>
+      </nav>
+      <!-- tablet-nav -->
+      <nav
+        class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
+      >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/dashboard.svg"
+            alt=""
+          /><span class="text-xs"
+            >Dashboard</span
+          ></a
+        >
+        
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/programs.svg"
+            alt=""
+          /><span class="text-xs">Search</span></a
+        >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/community-active.svg"
+            alt=""
+          /><span class="text-xs text-figma-nav-green">Community</span></a
+        >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/msg.png"
+          alt=""
+        /><span class="text-xs">Messages</span></a
+      >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
+          ><img
+            class="w-7"
+            src="/assets/icons/icons/settings.svg"
+            alt=""
+          /><span class="text-xs">My profile</span></a
+        >
+      </nav>
+      <!-- desktop-nav -->
+      <nav class="bg-white hidden lg:block w-1/4 fixed h-screen overflow-y-auto px-3">
+
+        <img src="/assets/images/text-logo.png" alt="" class=""/>
+        <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
+            <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
+            <div>
+            <h1 class="text-lg font-medium"> {{ user.prenom }} {{ user.nom }}</h1>
+            <p class="text-md font-medium text-[#61646B]"> {{ user.email }}</p>
+           
+        </div>
+          </div>
+        <ul class="w-fit flex flex-col mx-auto mt-8  ">
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/dashboard.svg"
+              alt="Dashboard Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]">Dashboard</a>
+          </li>
+         
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/programs.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search </a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/community-active.svg"
+              alt="Community Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/community/', user.id]" class="text-figma-nav-green underline-custom"
+              >Community</a
+            >
+          </li>
+          <li class="nav-li">
+            <img
+            src="/assets/icons/icons/msg.png"
+              alt="Articles Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/messages/', user.id]">Messages</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/settings.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">My Profile</a>
+          </li>
+          <li class="nav-li mt-3">
+            <img
+              src="/assets/icons/icons/logout.svg"
+              alt="Settings Icon"
+              class="icon"
+            />
+            <a (click)="onLogout()" >Logout</a>
+          </li>
+        </ul>
+      </nav>
+
+
+      <main *ngIf="friendData" class="flex-1 flex flex-col h-screen overflow-y-auto pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px] lg:ml-[25%] scrollbar-hide"
+      [ngClass]="moodStyles[friendData.etats[0]?.mood]?.background">
+
+      <img src="/assets/images/profile_header.png" alt="" class="z-0 -mt-10 w-full">
+      
+        <a (click)="onLogout()" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4">
+          <img src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()">
+        </a>
+
+        <div class="p-8 z-20">
+
+  <!-- Vue des informations de l'ami -->
+  <div class="mb-6 flex justify-between max-[800px]:justify-center items-center flex-wrap -mt-36">
+    <div class="flex items-center gap-4">
+      <img
+        [src]="friendData.profile_image || '/assets/images/placeholder.png'"
+        alt="Photo de profil"
+        class="w-14 h-14 rounded-full"
+      />
+      <div class="text-white">
+        <span> Your friend <strong>{{ friendData.nom }} {{ friendData.prenom }}</strong> is feeling <span>{{friendData.etats[0]?.mood}} Today</span></span>
+        <p class="text-white/80"><strong>{{ friendData.email }}</strong></p>
+      </div>
+    </div>
+
+    <div>
+        <!-- Unfollow button on the friend's profile -->
+<button (click)="removeFriend(friendData.id)" class="bg-white text-figma-blue py-2 px-4 rounded-md hover:scale-105 ">
+   - Unfollow
+  </button>
+  
+    </div>
+  </div>
+
+  <!-- Statistiques de l'ami -->
+  <div *ngIf="friendData" class="flex justify-between mt-12 items-center mb-4 flex-wrap"
+  [ngClass]="{
+    'text-[#3971FF7D]': friendData.etats[0]?.mood === 'sad',
+    'text-[#ea392d]': friendData.etats[0]?.mood === 'angry',
+    'text-[#7520d0c1]': friendData.etats[0]?.mood  === 'afraid',
+    'text-[#f36100]': friendData.etats[0]?.mood  === 'anxious',
+    'text-[#BAC018]':friendData.etats[0]?.mood  === 'happy',
+    'text-[#080959C9]': friendData.etats[0]?.mood  === 'bored',
+    'text-[#ED2469]': friendData.etats[0]?.mood  === 'shy'
+  }">
+    <p class="font-bold  px-4">Posts : {{ friendData.posts?.length || 0 }}</p>
+    <p class="font-bold  px-4">Friends : {{ friendData.friends?.length || 0 }}</p>
+  </div>
+
+  <div class="flex justify-between">
+  <!-- Publications de l'ami -->
+  <div *ngIf="friendData.posts && friendData.posts.length > 0" class="space-y-2 w-full sm:w-[49%] lg:w-[49%] overflow-y-auto max-h-80 scrollbar-thin px-4 rounded-lg scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
+    <div *ngFor="let post of friendData.posts" class="mb-4">
+      <div class="post-content p-4 bg-white rounded-lg shadow-lg">
+        <p>{{ post.content }}</p>
+        <span class="text-gray-500 text-xs">{{ getTimeSince(post.updated_at) }}</span>
+        <div *ngIf="post.image" class="post-image mt-2">
+          <img [src]="post.image" alt="Post Image" class="w-full rounded-lg">
+        </div>
+      </div>
+
+      <!-- Réactions et commentaires -->
+      <div class="flex justify-between p-2 items-center">
+        <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
+          <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1">
+            {{ countReactions(post, 'happy') }}
+            <div class="reaction bg-[#F4F3AC] hover:scale-150">
+              <img src="/assets/images/happy.png" alt="" class="w-6 h-6">
+            </div>
+          </button>
+          <button (click)="addReaction(post.id, 'sad')" class="flex justify-center items-center gap-1">
+            {{ countReactions(post, 'sad') }}
+            <div class="reaction bg-[#6590ff] hover:scale-150">
+              <img src="/assets/images/sad.png" alt="" class="w-6 h-6">
+            </div>
+          </button>
+          <button (click)="addReaction(post.id, 'angry')" class="flex justify-center items-center gap-1">
+            {{ countReactions(post, 'angry') }}
+            <div class="reaction bg-[#ff8981] hover:scale-150">
+              <img src="/assets/images/angry.png" alt="" class="w-6 h-6">
+            </div>
+          </button>
+          <button (click)="addReaction(post.id, 'shy')" class="flex justify-center items-center gap-1">
+            {{ countReactions(post, 'shy') }}
+            <div class="reaction bg-[#F2E9EC] hover:scale-150">
+              <img src="/assets/images/shy.png" alt="" class="w-6 h-6">
+            </div>
+          </button>
+        </div>
+
+        <div class="comments-count">
+          <button (click)="openCommentsModal(post)" class="hover:underline">
+            {{ countComments(post) }} Commentaires
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message si aucun post -->
+  <div *ngIf="!friendData.posts || friendData.posts.length === 0" class="text-gray-500">
+    No posts available.
+  </div>
+
+  <!-- Mood Image -->
+  <div class="w-[30%]">
+   
+    
+    <img [src]="moodStyles[friendData.etats[0]?.mood]?.image || moodStyles.default.image" alt="Mood Image">
+  </div>
+
+  </div>
+
+
+</div>
+</main>
+
+
+
+
+
+<!-- Modal for comments -->
+<div *ngIf="selectedPostId !== null" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div class="modal-content bg-white p-4 rounded-lg shadow-lg w-1/2">
+        <div class="flex justify-between items-center">
+            <h2 class="text-lg font-semibold">Comments for Post</h2>
+            <button (click)="closeCommentsModal()" class="text-gray-500">X</button>
+        </div>
+        <div class="comments-list space-y-2 overflow-y-auto max-h-64 scrollbar-thin scrollbar-thumb-figma-nav-green scrollbar-track-gray-200/0">
+            <div *ngFor="let comment of getCommentsForPost(selectedPostId)" class="p-2">
+                <div class="flex justify-start gap-2 items-center">
+                    <img [src]="comment.profile" alt="" class="rounded-full w-6">
+                    <p class="font-semibold">{{ comment.author }}:</p>
+                    <span class="text-gray-500 text-xs">{{ getTimeSince(comment.updated_at) }}</span>
+                </div>
+                <p class="ml-8"> {{ comment.content }}</p>
+            </div>
+        </div>
+        
+        <!-- Formulaire pour ajouter un commentaire (only shown when selectedPostId is not null) -->
+        <div class="flex justify-between items-center gap-2 mt-4">
+            <input
+                type="text"
+                [(ngModel)]="commentContents[selectedPostId || '']"
+                placeholder="Add a comment"
+                class="w-full border rounded px-2 py-1"
+            />
+            <button 
+                *ngIf="selectedPostId !== null" 
+                (click)="addComment(selectedPostId, commentContents[selectedPostId])">
+                Add Comment
+            </button>
+        </div>
+    </div>
+</div>
+
+
+      
+      
+      
+    </div>
+  </body>
+
+   

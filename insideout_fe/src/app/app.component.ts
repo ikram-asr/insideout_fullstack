@@ -96,5 +96,8 @@ export class AppComponent implements OnInit {
   isMessagesPage(): boolean {
     return this.currentRoute === '/messages/:id';
   }
+  isProfilePage(): boolean {
+    return this.currentRoute === '/profile/:id/:idfriend';
+  }
 }
  

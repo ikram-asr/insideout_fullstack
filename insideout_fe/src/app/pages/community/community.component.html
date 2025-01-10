@@ -87,8 +87,9 @@
         >
       </nav>
       <!-- desktop-nav -->
-      <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3 ">
-        <img src="/assets/images/text-logo.png" alt="" />
+      <nav class="bg-white hidden lg:block w-1/4 fixed h-screen overflow-y-auto px-3">
+
+        <img src="/assets/images/text-logo.png" alt="" class=""/>
         <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
             <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
             <div>
@@ -97,7 +98,7 @@
            
         </div>
           </div>
-        <ul class="w-fit flex flex-col mx-auto mt-8 ">
+        <ul class="w-fit flex flex-col mx-auto mt-8  ">
           <li class="nav-li">
             <img
               src="/assets/icons/icons/dashboard.svg"
@@ -153,21 +154,10 @@
       </nav>
 
 
-      <main   class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+      <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px] lg:ml-[25%]">
 
-        <h1 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Today, your friend is feeling:</h1>
 
-        <div class="flex justify-center items-center px-16 py-6 overflow-x-auto scrollbar-hide space-x-8 w-11/12 mx-auto">
-            <div *ngFor="let friend of users" 
-                 [ngClass]="moodStyles[friend.etats[0]?.mood]?.background || moodStyles['default'].background" 
-                 class="friend-container py-4 rounded-lg shadow-md flex-shrink-0  ">
-             
-              <img [src]="moodStyles[friend.etats[0]?.mood]?.image || moodStyles['default'].image" 
-                   alt="{{ friend.etats[0]?.mood || 'default' }}" 
-                   class="-mb-4" />
-                   <p class="text-center absolute -bottom-4 text-xs whitespace-pre font-semibold text-figma-blue">{{ friend.nom }} {{ friend.prenom }}</p>
-            </div>
-          </div>
+       
           
           
           
@@ -184,7 +174,7 @@
           <h1 class="mt-12 mb-4 mx-auto text-figma-blue text-xl lg:text-2xl font-semibold">Share your thoughts</h1>
           <div class="flex justify-center">
             <img src="/assets/images/joy.png" alt="" 
-            class="w-[50%] max-[600px]:w-[65%] max-[1000px]:ml-[-60px]  -mr-[300px] z-10 -mt-36 -mb-20 min-[1000px]:-ml-[50px] min-[1000px]:-mr-[300px] min-[1015px]:-mr-[240px] max-[1020px]:-mr-[300px]
+            class=" z-0 w-[50%] max-[600px]:w-[65%] max-[1000px]:ml-[-60px]  -mr-[300px]  -mt-36 -mb-20 min-[1000px]:-ml-[50px] min-[1000px]:-mr-[300px] min-[1015px]:-mr-[240px] max-[1020px]:-mr-[300px]
             max-[930px]:-mr-[290px] min-[1200px]:-mr-[300px] min-[1400px]:-mr-[320px]    max-[850px]:-mr-[260px]  max-[760px]:-mr-[240px]
             max-[690px]:-mr-[210px]  max-[630px]:-mr-[220px]
             max-[530px]:-mr-[190px] max-[410px]:-mr-[150px]
@@ -225,160 +215,121 @@
         </div>
       </div>
     </div>
-        <div class="main-div px-10 flex justify-between items-start ">
+    <div class="main-div px-4 md:px-10 flex flex-wrap md:justify-between items-start gap-4">
 
             <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
             <!-- Section des posts des amis -->
-<div *ngIf="users.length > 0" class="space-y-4 w-[49%]">
-    <h2 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Your friends posts</h2>
-    <div *ngFor="let friend of users" >
-        <div class="friend ">
-          <div class="friend-info flex justify-start items-center gap-2 py-2">
-            <img [src]="friend.profile_image" alt="Profile Image" class="profile-image w-8 rounded-full">
-            <p>{{ friend.prenom }} {{ friend.nom }}</p>
-            <span *ngFor="let post of friend.posts" class="text-gray-500 text-xs ">{{ getTimeSince(post.updated_at) }}</span>
-          </div>
-      
-          <div *ngFor="let post of friend.posts" class="">
-            <div class="post-content p-4 bg-white rounded-lg shadow-lg">
-              <p>{{ post.content }}</p>
-              <div *ngIf="post.image" class="post-image">
-                <img [src]="post.image" alt="Post Image">
-              </div>
-            </div>
-      
-            <div class="flex justify-between p-2 items-center  ">
-  
-              <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
-                <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1 "> 
-                  {{ countReactions(post, 'happy') }} 
-                  <div class="reaction bg-[#F4F3AC] hover:scale-150">
-                    <img src="/assets/images/happy.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150 "> 
-                  </div></button>
-                <button (click)="addReaction(post.id, 'sad')" class="flex justify-center items-center gap-1">
-                  {{ countReactions(post, 'sad') }}
-                    <div class="reaction bg-[#6590ff] hover:scale-150">
-                        <img src="/assets/images/sad.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150">
-                      </div>  
-                </button>
-                <button (click)="addReaction(post.id, 'angry')" class="flex justify-center items-center gap-1">
-                  {{ countReactions(post, 'angry') }}
-                    <div class="reaction bg-[#ff8981] hover:scale-150">
-                        <img src="/assets/images/angry.png" alt="" class="hover:scale-200">
-                      </div> 
-                </button>
-                <button (click)="addReaction(post.id, 'shy')" class="flex justify-center items-center gap-1">
-                  {{ countReactions(post, 'shy') }}
-                    <div class="reaction bg-[#F2E9EC] hover:scale-150">
-                        <img src="/assets/images/shy.png" alt="" class="hover:scale-150">
-                      </div> 
-                </button>
-        
+            <div class="w-full md:w-[49%] text-center order-2 md:order-1">
+              <h2 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Your friends' posts</h2>
+
+              <div *ngIf="users.length > 0" class="space-y-2 overflow-y-auto max-h-80 scrollbar-thin
+                px-4 rounded-lg
+                scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
+              
+                <div *ngFor="let friend of users">
+                  <!-- Informations sur l'ami -->
+                  <div class="friend">
+                    <div class="friend-info flex justify-start items-center gap-2 py-2"  (click)="goToFriendProfile(user.id,friend.id)">
+                      <img [src]="friend.profile_image" alt="Profile Image" class="profile-image w-8 rounded-full">
+                      <p class="cursor-pointer hover:scale-105">{{ friend.prenom }} {{ friend.nom }}</p>
+                      
+                    
                 
+                      
+                    </div>
+              
+                    <!-- Publications de l'ami -->
+                    <div *ngIf="friend.posts && friend.posts.length > 0">
+                      <div *ngFor="let post of friend.posts" class="mb-4">
+                        <div class="post-content p-4 bg-white rounded-lg shadow-lg">
+                          <p>{{ post.content }}</p>
+                          <span  class="text-gray-500 text-xs ">{{ getTimeSince(post.updated_at) }}</span>
+                          <div *ngIf="post.image" class="post-image mt-2">
+                            <img [src]="post.image" alt="Post Image" class="w-full rounded-lg">
+                          </div>
+                        </div>
+              
+                        <!-- Réactions et commentaires -->
+                        <div class="flex justify-between p-2 items-center">
+                          <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
+                            <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1">
+                              {{ countReactions(post, 'happy') }}
+                              <div class="reaction bg-[#F4F3AC] hover:scale-150">
+                                <img src="/assets/images/happy.png" alt="" class="w-6 h-6">
+                              </div>
+                            </button>
+                            <button (click)="addReaction(post.id, 'sad')" class="flex justify-center items-center gap-1">
+                              {{ countReactions(post, 'sad') }}
+                              <div class="reaction bg-[#6590ff] hover:scale-150">
+                                <img src="/assets/images/sad.png" alt="" class="w-6 h-6">
+                              </div>
+                            </button>
+                            <button (click)="addReaction(post.id, 'angry')" class="flex justify-center items-center gap-1">
+                              {{ countReactions(post, 'angry') }}
+                              <div class="reaction bg-[#ff8981] hover:scale-150">
+                                <img src="/assets/images/angry.png" alt="" class="w-6 h-6">
+                              </div>
+                            </button>
+                            <button (click)="addReaction(post.id, 'shy')" class="flex justify-center items-center gap-1">
+                              {{ countReactions(post, 'shy') }}
+                              <div class="reaction bg-[#F2E9EC] hover:scale-150">
+                                <img src="/assets/images/shy.png" alt="" class="w-6 h-6">
+                              </div>
+                            </button>
+                          </div>
+              
+                          <div class="comments-count">
+                            <button (click)="openCommentsModal(post)" class="hover:underline">
+                              {{ countComments(post) }} Commentaires
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              
+                    <!-- Message si aucun post -->
+                    <div *ngIf="!friend.posts || friend.posts.length === 0" class="text-gray-500">
+                      No posts available.
+                    </div>
+                  </div>
+                </div>
               </div>
-        
-              <div class="comments-count">
-                <button (click)="openCommentsModal(post)" class="hover:underline">
-                  {{ countComments(post) }} Commentaires
-                </button>
-              </div>
-        
-            </div>
-            
-      
-         
-            
-            
-      
-           
-            
-            
-          </div>
-        </div>
-      </div>
+              
+</div>
 
 
-      
-
-     
-  </div>
-
-  <div><hr class="bg-black border "> </div>
   
-  <!-- Section des posts du user -->
-  <div *ngIf="user" class="space-y-2 w-[49%]">
-    <h2 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Your Posts</h2>
-    <div class="flex justify-start items-center gap-2">
-      <img [src]="user.profile_image" alt="Profile Image" class="profile-image w-8 rounded-full">
-      <p>{{ user.prenom }} {{ user.nom }}</p>
-     
+  <!-- Section des moods des amis -->
+  <div class="w-full md:w-[49%] flex flex-col text-center order-1 md:order-2">
+    <h1 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Today, your friend is feeling:</h1>
 
+    <div class="grid grid-cols-3 gap-8 px-16 py-6 overflow-x-auto  w-11/12 mx-auto 
+    overflow-y-auto max-h-80 scrollbar-thin
+   rounded-lg
+  scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent
+    ">
+      <div
+        *ngFor="let friend of users"  (click)="goToFriendProfile(user.id,friend.id)"
+        [ngClass]="moodStyles[friend.etats[0]?.mood]?.background || moodStyles['default'].background"
+        class="friend-container py-4 rounded-lg shadow-md flex-shrink-0 cursor-pointer hover:scale-105"
+      >
+        <img
+          [src]="moodStyles[friend.etats[0]?.mood]?.image || moodStyles['default'].image"
+          alt="{{ friend.etats[0]?.mood || 'default' }}"
+          class="-mb-4"
+        />
+        <p class="text-center absolute -bottom-4 text-xs whitespace-pre font-semibold text-figma-blue">
+          {{ friend.nom }} {{ friend.prenom }}
+        </p>
+      </div>
     </div>
+  </div>
     
-    <div *ngFor="let post of user.posts" class="">
-      
-      <span  class="text-gray-500 text-xs ">{{ getTimeSince(post.updated_at) }}</span>
-      <div class="post-content" class="p-4 bg-white rounded-lg shadow-lg">
-        <p>{{ post.content }}</p>
-        <div *ngIf="post.image" class="post-image">
-          <img [src]="post.image" alt="Post Image">
-        </div>
-      </div>
-
-      <div class="flex justify-between p-2 items-center  ">
-  
-        <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
-          <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1 "> 
-            {{ countReactions(post, 'happy') }} 
-            <div class="reaction bg-[#F4F3AC] hover:scale-150">
-              <img src="/assets/images/happy.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150 "> 
-            </div></button>
-          <button (click)="addReaction(post.id, 'sad')" class="flex justify-center items-center gap-1">
-            {{ countReactions(post, 'sad') }}
-              <div class="reaction bg-[#6590ff] hover:scale-150">
-                  <img src="/assets/images/sad.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150">
-                </div>  
-          </button>
-          <button (click)="addReaction(post.id, 'angry')" class="flex justify-center items-center gap-1">
-            {{ countReactions(post, 'angry') }}
-              <div class="reaction bg-[#ff8981] hover:scale-150">
-                  <img src="/assets/images/angry.png" alt="" class="hover:scale-200">
-                </div> 
-          </button>
-          <button (click)="addReaction(post.id, 'shy')" class="flex justify-center items-center gap-1">
-            {{ countReactions(post, 'shy') }}
-              <div class="reaction bg-[#F2E9EC] hover:scale-150">
-                  <img src="/assets/images/shy.png" alt="" class="hover:scale-150">
-                </div> 
-          </button>
-  
-          
-        </div>
-  
-        <div class="comments-count">
-          <button (click)="openCommentsModal(post)" class="hover:underline">
-            {{ countComments(post) }} Commentaires
-          </button>
-        </div>
-  
-      </div>
-      
-      
-
-      
-      
-
-
-
-
-    </div>
-  </div>
-  
   
           <!-- Modal pour afficher les commentaires -->
-          <div *ngIf="selectedPostId" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div class="modal-content bg-white rounded-lg p-4 w-96 space-y-4 h-96 overflow-hidden">
+          <div *ngIf="selectedPostId" class="modal z-20 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="modal-content bg-white rounded-lg p-4 w-full max-w-md h-full max-h-96 overflow-hidden">
               <div class="flex justify-between items-center">
                 <h3 class="text-lg font-semibold">comments</h3>
                 <button (click)="closeCommentsModal()" class="text-red-700 hover:scale-150 font-bold text-3xl">x</button>

@@ -1,0 +1,232 @@
+.text-figma-blue {
+    color: rgba(0, 48, 89, 1);
+  }
+  
+  .text-figma-nav-green {
+    color: rgba(0, 146, 124, 1);
+  }
+  
+  .nav-li {
+    color: rgba(0, 48, 89, 1);
+    font-weight: 500;
+    display: flex;
+    font-size: 0.875rem;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .icon {
+    width:1.75rem;
+    height:1.75rem;
+  }
+  
+  .absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .mobile-nav-active {
+    background-color: rgba(0, 48, 89, 1);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+  }
+  
+  .mobile-nav-active img {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .mobile-nav-1 {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    left: 25%;
+    top: 0.75rem;
+  }
+  
+  .mobile-nav-2 {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    right: 25%;
+    top: 0.75rem;
+  }
+  
+  .mobile-nav-3 {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    left: 10%;
+    bottom: 0.25rem;
+  }
+  
+  .mobile-nav-4 {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    right: 10%;
+    bottom: 0.25rem;
+  }
+  
+  .tablet-nav-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .underline-custom {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .underline-custom::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 1px;
+    background-color: rgba(0, 146, 124, 1);
+  }
+  
+  .sliding-part {
+    background-color: white;
+    height: 5rem;
+    width: 1.75rem;
+    position: relative;
+  }
+  
+  .sliding-part.active .circle {
+    display: block;
+  }
+  
+  .sleep-info {
+    color: #61646B;
+    text-align: center;
+  }
+  
+  .sleep-info h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    width: 5rem;
+  }
+  
+  .sleep-info p {
+    font-weight: 300;
+  }
+  
+  .faux-gap {
+    height: 0;
+    background-color: white;
+    width: 1.75rem;
+    grid-column: span 3;
+  }
+  
+  .circle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+  
+  .character-container {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .character-container-full {
+    border-radius: 50%;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .friend-container {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+  }
+  
+  .friend-container img {
+    height: 150%;
+    width:150%;
+    
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  
+  .character-container img {
+    height: 75%;
+  }
+  
+  .post {
+    background-color: white;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .post h3 {
+    font-weight: 600;
+    color: rgba(0, 48, 89, 1);
+  }
+  
+  .post p {
+    font-size: 0.875rem;
+  }
+  
+  .avatar {
+    background-color: rgba(0, 48, 89, 1);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+  }
+  
+  .reaction {
+    width: 1.5rem;
+    height: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .reaction img {
+    width: 1.25rem;
+    height: 0.9rem;
+  }
+  

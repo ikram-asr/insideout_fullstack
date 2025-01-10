@@ -1,5 +1,5 @@
 <body class="w-screen bg-gray-300">
-    <div class="w-full h-full flex">
+    <div class="w-full h-screen flex">
       <nav
         class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
       > 
@@ -84,7 +84,8 @@
         >
       </nav>
       <!-- desktop-nav -->
-      <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
+      <nav class="bg-white hidden lg:block w-1/4 fixed h-screen overflow-y-auto px-3">
+
         <img src="assets/images/text-logo.png" alt="" />
         <div
           class="flex items-center gap-3 justify-center  mt-3"
@@ -152,7 +153,7 @@
         </ul>
       </nav>
 
-      <main class="bg-[#F2E9EC] flex-1 flex flex-col items-center overflow-y-auto pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+      <main class="bg-[#F2E9EC] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px] lg:ml-[25%] flex-1 flex flex-col overflow-y-auto">
         <div class="flex place-items-end justify-end">
           <a (click)="onLogout()"  class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
 
@@ -167,7 +168,8 @@
           <img class="w-36 h-36 min-[380px]:w-40 min-[380px]:h-40 relative self-end ml-auto top-4 left-4" src="./assets/images/shy.png" alt="">
         </div>
 
-       <div class="mt-12 bg-white border-[1px] border-[#ED2469] relative pl-14 py-2 rounded-3xl max-w-[800px] w-[calc(100%-40px)] mx-[20px]">
+       <div class="mt-12 bg-white border-[1px] border-[#ED2469] items-center
+       relative pl-14 py-2 rounded-3xl max-w-[800px] w-[calc(100%-40px)] mx-[20px]">
   <img class="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6" src="/assets/icons/icons/search.svg" alt="search">
   <input
     class="w-[95%] focus:outline-none"
