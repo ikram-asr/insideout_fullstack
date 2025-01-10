@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -58,12 +59,34 @@ export class AuthService {
         })
       );
   }
-  // Déconnexion
-  logout(): void {
-    sessionStorage.removeItem('user');
-    this.user = null;
-  }
 
+
+  /*logout(): Observable<any> {
+    const token = localStorage.getItem('token');  // Assurez-vous que le token est bien dans le localStorage
+    return this.http.post(`${this.apiUrl}/logout`, {}, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    });
+  }*/
+    logout(): Observable<any> {
+      const token = localStorage.getItem('token');  // Récupérer le token depuis localStorage
+      return this.http.post('http://127.0.0.1:8000/api/logout', {}, {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        })
+      }).pipe(
+        tap(response => {
+          console.log('Déconnexion réussie :');  // Afficher un message si la déconnexion est réussie
+          localStorage.removeItem('auth_token');  // Supprimer le token du localStorage
+        }),
+        catchError(error => {
+          console.error('Erreur de déconnexion:', error.message);  // Afficher un message d'erreur si la déconnexion échoue
+          return throwError(error);  // Propager l'erreur
+        })
+      );
+    }
+    
   // Vérifier si l'utilisateur est connecté
   isLoggedIn(): boolean {
     return this.user !== null;

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/userService/user.service';
 import { ActivatedRoute } from '@angular/router';  
-
+import { AuthService } from '../../services/authService/auth.service';
 @Component({
   selector: 'app-settings',
   imports: [ RouterModule, FormsModule, CommonModule], 
@@ -23,7 +23,9 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,15 @@ export class SettingsComponent implements OnInit {
       this.errorMessage = 'ID utilisateur non valide';
     }
   }
+  onLogout(): void {
+    this.authService.logout().subscribe(() => {
+      // Redirigez l'utilisateur vers la page de connexion ou une autre page
+      this.router.navigate(['/']);
+    }, error => {
+      console.error('Erreur lors de la déconnexion', error);
+    });
+  }
+
 
   // Récupérer les données utilisateur
   getUserData(userId: string): void {

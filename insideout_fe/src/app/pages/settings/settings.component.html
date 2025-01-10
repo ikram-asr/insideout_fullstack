@@ -61,7 +61,7 @@
             class="h-9 w-9 md:h-11 md:w-11"
             src="/assets/icons/icons/programs.svg"
             alt=""
-          /><span class="text-sm md:text-base">Programs</span></a
+          /><span class="text-sm md:text-base">Search</span></a
         >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
           ><img
@@ -82,7 +82,7 @@
             class="h-9 w-9 md:h-11 md:w-11"
             src="/assets/icons/icons/settings-active.svg"
             alt=""
-          /><span class="text-sm md:text-base text-figma-nav-green">Settings</span></a
+          /><span class="text-sm md:text-base text-figma-nav-green">My Profile</span></a
         >
       </nav>
       <!-- desktop-nav -->
@@ -116,7 +116,7 @@
               alt="Programs Icon"
               class="icon"
             />
-            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">My Programs</a>
+            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search</a>
           </li>
           <li class="nav-li">
             <img
@@ -142,7 +142,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
+            <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/settings/', user.id]">My profile</a>
           </li>
           <li class="nav-li mt-3">
             <img
@@ -150,12 +150,13 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a href="home.html">Logout</a>
+            <a (click)="onLogout()" >Logout</a>
           </li>
         </ul>
       </nav>
 
       <main class="flex-1 pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+    <a (click)="onLogout()"  class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
 
         <div class="p-8">
           <h2 class="text-2xl font-semibold mb-4">Paramètres</h2>

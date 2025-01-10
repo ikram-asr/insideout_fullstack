@@ -62,7 +62,7 @@
             class="w-7"
             src="/assets/icons/icons/programs.svg"
             alt=""
-          /><span class="text-xs">Programs</span></a
+          /><span class="text-xs">Search</span></a
         >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
           ><img
@@ -83,7 +83,7 @@
             class="w-7"
             src="/assets/icons/icons/settings.svg"
             alt=""
-          /><span class="text-xs">Settings</span></a
+          /><span class="text-xs">My profile</span></a
         >
       </nav>
       <!-- desktop-nav -->
@@ -113,7 +113,7 @@
               alt="Programs Icon"
               class="icon"
             />
-            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">My Programs</a>
+            <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search </a>
           </li>
           <li class="nav-li">
             <img
@@ -139,7 +139,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
+            <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">My Profile</a>
           </li>
           <li class="nav-li mt-3">
             <img
@@ -147,7 +147,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a href="home.html">Logout</a>
+            <a (click)="onLogout()" >Logout</a>
           </li>
         </ul>
       </nav>
@@ -178,7 +178,7 @@
         <div class="z-30 flex place-items-end justify-end">
           <div class=" flex justify-center p-[6px] text-white "> 
             <div class="fixed w-60 z-0 top-0 right-0"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 
-            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt=""></a> 
+            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
           </div>
           </div>
           <h1 class="mt-12 mb-4 mx-auto text-figma-blue text-xl lg:text-2xl font-semibold">Share your thoughts</h1>

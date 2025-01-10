@@ -42,6 +42,8 @@ Route::prefix('api')->group(function () {
     Route::post('signup', [AuthController::class, 'signup']);
     Route::post('login', [AuthController::class, 'login']);
     Route::get('users/user/{id}', [UserController::class, 'getUser']);
+    Route::post('logout', [AuthController::class, 'logout']);
+
 
 
     Route::middleware('auth:sanctum')->get('/posts', [PostController::class, 'index']);

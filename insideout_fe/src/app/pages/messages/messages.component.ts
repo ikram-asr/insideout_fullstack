@@ -1,10 +1,10 @@
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AfterViewInit, Component, ElementRef, Renderer2, OnInit } from '@angular/core';
 import { UserService } from '../../services/userService/user.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { AuthService } from '../../services/authService/auth.service';
 @Component({
   selector: 'app-messages',
   imports: [RouterModule, FormsModule, CommonModule],
@@ -24,7 +24,9 @@ export class MessagesComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute  // Service pour récupérer les paramètres d'URL
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router,  // Service pour récupérer les paramètres d'URL
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,14 @@ export class MessagesComponent implements OnInit {
     } else {
       this.errorMessage = 'ID utilisateur non valide';
     }
+  }
+  onLogout(): void {
+    this.authService.logout().subscribe(() => {
+      // Redirigez l'utilisateur vers la page de connexion ou une autre page
+      this.router.navigate(['/']);
+    }, error => {
+      console.error('Erreur lors de la déconnexion', error);
+    });
   }
 
   getUserData(userId: string): void {

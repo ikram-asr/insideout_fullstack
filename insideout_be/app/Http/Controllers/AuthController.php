@@ -72,5 +72,21 @@ class AuthController extends Controller
                 'redirect_url' => 'http://localhost:4200/#/dashboard/' . $user->id // L'URL avec l'ID de l'utilisateur
             ]);
         }
+        public function logout(Request $request)
+        {
+            // Vérifier si l'utilisateur est authentifié
+            if ($request->user()) {
+                // Révoquer le token de l'utilisateur
+                $request->user()->tokens->each(function ($token) {
+                    $token->delete();
+                });
+        
+                return response()->json(['message' => 'Déconnexion réussie.']);
+            }
+        
+            return response()->json(['message' => 'Non authentifié.'], 401);
+        }
+        
+        
         
     }
