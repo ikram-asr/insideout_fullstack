@@ -357,7 +357,7 @@
                 <h3 class="text-xl font-semibold mb-4">Your friend's list</h3>
                 <ul>
                   <li *ngFor="let friend of friendList" class="flex justify-between items-center mb-2">
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 hover:bg-figma-light-green" (click)="goToFriendProfile(user.id,friend.id)">
                       <img [src]="friend.profile_image" class="w-6 rounded-full" alt="">
                       <p>{{ friend.nom }} {{ friend.prenom }}</p> 
                     </div>

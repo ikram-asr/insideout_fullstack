@@ -228,5 +228,10 @@ getTimeSince(dateString: string): string {
 }
 
 
+goToFriendProfile(userId:string,friendId: string): void {
+  this.router.navigate(['/profile', userId, friendId]);
+}
+
+
   
 }

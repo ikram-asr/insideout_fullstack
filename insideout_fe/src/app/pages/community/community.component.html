@@ -230,9 +230,9 @@
                 <div *ngFor="let friend of users">
                   <!-- Informations sur l'ami -->
                   <div class="friend">
-                    <div class="friend-info flex justify-start items-center gap-2 py-2">
+                    <div class="friend-info flex justify-start items-center gap-2 py-2"  (click)="goToFriendProfile(user.id,friend.id)">
                       <img [src]="friend.profile_image" alt="Profile Image" class="profile-image w-8 rounded-full">
-                      <p>{{ friend.prenom }} {{ friend.nom }}</p>
+                      <p class="cursor-pointer hover:scale-105">{{ friend.prenom }} {{ friend.nom }}</p>
                       
                     
                 
@@ -310,9 +310,9 @@
   scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent
     ">
       <div
-        *ngFor="let friend of users"
+        *ngFor="let friend of users"  (click)="goToFriendProfile(user.id,friend.id)"
         [ngClass]="moodStyles[friend.etats[0]?.mood]?.background || moodStyles['default'].background"
-        class="friend-container py-4 rounded-lg shadow-md flex-shrink-0"
+        class="friend-container py-4 rounded-lg shadow-md flex-shrink-0 cursor-pointer hover:scale-105"
       >
         <img
           [src]="moodStyles[friend.etats[0]?.mood]?.image || moodStyles['default'].image"

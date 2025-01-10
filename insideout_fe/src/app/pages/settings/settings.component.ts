@@ -291,6 +291,8 @@ export class SettingsComponent implements OnInit {
     return commentTime.from(now); // Retourne une chaîne comme "il y a 2 heures"
   }
   
-  
+  goToFriendProfile(userId:string,friendId: string): void {
+    this.router.navigate(['/profile', userId, friendId]);
+  }
   
 }
