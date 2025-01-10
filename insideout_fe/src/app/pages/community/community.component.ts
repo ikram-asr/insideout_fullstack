@@ -7,6 +7,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
+import moment from 'moment';  // Installer Moment.js : `npm install moment`
+
 
 @Component({
   selector: 'app-community',
@@ -38,7 +41,8 @@ export class CommunityComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private communityService: CommunityService,
-    private http: HttpClient
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef // Injection de ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -79,18 +83,29 @@ export class CommunityComponent implements OnInit {
     this.communityService.addReaction(postId, this.userId, type).subscribe({
       next: (response) => {
         console.log('Reaction added', response);
+        const post = this.friends.posts.find((p) => p.id === postId);
+        if (post) {
+          post.reactions.push({ userId: this.userId, type }); // Ajouter la réaction localement
+        }
       },
       error: (error) => {
         console.error('Error adding reaction', error);
       }
     });
   }
+  
 
   addComment(postId: string, content: string): void {
     if (content) {
       this.communityService.addComment(postId, this.userId, content).subscribe({
         next: (response) => {
           console.log('Comment added successfully:', response);
+          const newComment = response.data; // Supposons que l'API retourne le nouveau commentaire
+          const post = this.friends.posts.find((p) => p.id === postId);
+          if (post) {
+            post.comments.push(newComment); // Ajouter le commentaire à la liste locale
+          }
+          this.commentContents[postId] = ''; // Réinitialiser le champ de texte
         },
         error: (error) => {
           console.error('Error adding comment:', error);
@@ -98,6 +113,7 @@ export class CommunityComponent implements OnInit {
       });
     }
   }
+  
 
   newPostContent: string = '';
   newPostImage: File | undefined = undefined; // Initialisé à undefined
@@ -115,25 +131,90 @@ addPost(): void {
   const image = this.newPostImage;
 
   if (!content) {
-      console.error('Post content cannot be empty');
-      return;
+    console.error('Post content cannot be empty');
+    return;
   }
 
   this.communityService.addPost(this.userId, content, image).subscribe({
-      next: (response) => {
-          console.log('Post created successfully', response);
-          this.friends.posts.unshift(response.data); // Ajouter le nouveau post
-          this.newPostContent = ''; // Réinitialiser le contenu
-          this.newPostImage = undefined; // Réinitialiser l'image
-      },
-      error: (error) => {
-          console.error('Error creating post', error);
-      },
+    next: (response) => {
+      console.log('Post created successfully', response);
+      const newPost = response.data;
+      this.friends.posts.unshift(newPost);
+      console.log('Updated posts:', this.friends.posts); // Vérification
+      this.newPostContent = '';
+      this.newPostImage = undefined;
+    },
+    error: (error) => {
+      console.error('Error creating post', error);
+    }
   });
 }
 
 
 
+// Compter les commentaires pour un post
+countComments(post: any): number {
+  let userComments = this.user.comments.filter((c: any) => c.post_id === post.id).length;
+  let friendsComments = this.users.flatMap(friend => friend.comments || [])
+                                   .filter((c: any) => c.post_id === post.id).length;
+  return userComments + friendsComments;
+}
+
+// Compter les réactions par type
+countReactions(post: any, type: string): number {
+  let userReactions = this.user.reactions.filter((r: any) => r.post_id === post.id && r.type === type).length;
+  let friendsReactions = this.users.flatMap(friend => friend.reactions || [])
+                                    .filter((r: any) => r.post_id === post.id && r.type === type).length;
+  return userReactions + friendsReactions;
+}
+selectedPost: any = null;
+
+// Afficher une fenêtre modale avec les détails des commentaires
+openCommentsModal(post: any): void {
+  this.selectedPostId = post.id; // Stocker l'ID du post sélectionné
+  // Implémentez ici la logique pour ouvrir une pop-up
+}
+
+
+// Fermer la modale
+closeCommentsModal(): void {
+  this.selectedPostId = null; // Réinitialise l'ID du post sélectionné
+}
+
+// Obtenir les commentaires pour un post spécifique
+getCommentsForPost(postId: string): any[] {
+  // Récupérer les commentaires de l'utilisateur connecté
+  const userComments = this.user.comments
+    .filter((c: any) => c.post_id === postId)
+    .map((c: any) => ({
+      ...c,
+      author: `${this.user.nom} ${this.user.prenom}`,
+      profile: `${this.user.profile_image} `, // Nom et prénom de l'utilisateur connecté
+    }));
+
+  // Récupérer les commentaires des amis
+  const friendsComments = this.users
+    .flatMap(friend => friend.comments || [])
+    .filter((c: any) => c.post_id === postId)
+    .map((c: any) => {
+      const author = this.users.find(u => u.id === c.user_id);
+      return {
+        ...c,
+        author: author ? `${author.nom} ${author.prenom}` : 'Auteur inconnu',
+        profile: `${this.user.profile_image} `,
+      };
+    });
+
+  return [...userComments, ...friendsComments];
+}
+
+
+
+getTimeSince(dateString: string): string {
+  const now = moment();
+  const commentTime = moment(dateString);
+  return commentTime.from(now); // Retourne une chaîne comme "il y a 2 heures"
+}
 
 
   

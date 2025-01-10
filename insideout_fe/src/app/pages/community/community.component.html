@@ -87,7 +87,7 @@
         >
       </nav>
       <!-- desktop-nav -->
-      <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
+      <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3 ">
         <img src="/assets/images/text-logo.png" alt="" />
         <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
             <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
@@ -97,7 +97,7 @@
            
         </div>
           </div>
-        <ul class="w-fit flex flex-col mx-auto mt-8">
+        <ul class="w-fit flex flex-col mx-auto mt-8 ">
           <li class="nav-li">
             <img
               src="/assets/icons/icons/dashboard.svg"
@@ -153,7 +153,7 @@
       </nav>
 
 
-      <main class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+      <main   class="flex-1 flex flex-col overflow-y-auto bg-[#ccf0ec] pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
 
         <h1 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Today, your friend is feeling:</h1>
 
@@ -195,7 +195,14 @@
         max-[930px]:pl-12 pl-8">
           
           
-        <img class="w-[40px] h-[40px] xl:w-10 xl:h-10  rounded-full object-cover" src="assets/Elizabeth Gintama Icon.jpeg" alt="" />
+        
+        <div *ngIf="user"  class="flex items-start gap-3 justify-start  mt-3">
+          <img class="w-[40px] h-[40px] xl:w-10 xl:h-10  rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
+          <div>
+          <h1 class="text-lg font-medium"> {{ user.prenom }} {{ user.nom }}</h1>
+         
+      </div>
+        </div>
           <!-- <img class="w-[32px] h-[32px] " src="./assets/avatar.png" alt=""> -->
 
           
@@ -218,131 +225,245 @@
         </div>
       </div>
     </div>
-        <div class="main-div px-10 lg:grid flex-1">
+        <div class="main-div px-10 flex justify-between items-start ">
 
             <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
             <!-- Section des posts des amis -->
-<div *ngIf="users.length > 0">
-    <h2>Posts des amis</h2>
-    <div *ngFor="let friend of users">
-        <div class="friend">
-          <div class="friend-info">
-            <img [src]="friend.profile_image" alt="Profile Image" class="profile-image">
+<div *ngIf="users.length > 0" class="space-y-4 w-[49%]">
+    <h2 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Your friends posts</h2>
+    <div *ngFor="let friend of users" >
+        <div class="friend ">
+          <div class="friend-info flex justify-start items-center gap-2 py-2">
+            <img [src]="friend.profile_image" alt="Profile Image" class="profile-image w-8 rounded-full">
             <p>{{ friend.prenom }} {{ friend.nom }}</p>
+            <span *ngFor="let post of friend.posts" class="text-gray-500 text-xs ">{{ getTimeSince(post.updated_at) }}</span>
           </div>
       
-          <div *ngFor="let post of friend.posts" class="post">
-            <div class="post-content">
+          <div *ngFor="let post of friend.posts" class="">
+            <div class="post-content p-4 bg-white rounded-lg shadow-lg">
               <p>{{ post.content }}</p>
               <div *ngIf="post.image" class="post-image">
                 <img [src]="post.image" alt="Post Image">
               </div>
             </div>
       
-            <div class="post-actions space-x-2">
-              <button (click)="addReaction(post.id, 'happy')"> 
-                  <div class="reaction bg-[#F4F3AC]">
-                  <img src="/assets/images/happy.png" alt="">
-                </div> </button>
-              <button (click)="addReaction(post.id, 'sad')">
-                  <div class="reaction bg-[#6590ff]">
-                      <img src="/assets/images/sad.png" alt="">
-                    </div>
-              </button>
-              <button (click)="addReaction(post.id, 'angry')">
-                  <div class="reaction bg-[#ff8981]">
-                      <img src="/assets/images/angry.png" alt="">
-                    </div>
-              </button>
-              <button (click)="addReaction(post.id, 'shy')">
-                  <div class="reaction bg-[#F2E9EC]">
-                      <img src="/assets/images/shy.png" alt="">
-                    </div>
-              </button>
-      
-              <input type="text" [(ngModel)]="commentContents[post.id]" placeholder="Ajouter un commentaire">
-              <button (click)="addComment(post.id, commentContents[post.id])">Ajouter Commentaire</button>
+            <div class="flex justify-between p-2 items-center  ">
+  
+              <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
+                <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1 "> 
+                  {{ countReactions(post, 'happy') }} 
+                  <div class="reaction bg-[#F4F3AC] hover:scale-150">
+                    <img src="/assets/images/happy.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150 "> 
+                  </div></button>
+                <button (click)="addReaction(post.id, 'sad')" class="flex justify-center items-center gap-1">
+                  {{ countReactions(post, 'sad') }}
+                    <div class="reaction bg-[#6590ff] hover:scale-150">
+                        <img src="/assets/images/sad.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150">
+                      </div>  
+                </button>
+                <button (click)="addReaction(post.id, 'angry')" class="flex justify-center items-center gap-1">
+                  {{ countReactions(post, 'angry') }}
+                    <div class="reaction bg-[#ff8981] hover:scale-150">
+                        <img src="/assets/images/angry.png" alt="" class="hover:scale-200">
+                      </div> 
+                </button>
+                <button (click)="addReaction(post.id, 'shy')" class="flex justify-center items-center gap-1">
+                  {{ countReactions(post, 'shy') }}
+                    <div class="reaction bg-[#F2E9EC] hover:scale-150">
+                        <img src="/assets/images/shy.png" alt="" class="hover:scale-150">
+                      </div> 
+                </button>
+        
+                
+              </div>
+        
+              <div class="comments-count">
+                <button (click)="openCommentsModal(post)" class="hover:underline">
+                  {{ countComments(post) }} Commentaires
+                </button>
+              </div>
+        
             </div>
+            
       
-            <div class="reactions">
-              <p>Réactions :</p>
-              <ul>
-                <li *ngFor="let reaction of friend.reactions">{{ reaction.type }}</li>
-              </ul>
-            </div>
+         
+            
+            
       
-            <div class="comments">
-              <p>Commentaires :</p>
-              <ul>
-                <li *ngFor="let comment of friend.comments">{{ comment.content }}</li>
-              </ul>
-            </div>
+           
+            
+            
           </div>
         </div>
       </div>
 
+
+      
+
      
   </div>
+
+  <div><hr class="bg-black border "> </div>
   
   <!-- Section des posts du user -->
-  <div *ngIf="user" class="space-y-2">
-    <h2>Vos Posts</h2>
-    <div *ngFor="let post of user.posts" class="post">
-      <div class="post-content">
+  <div *ngIf="user" class="space-y-2 w-[49%]">
+    <h2 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Your Posts</h2>
+    <div class="flex justify-start items-center gap-2">
+      <img [src]="user.profile_image" alt="Profile Image" class="profile-image w-8 rounded-full">
+      <p>{{ user.prenom }} {{ user.nom }}</p>
+     
+
+    </div>
+    
+    <div *ngFor="let post of user.posts" class="">
+      
+      <span  class="text-gray-500 text-xs ">{{ getTimeSince(post.updated_at) }}</span>
+      <div class="post-content" class="p-4 bg-white rounded-lg shadow-lg">
         <p>{{ post.content }}</p>
         <div *ngIf="post.image" class="post-image">
           <img [src]="post.image" alt="Post Image">
         </div>
       </div>
+
+      <div class="flex justify-between p-2 items-center  ">
   
-      <div class="post-actions space-x-2">
-        <button (click)="addReaction(post.id, 'happy')">
-          <div class="reaction" [ngClass]="moodStyles.happy.background">
-            <img [src]="moodStyles.happy.image" alt="Happy Reaction">
-          </div>
-        </button>
-        <button (click)="addReaction(post.id, 'sad')">
-          <div class="reaction" [ngClass]="moodStyles.sad.background">
-            <img [src]="moodStyles.sad.image" alt="Sad Reaction">
-          </div>
-        </button>
-        <button (click)="addReaction(post.id, 'angry')">
-          <div class="reaction" [ngClass]="moodStyles.angry.background">
-            <img [src]="moodStyles.angry.image" alt="Angry Reaction">
-          </div>
-        </button>
-        <button (click)="addReaction(post.id, 'shy')">
-          <div class="reaction" [ngClass]="moodStyles.shy.background">
-            <img [src]="moodStyles.shy.image" alt="Shy Reaction">
-          </div>
-        </button>
+        <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
+          <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1 "> 
+            {{ countReactions(post, 'happy') }} 
+            <div class="reaction bg-[#F4F3AC] hover:scale-150">
+              <img src="/assets/images/happy.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150 "> 
+            </div></button>
+          <button (click)="addReaction(post.id, 'sad')" class="flex justify-center items-center gap-1">
+            {{ countReactions(post, 'sad') }}
+              <div class="reaction bg-[#6590ff] hover:scale-150">
+                  <img src="/assets/images/sad.png" alt="" class="flex justify-center items-center gap-1 hover:scale-150">
+                </div>  
+          </button>
+          <button (click)="addReaction(post.id, 'angry')" class="flex justify-center items-center gap-1">
+            {{ countReactions(post, 'angry') }}
+              <div class="reaction bg-[#ff8981] hover:scale-150">
+                  <img src="/assets/images/angry.png" alt="" class="hover:scale-200">
+                </div> 
+          </button>
+          <button (click)="addReaction(post.id, 'shy')" class="flex justify-center items-center gap-1">
+            {{ countReactions(post, 'shy') }}
+              <div class="reaction bg-[#F2E9EC] hover:scale-150">
+                  <img src="/assets/images/shy.png" alt="" class="hover:scale-150">
+                </div> 
+          </button>
   
-        <input type="text" [(ngModel)]="commentContents[post.id]" placeholder="Ajouter un commentaire">
-        <button (click)="addComment(post.id, commentContents[post.id])">Ajouter Commentaire</button>
+          
+        </div>
+  
+        <div class="comments-count">
+          <button (click)="openCommentsModal(post)" class="hover:underline">
+            {{ countComments(post) }} Commentaires
+          </button>
+        </div>
+  
       </div>
-  
-      <div class="reactions">
-        <p>Réactions :</p>
-        <ul>
-          <li *ngFor="let reaction of post.reactions">{{ reaction.type }}</li>
-        </ul>
-      </div>
-  
-      <div class="comments">
-        <p>Commentaires :</p>
-        <ul>
-          <li *ngFor="let comment of post.comments">{{ comment.content }}</li>
-        </ul>
-      </div>
+      
+      
+
+      
+      
+
+
+
+
     </div>
   </div>
   
   
-              
+          <!-- Modal pour afficher les commentaires -->
+          <div *ngIf="selectedPostId" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="modal-content bg-white rounded-lg p-4 w-96 space-y-4 h-96 overflow-hidden">
+              <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold">comments</h3>
+                <button (click)="closeCommentsModal()" class="text-red-700 hover:scale-150 font-bold text-3xl">x</button>
+              </div>
+          
+              <!-- Liste des commentaires -->
+              <div class="comments space-y-2 overflow-y-auto max-h-64 scrollbar-thin scrollbar-thumb-figma-nav-green scrollbar-track-gray-200/0">
+                <div *ngFor="let comment of getCommentsForPost(selectedPostId)" class="p-2">
+                  <div class="flex justify-start gap-2 items-center">
+                    <img [src]="comment.profile" alt="" class="rounded-full w-6">
+                    <p class="font-semibold">{{ comment.author }}:</p>
+                    <span class="text-gray-500 text-xs">{{ getTimeSince(comment.updated_at) }}</span>
+                  </div>
+                  <p class="ml-8"> {{ comment.content }}</p>
+                    <!-- Ligne horizontale sauf après le dernier commentaire -->
+                  <!-- <hr class="border-gray-300 w-1/2 mx-auto pt-2"> -->
+                </div>
+              </div>
+          
+              <!-- Formulaire pour ajouter un commentaire -->
+              <div class="flex justify-between items-center gap-2">
+                <input
+                  type="text"
+                  [(ngModel)]="commentContents[selectedPostId]"
+                  placeholder="Add a comment"
+                  class="w-full border rounded px-2 py-1"
+                />
+                <button
+                  (click)="addComment(selectedPostId, commentContents[selectedPostId])"
+                  class="bg-figma-nav-green text-white px-4 py-1 rounded"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+          
+
+
+
+    
          
         </div>
       </main>
     </div>
   </body>
 
+   <!-- <div class="reactions">
+              <p>Réactions :</p>
+              <ul>
+                 Réactions de l'utilisateur 
+                <li *ngFor="let reaction of user.reactions">
+                  <span *ngIf="reaction.post_id === post.id">{{ reaction.type }}</span>
+                </li>
+            
+                 Réactions des amis 
+                <li *ngFor="let friend of users">
+                  <ul>
+                    <li *ngFor="let reaction of friend.reactions">
+                      <span *ngIf="reaction.post_id === post.id">{{ reaction.type }}</span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div> -->
+
+            <!-- <div class="comments">
+              <p>Commentaires :</p>
+              <ul>
+                
+                <li *ngFor="let comment of user.comments">
+                  <span *ngIf="comment.post_id === post.id">{{ comment.content }}</span>
+                </li>
+            
+                
+                <li *ngFor="let friend of users">
+                  <ul>
+                    <li *ngFor="let comment of friend.comments">
+                      <span *ngIf="comment.post_id  === post.id">{{ comment.content }}</span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div> -->
+
+
+            <!-- <input type="text" [(ngModel)]="commentContents[post.id]" placeholder="Ajouter un commentaire">
+        <button (click)="addComment(post.id, commentContents[post.id])">Ajouter Commentaire</button> -->

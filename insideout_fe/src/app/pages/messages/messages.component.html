@@ -169,8 +169,10 @@
                   (click)="selectFriend(friend.id)" 
                   [ngClass]="{'bg-blue-200': friend.id === selectedFriendId, 'cursor-pointer p-2 hover:bg-gray-200': true}" 
                   class="p-2">
+                  <div class="flex justify-start items-center gap-2">
                 <img [src]="friend.profile_image" class="h-10 w-10 rounded-full" alt="Friend Image" />
                 <span>{{ friend.prenom }} {{ friend.nom }}</span>
+              </div>
               </li>
             </ul>
           </div>
