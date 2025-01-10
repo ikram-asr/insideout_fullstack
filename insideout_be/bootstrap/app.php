@@ -23,7 +23,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'http://127.0.0.1:8000/api/users/friendships',
             'http://127.0.0.1:8000/api/users/user/{id}',
             'http://127.0.0.1:8000/api/users/user/*/friend/*',
-            'http://127.0.0.1:8000/api/users/user/{id}'
+            'http://127.0.0.1:8000/api/users/user/{id}',
+            'http://127.0.0.1:8000/api/notifications',
+            'http://127.0.0.1:8000/api/notifications/mark-as-read',
+
         ]);    })
     ->withExceptions(function (Exceptions $exceptions) {
         //

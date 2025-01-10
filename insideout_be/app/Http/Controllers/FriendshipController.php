@@ -11,14 +11,14 @@ class FriendshipController extends Controller
 {
     public function store(Request $request)
     {
-        // Validate incoming request
+        // Valider la requête entrante
         $validated = $request->validate([
             'userId' => 'required|integer',
             'friendId' => 'required|integer',
             'status' => 'required|string',
         ]);
     
-        // Check if the user exists before proceeding (you can also check the friendship status if needed)
+        // Vérifier si les utilisateurs existent
         $user = User::find($validated['userId']);
         $friend = User::find($validated['friendId']);
     
@@ -26,11 +26,11 @@ class FriendshipController extends Controller
             return response()->json(['error' => 'User or friend not found'], 404);
         }
     
-        // Check if the friendship already exists
-        $existingFriendship = Friendship::where(function($query) use ($validated) {
+        // Vérifier si la relation d'amitié existe déjà
+        $existingFriendship = Friendship::where(function ($query) use ($validated) {
             $query->where('user_id', $validated['userId'])
                   ->where('friend_id', $validated['friendId']);
-        })->orWhere(function($query) use ($validated) {
+        })->orWhere(function ($query) use ($validated) {
             $query->where('user_id', $validated['friendId'])
                   ->where('friend_id', $validated['userId']);
         })->first();
@@ -39,17 +39,27 @@ class FriendshipController extends Controller
             return response()->json(['error' => 'Friendship already exists'], 409);
         }
     
-        // Create the friendship record
+        // Créer les relations d'amitié mutuelles
         try {
-            $friendship = Friendship::create([
+            // Insertion de la première relation
+            $friendship1 = Friendship::create([
                 'user_id' => $validated['userId'],
                 'friend_id' => $validated['friendId'],
                 'status' => $validated['status'],
             ]);
-            return response()->json($friendship, 201);
+    
+            // Insertion de la seconde relation (mutuelle)
+            $friendship2 = Friendship::create([
+                'user_id' => $validated['friendId'],
+                'friend_id' => $validated['userId'],
+                'status' => $validated['status'],
+            ]);
+    
+            return response()->json(['friendship1' => $friendship1, 'friendship2' => $friendship2], 201);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to create friendship', 'details' => $e->getMessage()], 500);
         }
     }
+    
     
 }
