@@ -242,5 +242,9 @@ removeFriend(friendId: string): void {
   }
 }
 
-  
+dropdownOpen = false;
+
+toggleDropdown() {
+  this.dropdownOpen = !this.dropdownOpen;
+}
 }
