@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -44,6 +45,7 @@ Route::prefix('api')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::get('users/user/{id}', [UserController::class, 'getUser']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('articles/{mood}', [ArticleController::class, 'getArticlesByMood']);
 
 
 

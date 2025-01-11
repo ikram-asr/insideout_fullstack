@@ -11,12 +11,14 @@ import { ProgramsComponent } from './pages/programs/programs.component';
 import { CommunityComponent } from './pages/community/community.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { RealprogrammsComponent } from './realprogramms/realprogramms.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  
+  { path: 'programsuggestion/:id', component: RealprogrammsComponent },
+
       { path: 'dashboard/:id', component: DashboardComponent },
       { path: 'programs/:id', component: ProgramsComponent },
       { path: 'settings/:id', component: SettingsComponent },

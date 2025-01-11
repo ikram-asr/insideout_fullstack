@@ -57,11 +57,17 @@
             >Dashboard</span
           ></a
         >
-        
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/programs.svg"
+          alt=""
+        /><span class="text-xs">Articles</span></a
+      >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/Programs/', user.id]"
           ><img
             class="w-7"
-            src="/assets/icons/icons/programs.svg"
+            src="/assets/icons/icons/search.svg"
             alt=""
           /><span class="text-xs">Search</span></a
         >
@@ -111,10 +117,17 @@
             />
             <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]">Dashboard</a>
           </li>
-         
           <li class="nav-li">
             <img
               src="/assets/icons/icons/programs.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a class="" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]">Articles</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/search.svg"
               alt="Programs Icon"
               class="icon"
             />
@@ -165,7 +178,7 @@
 
        
 
-        <a (click)="onLogout()"  class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
+        <a (click)="onLogout()"  class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="/assets/icons/icons/logout-mobile.svg" alt="" ></a> 
 
         <div class="flex flex-wrap w-full h-screen justify-center items-center gap-4">
 

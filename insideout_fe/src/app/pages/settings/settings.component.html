@@ -44,47 +44,54 @@
       </nav>
       <!-- tablet-nav -->
       <nav
-        class="max-[501px]:hidden min-[1024px]:hidden bg-white fixed bottom-0 w-full flex justify-evenly py-3"
-      >
-        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
-          ><img
-            class="h-9 w-9 md:h-11 md:w-11"
-            src="/assets/icons/icons/dashboard.svg"
-            alt=""
-          /><span class="text-sm md:text-base"
-            >Dashboard</span
-          ></a
-        >
-       
-        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
-          ><img
-            class="h-9 w-9 md:h-11 md:w-11"
-            src="/assets/icons/icons/programs.svg"
-            alt=""
-          /><span class="text-sm md:text-base">Search</span></a
-        >
-        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
-          ><img
-            class="h-9 w-9 md:h-11 md:w-11"
-            src="/assets/icons/icons/community.svg"
-            alt=""
-          /><span class="text-sm md:text-base">Community</span></a
-        >
-        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
+      class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
+    >
+      <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
         ><img
           class="w-7"
-          src="/assets/icons/icons/msg.png"
+          src="/assets/icons/icons/dashboard.svg"
           alt=""
-        /><span class="text-xs">Messages</span></a
+        /><span class="text-xs"
+          >Dashboard</span
+        ></a
       >
-        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
-          ><img
-            class="h-9 w-9 md:h-11 md:w-11"
-            src="/assets/icons/icons/settings-active.svg"
-            alt=""
-          /><span class="text-sm md:text-base text-figma-nav-green">My Profile</span></a
-        >
-      </nav>
+      <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
+      ><img
+        class="w-7"
+        src="/assets/icons/icons/programs.svg"
+        alt=""
+      /><span class="text-xs">Articles</span></a
+    >
+      <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/Programs/', user.id]"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/search.svg"
+          alt=""
+        /><span class="text-xs">Search</span></a
+      >
+      <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/community.svg"
+          alt=""
+        /><span class="text-xs ">Community</span></a
+      >
+      <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
+      ><img
+        class="w-7"
+        src="/assets/icons/icons/msg.png"
+        alt=""
+      /><span class="text-xs ">Messages</span></a
+    >
+      <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/settings-active.svg"
+          alt=""
+        /><span class="text-xs text-figma-nav-green">My Profile</span></a
+      >
+    </nav>
+
       <!-- desktop-nav -->
       <nav class="bg-white hidden lg:block w-1/4 fixed h-screen overflow-y-auto px-3">
 
@@ -110,7 +117,14 @@
             />
             <a  *ngIf="user.id" [routerLink]="['/dashboard/', user.id]">Dashboard</a>
           </li>
-         
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/search.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a class="" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]">Articles</a>
+          </li>
           <li class="nav-li">
             <img
               src="/assets/icons/icons/programs.svg"

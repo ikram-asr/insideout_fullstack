@@ -59,12 +59,18 @@
         /><span class="text-xs text-figma-nav-green"
           >Dashboard</span
         ></a
-      >
+      >  <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
+  ><img
+    class="w-7"
+    src="/assets/icons/icons/programs.svg"
+    alt=""
+  /><span class="text-xs">Articles</span></a
+>
       
       <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
         ><img
           class="w-7"
-          src="/assets/icons/icons/programs.svg"
+          src="/assets/icons/icons/search.svg"
           alt=""
         /><span class="text-xs">Search</span></a
       >
@@ -106,6 +112,7 @@
       </div>
      
       <ul class="w-fit flex flex-col mx-auto mt-8">
+        
         <li class="nav-li">
           <img
             src="/assets/icons/icons/dashboard-active.svg"
@@ -115,10 +122,17 @@
           />
           <a class="text-figma-nav-green underline-custom" routerLink="/dashboard">Dashboard</a>
         </li>
-        
         <li class="nav-li">
           <img
             src="/assets/icons/icons/programs.svg"
+            alt="Programs Icon"
+            class="icon"
+          />
+          <a class="" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]">Articles</a>
+        </li>
+        <li class="nav-li">
+          <img
+            src="/assets/icons/icons/search.svg"
             alt="Programs Icon"
             class="icon"
           />

@@ -29,4 +29,6 @@ class Etat extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+        // Relation avec les articles
+
 }

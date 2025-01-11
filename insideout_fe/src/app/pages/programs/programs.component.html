@@ -54,10 +54,17 @@
             >Dashboard</span
           ></a
         >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/programs.svg"
+          alt=""
+        /><span class="text-xs">Articles</span></a
+      >
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
           ><img
             class="w-7"
-            src="/assets/icons/icons/programs-active.svg"
+            src="/assets/icons/icons/search-active.svg"
             alt=""
           /><span class="text-xs text-figma-nav-green">Search</span></a
         >
@@ -110,7 +117,15 @@
           </li>
           <li class="nav-li">
             <img
-              src="/assets/icons/icons/programs-active.svg"
+              src="/assets/icons/icons/programs.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a class="" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]">Articles</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/search-active.svg"
               alt="Programs Icon"
               class="icon"
             />
@@ -159,7 +174,7 @@
 
           <div class=" flex justify-center p-[6px] text-white "> 
             <div class="fixed w-60 z-0 top-0 right-0"> <img src="/assets/icons/icons/header.svg" alt="" class=""> </div> 
-            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="./assets/icons/logout-mobile.svg" alt="" (click)="onLogout()" ></a> 
+            <a (click)="onLogout()" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="./assets/icons/logout-mobile.svg" alt="" ></a> 
           </div>
           </div> 
         <div class="grid grid-cols-3 content-center items-center justify-center bg-[#EED7DF] w-[calc(100%-60px)] max-w-[500px] min-h-[180px] mx-[30px] mt-7 rounded-[30px] shadow">
