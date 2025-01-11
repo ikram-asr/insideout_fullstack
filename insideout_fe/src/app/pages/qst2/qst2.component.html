@@ -59,13 +59,19 @@
           >Dashboard</span
         ></a
       >
-      
+      <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
+      ><img
+        class="w-7"
+        src="/assets/icons/icons/programs.svg"
+        alt=""
+      /><span class="text-xs">Articles</span></a
+    >
       <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
         ><img
           class="w-7"
-          src="/assets/icons/icons/programs.svg"
+          src="/assets/icons/icons/search.svg"
           alt=""
-        /><span class="text-xs">Programs</span></a
+        /><span class="text-xs">Search</span></a
       >
       <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
         ><img
@@ -114,14 +120,21 @@
           />
           <a class="text-figma-nav-green underline-custom" routerLink="/dashboard">Dashboard</a>
         </li>
-        
         <li class="nav-li">
           <img
             src="/assets/icons/icons/programs.svg"
             alt="Programs Icon"
             class="icon"
           />
-          <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Programs</a>
+          <a class="" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]">Articles</a>
+        </li>
+        <li class="nav-li">
+          <img
+            src="/assets/icons/icons/search.svg"
+            alt="Programs Icon"
+            class="icon"
+          />
+          <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search</a>
         </li>
         <li class="nav-li">
           <img
