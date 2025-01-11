@@ -63,7 +63,7 @@ export class RealprogrammsComponent {
         case 'sad':
           return '/assets/images/sad-cry.png';
         case 'angry':
-          return '/assets/images/angry-1.png';
+          return '/assets/images/anger-removebg-preview.png';
         case 'happy':
           return '/assets/images/image-removebg-preview.png';
         case 'anxious':

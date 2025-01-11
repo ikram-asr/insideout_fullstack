@@ -97,7 +97,7 @@
   >
 </nav>
     <!-- desktop-nav -->
-    <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
+    <nav class="bg-white hidden lg:block w-1/4 fixed h-screen overflow-y-auto px-3">
         <img src="assets/images/text-logo.png" alt="" />
         <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
           <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
@@ -182,7 +182,7 @@
         'bg-[#d0d1f199]': user.etats[user.etats.length - 1]?.mood === 'bored',
         'bg-[#EED7DF]': user.etats[user.etats.length - 1]?.mood === 'shy',
 
-      }" class=" flex-1 flex flex-col items-center overflow-y-auto pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px]">
+      }" class=" flex-1 flex flex-col  items-center overflow-y-autopb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px] lg:ml-[25%] scrollbar-hide ">
         <div class="flex place-items-end justify-end">
           <div class=" flex justify-center p-[6px] text-white "> 
             <div class="fixed w-60 z-0 top-0 right-0"> <img src="./assets/icons/header.svg" alt="" class=""> </div> 
