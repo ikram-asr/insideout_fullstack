@@ -294,5 +294,13 @@ export class SettingsComponent implements OnInit {
   goToFriendProfile(userId:string,friendId: string): void {
     this.router.navigate(['/profile', userId, friendId]);
   }
+
+
+  dropdownOpen = false;
+
+toggleDropdown() {
+  this.dropdownOpen = !this.dropdownOpen;
+}
+
   
 }

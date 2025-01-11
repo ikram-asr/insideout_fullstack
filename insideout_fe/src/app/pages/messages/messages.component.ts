@@ -26,7 +26,8 @@ export class MessagesComponent implements OnInit {
   conversation: any[] = [];  // Conversation avec l'ami sélectionné
   newMessage: string = '';  // Le nouveau message que l'utilisateur tape
   notifications: any[] = [];
-
+  isDesktop: boolean = true;
+  isSmallScreen: boolean = false; // Indique si l'écran est petit
 
   constructor(
     private userService: UserService,
@@ -44,6 +45,7 @@ export class MessagesComponent implements OnInit {
     this.userId = this.route.snapshot.paramMap.get('id')!;
     console.log('ID utilisateur récupéré :', this.userId);
     this.getNotifications(this.userId);
+    this.checkScreenSize();
 
     // Vérifier que l'ID est valide avant de récupérer les données
     if (this.userId) {
@@ -51,6 +53,9 @@ export class MessagesComponent implements OnInit {
     } else {
       this.errorMessage = 'ID utilisateur non valide';
     }
+  }
+  checkScreenSize(): void {
+    this.isSmallScreen = window.innerWidth < 640; // Définit une largeur pour petits écrans
   }
   onLogout(): void {
     this.authService.logout().subscribe(() => {
@@ -90,6 +95,15 @@ export class MessagesComponent implements OnInit {
     });
   }
 
+ 
+  popupOpen: boolean = false;
+
+  // Existing code ...
+
+  // Toggle the popup open/close
+  togglePopup(): void {
+    this.popupOpen = !this.popupOpen;
+  }
   // Fonction pour sélectionner un ami et afficher la conversation
   selectFriend(friendId: string): void {
     this.selectedFriendId = friendId;
@@ -99,6 +113,13 @@ export class MessagesComponent implements OnInit {
     this.markNotificationsAsRead(friendId);
   }
   
+
+  // Method to close the popup
+  closePopup(): void {
+    this.selectedFriendId = ''; // Close the popup by resetting the selected friend
+  }
+  
+
   markNotificationsAsRead(friendId: string): void {
     // Mettre à jour l'état de la notification dans la base de données
     this.notificationService.markAsRead(this.userId, friendId).subscribe({
@@ -140,7 +161,7 @@ sendMessage(): void {
       const notificationContent = `You have a new message from User: ${this.newMessage}`;
       this.notificationService.sendNotification(this.userId, this.selectedFriendId, notificationContent).subscribe({
         next: (notificationResponse) => {
-          console.log('Notification envoyée:', notificationResponse);
+            console.log('Notification envoyée:', notificationResponse);
         },
         error: (notificationError) => {
           console.error('Erreur lors de l\'envoi de la notification', notificationError);

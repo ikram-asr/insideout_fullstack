@@ -156,40 +156,79 @@
 
       <main *ngIf="friendData" class="flex-1 flex flex-col h-screen overflow-y-auto pb-[calc(6rem)] min-[500px]:pb-[80px] min-[1024px]:pb-[0px] lg:ml-[25%] scrollbar-hide"
       [ngClass]="moodStyles[friendData.etats[0]?.mood]?.background">
+      
 
-      <img src="/assets/images/profile_header.png" alt="" class="z-0 -mt-10 w-full">
+      <img src="/assets/images/profile_header.png" alt="" class=" lg:-mt-12 bg-fixed sm:-mt-8">
       
         <a (click)="onLogout()" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4">
           <img src="/assets/icons/icons/logout-mobile.svg" alt="" (click)="onLogout()">
         </a>
 
-        <div class="p-8 z-20">
+        <div class="p-8 ">
 
   <!-- Vue des informations de l'ami -->
-  <div class="mb-6 flex justify-between max-[800px]:justify-center items-center flex-wrap -mt-36">
-    <div class="flex items-center gap-4">
-      <img
-        [src]="friendData.profile_image || '/assets/images/placeholder.png'"
-        alt="Photo de profil"
-        class="w-14 h-14 rounded-full"
-      />
-      <div class="text-white">
-        <span> Your friend <strong>{{ friendData.nom }} {{ friendData.prenom }}</strong> is feeling <span>{{friendData.etats[0]?.mood}} Today</span></span>
-        <p class="text-white/80"><strong>{{ friendData.email }}</strong></p>
-      </div>
-    </div>
-
-    <div>
-        <!-- Unfollow button on the friend's profile -->
+  <div
+          class="flex lg:justify-between gap-10 justify-start  items-center sm:-mt-32 md:-mt-36 -mt-20"
+        >
+          <!-- Profil uniquement pour écrans < 770px -->
+          <div class="md:hidden relative">
+            <img
+              [src]="friendData.profile_image || '/assets/images/placeholder.png'"
+              alt="Photo de profil"
+              class="w-14 h-14 rounded-full cursor-pointer"
+              (click)="toggleDropdown()"
+            />
+        
+            <!-- Dropdown avec les informations utilisateur -->
+            <div
+              *ngIf="dropdownOpen"
+              class="absolute top-16  bg-white shadow-lg rounded-lg p-4 z-10"
+            >
+              <div class="text-center">
+                <img
+                  [src]="friendData.profile_image || '/assets/images/placeholder.png'"
+                  alt="Photo de profil"
+                  class="w-14 h-14 mx-auto rounded-full mb-2"
+                />
+                <div class="text-gray-800">
+                    <span> Your friend <strong>{{ friendData.nom }} {{ friendData.prenom }}</strong> is feeling <span>{{friendData.etats[0]?.mood}} Today</span></span>
+                    <p class="text-white/80"><strong>{{ friendData.email }}</strong></p>
+                </div>
+                     <!-- Unfollow button on the friend's profile -->
 <button (click)="removeFriend(friendData.id)" class="bg-white text-figma-blue py-2 px-4 rounded-md hover:scale-105 ">
-   - Unfollow
-  </button>
-  
-    </div>
-  </div>
+    - Unfollow
+   </button>
+ 
+              </div>
+            </div>
+          </div>
+        
+          <!-- Profil normal pour écrans ≥ 770px -->
+          <div
+            
+            class="hidden md:flex items-center gap-4 md:justify-between"
+          >
+            <div class="flex items-center gap-4">
+              <img
+                [src]="friendData.profile_image || '/assets/images/placeholder.png'"
+                alt="Photo de profil"
+                class="w-14 h-14 rounded-full"
+              />
+              <div class="text-white">
+                <span> Your friend <strong>{{ friendData.nom }} {{ friendData.prenom }}</strong> is feeling <span>{{friendData.etats[0]?.mood}} Today</span></span>
+                <p class="text-white/80"><strong>{{ friendData.email }}</strong></p>
+              </div>
+            </div>
+                 <!-- Unfollow button on the friend's profile -->
+<button (click)="removeFriend(friendData.id)" class="bg-white text-figma-blue py-2 px-4 rounded-md hover:scale-105 ">
+    - Unfollow
+   </button>
+ 
+          </div>
+        </div>
 
   <!-- Statistiques de l'ami -->
-  <div *ngIf="friendData" class="flex justify-between mt-12 items-center mb-4 flex-wrap"
+  <div *ngIf="friendData" class="flex justify-between mt-12 items-center mb-4 flex-wrap text-sm"
   [ngClass]="{
     'text-[#3971FF7D]': friendData.etats[0]?.mood === 'sad',
     'text-[#ea392d]': friendData.etats[0]?.mood === 'angry',
@@ -203,9 +242,9 @@
     <p class="font-bold  px-4">Friends : {{ friendData.friends?.length || 0 }}</p>
   </div>
 
-  <div class="flex justify-between">
+  <div class="md:flex justify-between  flex-wrap">
   <!-- Publications de l'ami -->
-  <div *ngIf="friendData.posts && friendData.posts.length > 0" class="space-y-2 w-full sm:w-[49%] lg:w-[49%] overflow-y-auto max-h-80 scrollbar-thin px-4 rounded-lg scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
+  <div *ngIf="friendData.posts && friendData.posts.length > 0" class="space-y-2 w-full  lg:w-[49%] overflow-y-auto max-h-80 scrollbar-thin px-4 rounded-lg scrollbar-thumb-figma-blue scrollbar-track-gray-200/0 scrollbar-corner-transparent">
     <div *ngFor="let post of friendData.posts" class="mb-4">
       <div class="post-content p-4 bg-white rounded-lg shadow-lg">
         <p>{{ post.content }}</p>
@@ -216,7 +255,7 @@
       </div>
 
       <!-- Réactions et commentaires -->
-      <div class="flex justify-between p-2 items-center">
+      <div class="sm:flex  justify-between p-2 items-center">
         <div class="post-actions space-x-2 flex justify-center gap-2 items-center">
           <button (click)="addReaction(post.id, 'happy')" class="flex justify-center items-center gap-1">
             {{ countReactions(post, 'happy') }}
@@ -244,7 +283,7 @@
           </button>
         </div>
 
-        <div class="comments-count">
+        <div class="comments-count  text-center">
           <button (click)="openCommentsModal(post)" class="hover:underline">
             {{ countComments(post) }} Commentaires
           </button>
@@ -259,7 +298,7 @@
   </div>
 
   <!-- Mood Image -->
-  <div class="w-[30%]">
+  <div class="w-full md:w-[40%]  mx-auto">
    
     
     <img [src]="moodStyles[friendData.etats[0]?.mood]?.image || moodStyles.default.image" alt="Mood Image">
