@@ -231,7 +231,7 @@
 
             <!-- Section des posts des amis -->
             <div class=" text-center order-2 md:order-1">
-              <h2 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Your friends' posts</h2>
+              <h2 class="mt-8 mb-4 mx-auto text-figma-blue text-xl font-semibold">Your friends' thoughts</h2>
 
               <div *ngIf="users.length > 0" class="space-y-2 overflow-y-auto max-h-80 scrollbar-thin
                 px-4 rounded-lg
@@ -291,7 +291,7 @@
               
                           <div class="comments-count">
                             <button (click)="openCommentsModal(post)" class="hover:underline">
-                              {{ countComments(post) }} Commentaires
+                              {{ countComments(post) }} Comments
                             </button>
                           </div>
                         </div>
