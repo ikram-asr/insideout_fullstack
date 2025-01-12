@@ -213,7 +213,7 @@ export class ProfileComponent implements OnInit {
     afraid: { image: '/assets/images/stress-removebg-preview.png', background: 'bg-[#9F86BAA3]' },
     bored: { image: '/assets/images/ennui-removebg-preview.png', background: 'bg-[#08095999]' },
     shy: { image: '/assets/images/shy.png', background: 'bg-[#EED7DF]' },
-    default: { image: '/assets/images/joy-removebg-preview.png', background: 'bg-[#F4F3AC]' }
+    default: { image: '/assets/images/Nostalgia_Transparent.webp', background: 'bg-[#F4F3AC]' }
   };
   // In your component class
 

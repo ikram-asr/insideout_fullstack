@@ -275,7 +275,7 @@ this.createSleepChart(dates, qualityValues,lineColor,bgolor);
         case 'shy':
           return '/assets/images/shy.png';
           case 'afraid':
-            return '/assets/images/stress-removebg-preview.png';
+            return '/assets/images/afraid.png';
       default:
         return '/assets/images/Nostalgia_Transparent.webp'; // Image par défaut
     }

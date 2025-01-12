@@ -186,7 +186,7 @@
         <div class="flex place-items-end justify-end">
           <div class=" flex justify-center p-[6px] text-white "> 
             <div class="fixed w-60 z-0 top-0 right-0"> <img src="./assets/icons/header.svg" alt="" class=""> </div> 
-            <a href="home.html" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="./assets/icons/logout-mobile.svg" alt=""></a> 
+            <a routerlink="/" class="h-[30px] w-[30px] z-10 min-[1000px]:hidden fixed top-4 right-4"><img  src="./assets/icons/logout-mobile.svg" alt=""></a> 
           </div>
           </div> 
         <div [ngClass]="{
@@ -210,7 +210,6 @@
         <div *ngIf="articles.length > 0" class="w-full p-8 grid gap-4 justify-center grid-cols-[repeat(auto-fit,_minmax(270px,_1fr))]">
 <!-- Liste des articles -->
 <div *ngFor="let article of articles" class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
-    <img class="w-20 h-20" src="./assets/placeholder.png" alt="">
     <div>
       <h3
       [ngStyle]="{
