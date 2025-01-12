@@ -207,7 +207,10 @@
         </div>
 
 
-        <div *ngIf="articles.length > 0" class="w-full p-8 grid gap-4 justify-center grid-cols-[repeat(auto-fit,_minmax(270px,_1fr))]">
+        <div *ngIf="articles.length > 0" class="w-full p-8 grid gap-4 justify-center grid-cols-[repeat(auto-fit,_minmax(270px,_1fr))] 
+          overflow-y-auto max-h-80 scrollbar-thin
+                px-4 rounded-lg
+                scrollbar-thumb-white scrollbar-track-gray-200/0 scrollbar-corner-transparent">
 <!-- Liste des articles -->
 <div *ngFor="let article of articles" class="flex items-center gap-4 bg-white p-4 rounded-xl shadow-sm">
     <div>
