@@ -207,7 +207,7 @@ export class ProfileComponent implements OnInit {
   // Define mood styles
   moodStyles: any = {
     happy: { image: '/assets/images/joy-removebg-preview.png', background: 'bg-[#F4F3AC]' },
-    anxious: { image: '/assets/images/anxiety-removebg-preview.png', background: 'bg-[#F4A84CA1]' },
+    anxious: { image: '/assets/images/anxiety-removebg-preview.png', background: 'bg-[#FFE4BC]' },
     angry: { image: '/assets/images/anger-removebg-preview.png', background: 'bg-[#FF46397D]' },
     sad: { image: '/assets/images/sad-removebg-preview.png', background: 'bg-[#3971FF7D]' },
     afraid: { image: '/assets/images/stress-removebg-preview.png', background: 'bg-[#9F86BAA3]' },
