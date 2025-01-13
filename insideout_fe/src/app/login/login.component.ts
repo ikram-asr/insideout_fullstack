@@ -33,19 +33,17 @@ export class LoginComponent {
     this.authService.login(loginData).subscribe(
       response => {
         console.log('Login success:', response);
-        // Sauvegarder le token dans localStorage ou dans un service si nécessaire
-        localStorage.setItem('token', response.token);  // Exemple
-  
-        // Redirection vers la page de dashboard avec l'ID de l'utilisateur
-        const redirectUrl = response.redirect_url;  // URL de redirection fournie par Laravel
-        window.location.href = redirectUrl;  // Redirige l'utilisateur vers la page de son dashboard
+        localStorage.setItem('token', response.token);
+        window.location.href = response.redirect_url;
       },
       error => {
         console.error('Login error:', error);
-        // Afficher un message d'erreur si nécessaire
+        // Affichage du message d'erreur en anglais
+        this.errorMessage = 'Login failed. Please check your credentials and try again.';
       }
     );
   }
+  
   
   
 
