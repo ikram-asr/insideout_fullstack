@@ -12,22 +12,23 @@ import { CommunityComponent } from './pages/community/community.component';
 import { MessagesComponent } from './pages/messages/messages.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RealprogrammsComponent } from './realprogramms/realprogramms.component';
+import { AuthGuard } from './auth.guard'; 
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'programsuggestion/:id', component: RealprogrammsComponent },
+  { path: 'programsuggestion/:id', component: RealprogrammsComponent,canActivate: [AuthGuard]  },
 
-      { path: 'dashboard/:id', component: DashboardComponent },
-      { path: 'programs/:id', component: ProgramsComponent },
-      { path: 'settings/:id', component: SettingsComponent },
-      { path: 'qst1/:id', component: Qst1Component },
-      { path: 'qst2/:id', component: Qst2Component },
-      { path: 'qst3/:id', component: Qst3Component },
-      { path: 'community/:id', component: CommunityComponent },
-      { path: 'messages/:id', component: MessagesComponent },
-      { path: 'profile/:id/:idfriend', component: ProfileComponent },
+      { path: 'dashboard/:id', component: DashboardComponent, canActivate: [AuthGuard]  },
+      { path: 'programs/:id', component: ProgramsComponent,canActivate: [AuthGuard]  },
+      { path: 'settings/:id', component: SettingsComponent,canActivate: [AuthGuard]  },
+      { path: 'qst1/:id', component: Qst1Component,canActivate: [AuthGuard]  },
+      { path: 'qst2/:id', component: Qst2Component,canActivate: [AuthGuard]  },
+      { path: 'qst3/:id', component: Qst3Component, canActivate: [AuthGuard]  },
+      { path: 'community/:id', component: CommunityComponent, canActivate: [AuthGuard]  },
+      { path: 'messages/:id', component: MessagesComponent, canActivate: [AuthGuard]  },
+      { path: 'profile/:id/:idfriend', component: ProfileComponent, canActivate: [AuthGuard]  },
     
   
 ];

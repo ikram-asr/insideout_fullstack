@@ -361,7 +361,7 @@ getMoodButtonTextColor(mood: string): string {
       return '#9D2008'; 
         // Couleur du texte sombre pour d'autres moods
     default:
-      return '#B39B99'; // Couleur par défaut
+      return '#FFFFFF'; // Couleur par défaut
   }
 }
 

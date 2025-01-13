@@ -11,34 +11,62 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
         // Inscription d'un utilisateur
+        // public function signup(Request $request)
+        // {
+        //     // Validation des données
+        //     $validator = Validator::make($request->all(), [
+        //         'nom' => 'required|string|max:255',
+        //         'prenom' => 'required|string|max:255',
+        //         'email' => 'required|string|email|max:255|unique:users',
+        //         'password' => 'required|string|min:6',
+        //     ]);
+        
+        //     if ($validator->fails()) {
+        //         return response()->json(['errors' => $validator->errors()], 422);
+        //     }
+        
+        //     // Création de l'utilisateur
+        //     $user = User::create([
+        //         'nom' => $request->nom,
+        //         'prenom' => $request->prenom,
+        //         'email' => $request->email,
+        //         'password' => Hash::make($request->password),
+        //     ]);
+        
+        //     // Connexion de l'utilisateur après sa création
+        //     Auth::login($user);
+        
+        //     // Retourner la réponse avec un message de succès
+        //     return response()->json(['message' => 'Utilisateur créé et connecté avec succès!', 'user' => $user], 201);
+        // }
         public function signup(Request $request)
-        {
-            // Validation des données
-            $validator = Validator::make($request->all(), [
-                'nom' => 'required|string|max:255',
-                'prenom' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6',
-            ]);
-        
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-        
-            // Création de l'utilisateur
-            $user = User::create([
-                'nom' => $request->nom,
-                'prenom' => $request->prenom,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-        
-            // Connexion de l'utilisateur après sa création
-            Auth::login($user);
-        
-            // Retourner la réponse avec un message de succès
-            return response()->json(['message' => 'Utilisateur créé et connecté avec succès!', 'user' => $user], 201);
-        }
+{
+    // Validation des données d'inscription
+    $validated = $request->validate([
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:6',
+        'nom' => 'required',
+        'prenom' => 'required',
+    ]);
+
+    // Création de l'utilisateur
+    $user = User::create([
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+        'nom' => $validated['nom'],
+        'prenom' => $validated['prenom'],
+    ]);
+
+    // Générer un token pour l'utilisateur
+    $token = $user->createToken('YourAppName')->plainTextToken;
+
+    // Retourner la réponse avec le token
+    return response()->json([
+        'message' => 'Utilisateur créé et connecté avec succès!',
+        'user' => $user,
+        'token' => $token,
+    ]);
+}
         
         // Connexion de l'utilisateur
         public function login(Request $request)

@@ -39,6 +39,48 @@ export class SignupComponent {
       }
     });
   }
+  // onSubmit(): void {
+  //   if (this.signupForm.invalid) {
+  //     this.errorMessage = 'Please fill in all fields correctly.';
+  //     return;
+  //   }
+  
+  //   const { nom, prenom, email, password } = this.signupForm.value;
+  
+  //   // Envoi des données à l'API via le service AuthService
+  //   this.authService.signup(nom, prenom, email, password).subscribe({
+  //     next: (response) => {
+  //       console.log('User signed up successfully', response);
+      
+  //       // Vérifiez si un token est présent dans la réponse
+  //       if (response && response.token) {
+  //         // Sauvegarder le token dans localStorage
+  //         localStorage.setItem('token', response.token);
+  //         localStorage.setItem('user', JSON.stringify(response.user));
+  //         console.log('Token saved in localStorage:', response.token);
+  //       } else {
+  //         console.error('Token is missing in the response!');
+  //       }
+      
+  //       // Rediriger après une inscription réussie
+  //       if (response && response.user) {
+  //         console.log('Redirecting to dashboard with user ID:', response.user.id);
+  //         this.router.navigate(['/dashboard', response.user.id]);
+  //       } else {
+  //         this.router.navigate(['/dashboard']);
+  //       }
+      
+  //       // Message de succès
+  //       this.successMessage = 'User created successfully!';
+      
+  //       setTimeout(() => {
+  //         this.successMessage = '';
+  //       }, 5000);
+  //     }
+      
+      
+  //   });
+  // }
   onSubmit(): void {
     if (this.signupForm.invalid) {
       this.errorMessage = 'Please fill in all fields correctly.';
@@ -52,26 +94,57 @@ export class SignupComponent {
       next: (response) => {
         console.log('User signed up successfully', response);
   
-        // Définir le message de succès
-        this.successMessage = 'User created successfully!';
+        // Vérifiez si un token est présent dans la réponse
+        if (response && response.token) {
+          // Sauvegarder le token dans localStorage
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          console.log('Token saved in localStorage:', response.token);
+        } else {
+          console.error('Token is missing in the response!');
+        }
   
         // Rediriger après une inscription réussie
         if (response && response.user) {
+          console.log('Redirecting to dashboard with user ID:', response.user.id);
           this.router.navigate(['/dashboard', response.user.id]);
+  
+          // Une fois l'utilisateur inscrit, nous appelons la fonction de connexion
+          this.loginAfterSignup(email, password);  // Appel de la fonction de login
         } else {
           this.router.navigate(['/dashboard']);
         }
   
-        // Cacher le message de succès après 5 secondes
+        // Message de succès
+        this.successMessage = 'User created successfully!';
+  
         setTimeout(() => {
           this.successMessage = '';
         }, 5000);
       },
-      error: (error) => {
-        console.error('Error during signup', error);
-        this.errorMessage = 'Failed to sign up. Please try again.';
-      },
+      error: (err) => {
+        console.error('Signup error:', err);
+        this.errorMessage = 'Signup failed. Please try again.';
+      }
     });
+  }
+  
+  loginAfterSignup(email: string, password: string): void {
+    // Fonction de login après l'inscription réussie
+    const loginData = { email, password };
+  
+    this.authService.login(loginData).subscribe(
+      response => {
+        console.log('Login success:', response);
+        localStorage.setItem('token', response.token);
+        window.location.href = response.redirect_url;  // Redirection après connexion réussie
+      },
+      error => {
+        console.error('Login error:', error);
+        // Affichage du message d'erreur en anglais
+        this.errorMessage = 'Login failed. Please check your credentials and try again.';
+      }
+    );
   }
   
 

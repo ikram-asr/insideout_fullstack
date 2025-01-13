@@ -89,6 +89,25 @@ export class RealprogrammsComponent {
         case 'bored':
           return '#FFFFF';
           case 'shy':
+            return '#ED2469';
+            case 'anxious':
+          return '#9D2008'; 
+            // Couleur du texte sombre pour d'autres moods
+        default:
+          return '#B39B99'; // Couleur par défaut
+      }
+    }
+    getMoodButtonTextCol(mood: string): string {
+      switch (mood) {
+        case 'sad':
+        case 'angry':
+        case 'afraid':
+          return 'text-figma-blue '; // Couleur du texte clair pour certains moods
+        case 'happy':
+          return'#FAFCD7';
+        case 'bored':
+          return '#FFFFF';
+          case 'shy':
             return '#F2E9EC';
             case 'anxious':
           return '#9D2008'; 

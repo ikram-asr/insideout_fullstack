@@ -200,7 +200,7 @@
           }" class="grid grid-cols-3 content-center items-center justify-center  w-[calc(100%-60px)] max-w-[500px] min-h-[180px] mx-[30px] mt-7 rounded-[30px] shadow">
           
           <p             [ngStyle]="{
-            color: getMoodButtonTextColor(user.etats[user.etats.length - 1]?.mood || '') 
+            color: getMoodButtonTextCol(user.etats[user.etats.length - 1]?.mood || '') 
           }" class="col-span-2 place-self-center pl-4 w-full min-[450px]:w-2/3 text-lg min-[450px]:text-xl  font-semibold">These might help with how you’re feeling!</p>
           <img class="w-36 h-36 min-[380px]:w-40 min-[380px]:h-40 relative self-end ml-auto top-4 left-4"  [src]="'' + getMoodImagelifjenb(user.etats[user.etats.length - 1]?.mood || '')"
           [alt]="user.etats[user.etats.length - 1]?.mood" >
@@ -228,7 +228,7 @@
         'bg-[#F4A84CA1]': user.etats[user.etats.length - 1]?.mood === 'anxious',
         'bg-[#BAC018]': user.etats[user.etats.length - 1]?.mood === 'happy',
         'bg-[#080959C9]': user.etats[user.etats.length - 1]?.mood === 'bored',
-        'bg-[#ED2469]': user.etats[user.etats.length - 1]?.mood === 'shy'
+        'bg-[#F2E9EC]': user.etats[user.etats.length - 1]?.mood === 'shy'
       }"  class="text-xs  flex justify-end mt-2 px-2 py-2 rounded" (click)="openModal(article)" ><span class="font-bold"   [ngStyle]="{
         color: getMoodButtonTextColor(user.etats[user.etats.length - 1]?.mood || '') 
       }" >See more</span></button>
@@ -248,7 +248,7 @@
             'bg-[#F4A84CA1]': user.etats[user.etats.length - 1]?.mood === 'anxious',
             'bg-[#BAC018]': user.etats[user.etats.length - 1]?.mood === 'happy',
             'bg-[#080959C9]': user.etats[user.etats.length - 1]?.mood === 'bored',
-            'bg-[#ED2469]': user.etats[user.etats.length - 1]?.mood === 'shy'
+            'bg-[#F2E9EC]': user.etats[user.etats.length - 1]?.mood === 'shy'
           }"  class="  px-4 py-2 rounded"><span class="font-bold"   [ngStyle]="{
             color: getMoodButtonTextColor(user.etats[user.etats.length - 1]?.mood || '') 
           }" >Close</span></button>

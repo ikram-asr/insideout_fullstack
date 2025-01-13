@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   // Inscription
-  signup(nom: string, prenom: string, email: string, password: string): Observable<any> {
+ /* signup(nom: string, prenom: string, email: string, password: string): Observable<any> {
     const token = this.getCSRFToken();  // Récupère le token CSRF
 
     const headers = new HttpHeaders({
@@ -41,10 +41,36 @@ export class AuthService {
     };
 
     return this.http.post(`${this.apiUrl}/signup`, body, { headers });
+  }*/
+
+
+  // Inscription
+  signup(nom: string, prenom: string, email: string, password: string): Observable<any> {
+    const token = this.getCSRFToken();  // Récupère le token CSRF
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': token  // Ajouter le token CSRF aux en-têtes
+    });
+
+    const body = {
+      nom: nom,
+      prenom: prenom,
+      email: email,
+      password: password,
+    };
+
+    return this.http.post(`${this.apiUrl}/signup`, body, { headers }).pipe(
+      catchError(error => {
+        console.error('Erreur lors de l\'inscription:', error);
+        return throwError(error);
+      })
+    );
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.user = JSON.parse(sessionStorage.getItem('user') || 'null');
 
     return this.http.post(`${this.apiUrl}/login`, credentials, { headers })
       .pipe(
@@ -59,7 +85,15 @@ export class AuthService {
         })
       );
   }
-
+  isAuthenticated(): boolean {
+    return !!sessionStorage.getItem('user');
+  }
+  
+  getUserId(): number {
+    const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    return user.id;
+  }
+  
 
   /*logout(): Observable<any> {
     const token = localStorage.getItem('token');  // Assurez-vous que le token est bien dans le localStorage
@@ -68,7 +102,7 @@ export class AuthService {
         'Authorization': `Bearer ${token}`
       })
     });
-  }*/
+  }
     logout(): Observable<any> {
       const token = localStorage.getItem('token');  // Récupérer le token depuis localStorage
       return this.http.post('http://127.0.0.1:8000/api/logout', {}, {
@@ -78,11 +112,35 @@ export class AuthService {
       }).pipe(
         tap(response => {
           console.log('Déconnexion réussie :');  // Afficher un message si la déconnexion est réussie
-          localStorage.removeItem('auth_token');  // Supprimer le token du localStorage
+          localStorage.removeItem('token');  // Supprimer le token du localStorage
         }),
         catchError(error => {
           console.error('Erreur de déconnexion:', error.message);  // Afficher un message d'erreur si la déconnexion échoue
           return throwError(error);  // Propager l'erreur
+        })
+      );
+    }
+    */
+    logout(): Observable<any> {
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+        console.error('Token non trouvé, déconnexion impossible');
+        return throwError('No token found, cannot log out');
+      }
+    
+      return this.http.post('http://127.0.0.1:8000/api/logout', {}, {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        })
+      }).pipe(
+        tap(response => {
+          console.log('Déconnexion réussie');
+          localStorage.removeItem('token');  // Supprimer le token du localStorage
+        }),
+        catchError(error => {
+          console.error('Erreur de déconnexion:', error.message);
+          return throwError(error);
         })
       );
     }
