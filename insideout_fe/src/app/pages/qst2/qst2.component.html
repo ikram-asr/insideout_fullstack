@@ -58,14 +58,14 @@
         /><span class="text-xs text-figma-nav-green"
           >Dashboard</span
         ></a
-      >
-      <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
-      ><img
-        class="w-7"
-        src="/assets/icons/icons/programs.svg"
-        alt=""
-      /><span class="text-xs">Articles</span></a
-    >
+      >  <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
+  ><img
+    class="w-7"
+    src="/assets/icons/icons/programs.svg"
+    alt=""
+  /><span class="text-xs">Articles</span></a
+>
+      
       <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
         ><img
           class="w-7"
@@ -92,12 +92,12 @@
           class="w-7"
           src="/assets/icons/icons/settings.svg"
           alt=""
-        /><span class="text-xs">Settings</span></a
+        /><span class="text-xs">My Profile</span></a
       >
     </nav>
     <!-- desktop-nav -->
     <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
-      <img src="assets/images/text-logo.png" alt="" />
+      <img class="my-4" src="assets/images/emoticloud.png" alt="" />
       <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
         <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
         <div>
@@ -111,6 +111,7 @@
       </div>
      
       <ul class="w-fit flex flex-col mx-auto mt-8">
+        
         <li class="nav-li">
           <img
             src="/assets/icons/icons/dashboard-active.svg"
@@ -160,7 +161,7 @@
             alt="Settings Icon"
             class="icon"
           />
-          <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
+          <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">My Profile</a>
         </li>
         <li class="nav-li mt-3">
           <img
@@ -168,7 +169,7 @@
             alt="Settings Icon"
             class="icon"
           />
-          <a href="#">Logout</a>
+          <a (click)="onLogout()" href="#">Logout</a>
         </li>
       </ul>
     </nav>

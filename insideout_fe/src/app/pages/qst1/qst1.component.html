@@ -1,177 +1,177 @@
 <body class="w-screen h-screen bg-gray-300">
   <div class="relative w-full h-full flex">
-   <!-- mobile-nav -->
-   <nav
-   class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
- >
-   <div class="absolute mobile-nav-active">
-     <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
-       ><img
-         class="absolute-center"
-         src="/assets/icons/icons/home-mobile-active.svg"
-         alt=""
-     /></a>
-   </div>
-   <div class="absolute mobile-nav-1">
-     <a *ngIf="user.id" [routerLink]="['/messages/', user.id]"
-       ><img
-         class="absolute-center"
-         src="/assets/icons/icons/msg.png"
-         alt=""
-     /></a>
-   </div>
-   <div class="absolute mobile-nav-2">
-     <a *ngIf="user.id" [routerLink]="['/programs/', user.id]"
-       ><img
-         class="absolute-center"
-         src="/assets/icons/icons/programs.svg"
-         alt=""
-     /></a>
-   </div>
-   <div class="absolute mobile-nav-3">
-     <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
-       ><img
-         class="absolute-center"
-         src="/assets/icons/icons/community.svg"
-         alt=""
-     /></a>
-   </div>
-   <div class="absolute mobile-nav-4">
-     <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">
-         <img
-         class="absolute-center"
-         src="/assets/icons/icons/settings.svg"
-         alt=""
-     /></a>
-   </div>
- </nav>
- <!-- tablet-nav -->
- <nav
-   class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
- >
-   <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
-     ><img
-       class="w-7"
-       src="/assets/icons/icons/dashboard-active.svg"
-       alt=""
-     /><span class="text-xs text-figma-nav-green"
-       >Dashboard</span
-     ></a
-   >       <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
-   ><img
-     class="w-7"
-     src="/assets/icons/icons/programs.svg"
-     alt=""
-   /><span class="text-xs">Articles</span></a
- >
-   
-   <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
-     ><img
-       class="w-7"
-       src="/assets/icons/icons/search.svg"
-       alt=""
-     /><span class="text-xs">Search</span></a
-   >
-   <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
-     ><img
-       class="w-7"
-       src="/assets/icons/icons/community.svg"
-       alt=""
-     /><span class="text-xs">Community</span></a
-   >
-   <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
-     ><img
-       class="w-7"
-       src="/assets/icons/icons/msg.png"
-       alt=""
-     /><span class="text-xs">Messages</span></a
-   >
-   <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
-     ><img
-       class="w-7"
-       src="/assets/icons/icons/settings.svg"
-       alt=""
-     /><span class="text-xs">Settings</span></a
-   >
- </nav>
- <!-- desktop-nav -->
- <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
-   <img src="assets/images/text-logo.png" alt="" />
-   <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
-     <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
-     <div>
-     <h1 class="text-lg font-medium"> {{ user.prenom }} {{ user.nom }}</h1>
-     <p class="text-md font-medium text-[#61646B]"> {{ user.email }}</p>
+    <!-- mobile-nav -->
+    <nav
+    class="min-[501px]:hidden z-10 w-full bg-white h-16 rounded-t-[50%] fixed bottom-0"
+  >
+    <div class="absolute mobile-nav-active">
+      <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
+        ><img
+          class="absolute-center"
+          src="/assets/icons/icons/home-mobile-active.svg"
+          alt=""
+      /></a>
+    </div>
+    <div class="absolute mobile-nav-1">
+      <a *ngIf="user.id" [routerLink]="['/messages/', user.id]"
+        ><img
+          class="absolute-center"
+          src="/assets/icons/icons/msg.png"
+          alt=""
+      /></a>
+    </div>
+    <div class="absolute mobile-nav-2">
+      <a *ngIf="user.id" [routerLink]="['/programs/', user.id]"
+        ><img
+          class="absolute-center"
+          src="/assets/icons/icons/programs.svg"
+          alt=""
+      /></a>
+    </div>
+    <div class="absolute mobile-nav-3">
+      <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
+        ><img
+          class="absolute-center"
+          src="/assets/icons/icons/community.svg"
+          alt=""
+      /></a>
+    </div>
+    <div class="absolute mobile-nav-4">
+      <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">
+          <img
+          class="absolute-center"
+          src="/assets/icons/icons/settings.svg"
+          alt=""
+      /></a>
+    </div>
+  </nav>
+  <!-- tablet-nav -->
+  <nav
+    class="max-[501px]:hidden min-[1024px]:hidden h-[64px] py-[8px] z-10 border-t-2 border-[silver] bg-white fixed bottom-0 w-full flex items-center justify-evenly"
+  >
+    <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/dashboard/', user.id]"
+      ><img
+        class="w-7"
+        src="/assets/icons/icons/dashboard-active.svg"
+        alt=""
+      /><span class="text-xs text-figma-nav-green"
+        >Dashboard</span
+      ></a
+    >  <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
+><img
+  class="w-7"
+  src="/assets/icons/icons/programs.svg"
+  alt=""
+/><span class="text-xs">Articles</span></a
+>
     
- </div>
-   </div>
-   <div *ngIf="errorMessage">
-     <p class="error">{{ errorMessage }}</p>
-   </div>
-  
-   <ul class="w-fit flex flex-col mx-auto mt-8">
-     <li class="nav-li">
-       <img
-         src="/assets/icons/icons/dashboard-active.svg"
-         alt="Dashboard Icon"
-         class="icon"
-         
-       />
-       <a class="text-figma-nav-green underline-custom" routerLink="/dashboard">Dashboard</a>
-     </li>
-     <li class="nav-li">
-      <img
-        src="/assets/icons/icons/programs.svg"
-        alt="Programs Icon"
-        class="icon"
-      />
-      <a class="" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]">Articles</a>
-    </li>
+    <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
+      ><img
+        class="w-7"
+        src="/assets/icons/icons/search.svg"
+        alt=""
+      /><span class="text-xs">Search</span></a
+    >
+    <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/community/', user.id]"
+      ><img
+        class="w-7"
+        src="/assets/icons/icons/community.svg"
+        alt=""
+      /><span class="text-xs">Community</span></a
+    >
+    <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/messages/', user.id]"
+      ><img
+        class="w-7"
+        src="/assets/icons/icons/msg.png"
+        alt=""
+      /><span class="text-xs">Messages</span></a
+    >
+    <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/settings/', user.id]"
+      ><img
+        class="w-7"
+        src="/assets/icons/icons/settings.svg"
+        alt=""
+      /><span class="text-xs">My Profile</span></a
+    >
+  </nav>
+  <!-- desktop-nav -->
+  <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
+    <img class="my-4" src="assets/images/emoticloud.png" alt="" />
+    <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
+      <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
+      <div>
+      <h1 class="text-lg font-medium"> {{ user.prenom }} {{ user.nom }}</h1>
+      <p class="text-md font-medium text-[#61646B]"> {{ user.email }}</p>
      
-     <li class="nav-li">
-       <img
-         src="/assets/icons/icons/search.svg"
-         alt="Programs Icon"
-         class="icon"
-       />
-       <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search</a>
-     </li>
-     <li class="nav-li">
-       <img
-         src="/assets/icons/icons/community.svg"
-         alt="Community Icon"
-         class="icon"
-       />
-       <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
-         >Community</a
-       >
-     </li>
-     <li class="nav-li">
-       <img
-       src="/assets/icons/icons/msg.png"
-         alt="Articles Icon"
-         class="icon"
-       />
-       <a *ngIf="user.id" [routerLink]="['/messages/', user.id]">Messages</a>
-     </li>
-     <li class="nav-li">
-       <img
-         src="/assets/icons/icons/settings.svg"
-         alt="Settings Icon"
-         class="icon"
-       />
-       <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">Settings</a>
-     </li>
-     <li class="nav-li mt-3">
-       <img
-         src="/assets/icons/icons/logout.svg"
-         alt="Settings Icon"
-         class="icon"
-       />
-       <a href="#">Logout</a>
-     </li>
-   </ul>
- </nav>
+  </div>
+    </div>
+    <div *ngIf="errorMessage">
+      <p class="error">{{ errorMessage }}</p>
+    </div>
+   
+    <ul class="w-fit flex flex-col mx-auto mt-8">
+      
+      <li class="nav-li">
+        <img
+          src="/assets/icons/icons/dashboard-active.svg"
+          alt="Dashboard Icon"
+          class="icon"
+          
+        />
+        <a class="text-figma-nav-green underline-custom" routerLink="/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-li">
+        <img
+          src="/assets/icons/icons/programs.svg"
+          alt="Programs Icon"
+          class="icon"
+        />
+        <a class="" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]">Articles</a>
+      </li>
+      <li class="nav-li">
+        <img
+          src="/assets/icons/icons/search.svg"
+          alt="Programs Icon"
+          class="icon"
+        />
+        <a *ngIf="user.id" [routerLink]="['/programs/', user.id]">Search</a>
+      </li>
+      <li class="nav-li">
+        <img
+          src="/assets/icons/icons/community.svg"
+          alt="Community Icon"
+          class="icon"
+        />
+        <a *ngIf="user.id" [routerLink]="['/community/', user.id]"
+          >Community</a
+        >
+      </li>
+      <li class="nav-li">
+        <img
+        src="/assets/icons/icons/msg.png"
+          alt="Articles Icon"
+          class="icon"
+        />
+        <a *ngIf="user.id" [routerLink]="['/messages/', user.id]">Messages</a>
+      </li>
+      <li class="nav-li">
+        <img
+          src="/assets/icons/icons/settings.svg"
+          alt="Settings Icon"
+          class="icon"
+        />
+        <a *ngIf="user.id" [routerLink]="['/settings/', user.id]">My Profile</a>
+      </li>
+      <li class="nav-li mt-3">
+        <img
+          src="/assets/icons/icons/logout.svg"
+          alt="Settings Icon"
+          class="icon"
+        />
+        <a (click)="onLogout()" href="#">Logout</a>
+      </li>
+    </ul>
+  </nav>
 
     <main class="relative transition-colors flex-1 flex flex-col pt-2 pb-[calc(6rem)] h-full overflow-y-auto min-[500px]:pb-[80px] min-[1024px]:pb-2">
       <div class="flex items-center justify-between px-4 pt-3"> 

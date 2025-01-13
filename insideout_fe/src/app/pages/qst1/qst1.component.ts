@@ -159,5 +159,13 @@ ngOnInit(): void {
     });
   }
 
+  onLogout(): void {
+    this.authService.logout().subscribe(() => {
+      // Redirigez l'utilisateur vers la page de connexion ou une autre page
+      this.router.navigate(['/']);
+    }, error => {
+      console.error('Erreur lors de la déconnexion', error);
+    });
+  }
 
 }

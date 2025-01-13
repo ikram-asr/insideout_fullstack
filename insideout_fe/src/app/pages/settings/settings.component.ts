@@ -50,14 +50,7 @@ export class SettingsComponent implements OnInit {
       this.errorMessage = 'ID utilisateur non valide';
     }
   }
-  onLogout(): void {
-    this.authService.logout().subscribe(() => {
-      // Redirigez l'utilisateur vers la page de connexion ou une autre page
-      this.router.navigate(['/']);
-    }, error => {
-      console.error('Erreur lors de la déconnexion', error);
-    });
-  }
+ 
 
 
   // Récupérer les données utilisateur
@@ -69,13 +62,28 @@ export class SettingsComponent implements OnInit {
         this.user.prenom_old = response.prenom;
         this.user.email_old = response.email;
   
-        this.postCount = response.posts.length; // Nombre de posts
+        // Trier les posts par date décroissante
+        this.user.posts = response.posts.sort((a: any, b: any) => {
+          return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+        });
+  
+        this.postCount = this.user.posts.length; // Nombre de posts
         this.friendCount = response.friendships.length; // Nombre d'amis
         this.friendList = response.friends; // Charger la liste des amis
       },
       error: (error) => {
         this.errorMessage = 'Erreur lors de la récupération des données utilisateur.';
       }
+    });
+  }
+  
+
+  onLogout(): void {
+    this.authService.logout().subscribe(() => {
+      // Redirigez l'utilisateur vers la page de connexion ou une autre page
+      this.router.navigate(['/']);
+    }, error => {
+      console.error('Erreur lors de la déconnexion', error);
     });
   }
 

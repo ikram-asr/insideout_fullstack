@@ -162,7 +162,7 @@
               alt="Settings Icon"
               class="icon"
             />
-            <a (click)="onLogout()" >Logout</a>
+            <a (click)="onLogout()" href="#">Logout</a>
           </li>
         </ul>
       </nav>
@@ -215,7 +215,6 @@
                 class="w-fit ml-auto px-3 py-1 text-white rounded-[16px] bg-[linear-gradient(87deg,#003059_0%,#0067BF_100%)]">
                 Publish
             </button>
-        
         
         </div>
       </div>
@@ -288,6 +287,7 @@
                               </div>
                             </button>
                           </div>
+                          
               
                           <div class="comments-count">
                             <button (click)="openCommentsModal(post)" class="hover:underline">
@@ -346,18 +346,20 @@
               </div>
           
               <!-- Liste des commentaires -->
-              <div class="comments space-y-2 overflow-y-auto max-h-64 scrollbar-thin scrollbar-thumb-figma-nav-green scrollbar-track-gray-200/0">
-                <div *ngFor="let comment of getCommentsForPost(selectedPostId)" class="p-2">
-                  <div class="flex justify-start gap-2 items-center">
-                    <img [src]="comment.profile" alt="" class="rounded-full w-6">
-                    <p class="font-semibold">{{ comment.author }}:</p>
-                    <span class="text-gray-500 text-xs">{{ getTimeSince(comment.updated_at) }}</span>
-                  </div>
-                  <p class="ml-8"> {{ comment.content }}</p>
-                    <!-- Ligne horizontale sauf après le dernier commentaire -->
-                  <!-- <hr class="border-gray-300 w-1/2 mx-auto pt-2"> -->
+              <div 
+              class="comments space-y-2 overflow-y-auto max-h-64 scrollbar-thin scrollbar-thumb-figma-nav-green scrollbar-track-gray-200/0"
+            >
+              <div *ngFor="let comment of (comments$ | async)" class="p-2">
+                <div class="flex justify-start gap-2 items-center">
+                  <img [src]="comment.profile" alt="" class="rounded-full w-6">
+                  <p class="font-semibold">{{ comment.author }}:</p>
+                  <span class="text-gray-500 text-xs">{{ getTimeSince(comment.updated_at) }}</span>
                 </div>
+                <p class="ml-8">{{ comment.content }}</p>
               </div>
+            </div>
+            
+
           
               <!-- Formulaire pour ajouter un commentaire -->
               <div class="flex justify-between items-center gap-2">

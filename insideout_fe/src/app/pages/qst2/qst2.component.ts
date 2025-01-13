@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/userService/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../services/authService/auth.service';
 @Component({
   selector: 'app-qst2',
   imports: [RouterModule, FormsModule, CommonModule],
@@ -20,6 +21,7 @@ export class Qst2Component implements OnInit {
   mood: string = '';
 
   constructor(
+    private authService: AuthService,
     private userService: UserService,
     private etatService: EtatService,
     private route: ActivatedRoute,
@@ -42,6 +44,15 @@ export class Qst2Component implements OnInit {
   }
   changeBackgroundColor(bgColor: string): void {
     document.body.style.backgroundColor = bgColor;
+  }
+
+  onLogout(): void {
+    this.authService.logout().subscribe(() => {
+      // Redirigez l'utilisateur vers la page de connexion ou une autre page
+      this.router.navigate(['/']);
+    }, error => {
+      console.error('Erreur lors de la déconnexion', error);
+    });
   }
   
   getUserData(userId: string): void {

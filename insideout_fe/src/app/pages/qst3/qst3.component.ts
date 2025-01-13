@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/userService/user.service';
 import { ActivatedRoute } from '@angular/router';  
+import { AuthService } from '../../services/authService/auth.service';
 
 @Component({
   selector: 'app-qst3',
@@ -25,12 +26,20 @@ export class Qst3Component implements OnInit {
     private userService: UserService,
     private etatService: EtatService,
     private router: Router,
+    private authService: AuthService,
 
     private route: ActivatedRoute  // Service pour récupérer les paramètres d'URL
   ) {}
 
 
-
+  onLogout(): void {
+    this.authService.logout().subscribe(() => {
+      // Redirigez l'utilisateur vers la page de connexion ou une autre page
+      this.router.navigate(['/']);
+    }, error => {
+      console.error('Erreur lors de la déconnexion', error);
+    });
+  }
 
   increaseHours(): void {
     if (this.hours < 23) {
