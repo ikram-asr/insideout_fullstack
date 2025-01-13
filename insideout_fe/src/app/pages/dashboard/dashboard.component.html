@@ -98,7 +98,7 @@
     </nav>
     <!-- desktop-nav -->
     <nav class="bg-white hidden lg:block w-1/4 overflow-y-auto px-3">
-      <img src="assets/images/text-logo.png" alt="" />
+      <img class="my-4" src="assets/images/emoticloud.png" alt="" />
       <div *ngIf="user"  class="flex items-center gap-3 justify-center  mt-3">
         <img class="hidden xl:block xl:h-10 xl:w-10 rounded-full object-cover" [src]="user.profile_image" alt="Profile_Image"/>
         <div>
@@ -180,7 +180,7 @@
         'bg-[#3971FF7D]': user.etats[user.etats.length - 1]?.mood === 'sad',
            'bg-[#FF46397D]': user.etats[user.etats.length - 1]?.mood === 'angry',
         'bg-[#DBD5FD]': user.etats[user.etats.length - 1]?.mood === 'afraid',
-        'bg-[#F4A84CA1]': user.etats[user.etats.length - 1]?.mood === 'anxious',
+        'bg-[#FFE4BC]': user.etats[user.etats.length - 1]?.mood === 'anxious',
         'bg-[#FAFCD7]': user.etats[user.etats.length - 1]?.mood === 'happy',
         'bg-[#d0d1f199]': user.etats[user.etats.length - 1]?.mood === 'bored',
         'bg-[#EED7DF]': user.etats[user.etats.length - 1]?.mood === 'shy',

@@ -56,11 +56,18 @@
             >Dashboard</span
           ></a
         >
+        <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]"
+        ><img
+          class="w-7"
+          src="/assets/icons/icons/programs.svg"
+          alt=""
+        /><span class="text-xs">Articles</span></a
+      >
         
         <a class="tablet-nav-item" *ngIf="user.id" [routerLink]="['/programs/', user.id]"
           ><img
             class="w-7"
-            src="/assets/icons/icons/programs.svg"
+            src="/assets/icons/icons/search.svg"
             alt=""
           /><span class="text-xs">Search</span></a
         >
@@ -107,10 +114,17 @@
             />
             <a *ngIf="user.id" [routerLink]="['/dashboard/', user.id]">Dashboard</a>
           </li>
-         
           <li class="nav-li">
             <img
               src="/assets/icons/icons/programs.svg"
+              alt="Programs Icon"
+              class="icon"
+            />
+            <a class="" *ngIf="user.id" [routerLink]="['/programsuggestion/', user.id]">Articles</a>
+          </li>
+          <li class="nav-li">
+            <img
+              src="/assets/icons/icons/search.svg"
               alt="Programs Icon"
               class="icon"
             />
@@ -230,7 +244,7 @@
   <!-- Statistiques de l'ami -->
   <div *ngIf="friendData" class="flex justify-between mt-12 items-center mb-4 flex-wrap text-sm"
   [ngClass]="{
-    'text-[#3971FF7D]': friendData.etats[0]?.mood === 'sad',
+    'text-figma-blue': friendData.etats[0]?.mood === 'sad',
     'text-[#ea392d]': friendData.etats[0]?.mood === 'angry',
     'text-[#7520d0c1]': friendData.etats[0]?.mood  === 'afraid',
     'text-[#f36100]': friendData.etats[0]?.mood  === 'anxious',
