@@ -159,11 +159,11 @@
             />
             <a class="text-figma-nav-green underline-custom" *ngIf="user.id" [routerLink]="['/settings/', user.id]">My profile</a>
           </li>
-          <li class="nav-li mt-3">
+          <li class="nav-li mt-3 cursor-pointer">
             <img
               src="/assets/icons/icons/logout.svg"
               alt="Settings Icon"
-              class="icon"
+              class="icon "
             />
             <a (click)="onLogout()" >Logout</a>
           </li>
